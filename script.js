@@ -1,311 +1,668 @@
-/* =========================================================
-   SHREYANSH — PERSONAL WEBSITE
-   Main JavaScript
-========================================================= */
+/* ============================================================
+   SHREYANSH — PERSONAL ENGINEERING WEBSITE
+   Lightweight interaction layer
+   ============================================================ */
 
-document.addEventListener("DOMContentLoaded", () => {
-
-    /* =====================================================
-       01. MOBILE NAVIGATION
-    ===================================================== */
-
-    const menuButton = document.querySelector(".mobile-menu-button");
-    const navLinks = document.querySelector(".nav-links");
-
-    if (menuButton && navLinks) {
-        menuButton.addEventListener("click", () => {
-            const isOpen = navLinks.classList.toggle("open");
-
-            menuButton.setAttribute("aria-expanded", String(isOpen));
-
-            menuButton.setAttribute(
-                "aria-label",
-                isOpen ? "Close navigation menu" : "Open navigation menu"
-            );
-        });
-
-        // Close menu after clicking a navigation link
-        navLinks.querySelectorAll("a").forEach((link) => {
-            link.addEventListener("click", () => {
-                navLinks.classList.remove("open");
-                menuButton.setAttribute("aria-expanded", "false");
-                menuButton.setAttribute(
-                    "aria-label",
-                    "Open navigation menu"
-                );
-            });
-        });
-
-        // Close menu when clicking outside it
-        document.addEventListener("click", (event) => {
-            const clickedInsideNav =
-                navLinks.contains(event.target) ||
-                menuButton.contains(event.target);
-
-            if (!clickedInsideNav) {
-                navLinks.classList.remove("open");
-                menuButton.setAttribute("aria-expanded", "false");
-                menuButton.setAttribute(
-                    "aria-label",
-                    "Open navigation menu"
-                );
-            }
-        });
-    }
+(() => {
+    "use strict";
 
 
-    /* =====================================================
-       02. HEADER SCROLL STATE
-    ===================================================== */
+    /* ========================================================
+       01. DOM
+    ======================================================== */
 
-    const header = document.querySelector(".site-header");
+    const documentRoot = document.documentElement;
+    const body = document.body;
 
-    if (header) {
-        const updateHeader = () => {
-            if (window.scrollY > 20) {
-                header.classList.add("scrolled");
-            } else {
-                header.classList.remove("scrolled");
-            }
-        };
+    const header = document.querySelector("#site-header");
 
-        updateHeader();
-
-        window.addEventListener(
-            "scroll",
-            updateHeader,
-            { passive: true }
-        );
-    }
-
-
-    /* =====================================================
-       03. SCROLL REVEAL
-    ===================================================== */
-
-    const revealElements = document.querySelectorAll(
-        ".project-card, " +
-        ".now-item, " +
-        ".lab-card, " +
-        ".timeline-item, " +
-        ".architecture-node, " +
-        ".flow-step, " +
-        ".argus-card, " +
-        ".philosophy-card"
+    const menuToggle = document.querySelector(
+        ".mobile-menu-toggle"
     );
 
-    // Don't force animations if the user prefers reduced motion.
-    const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
+    const mobileNavigation = document.querySelector(
+        "#mobile-navigation"
+    );
 
-    if (!reducedMotion && "IntersectionObserver" in window) {
+    const mobileNavigationLinks = mobileNavigation
+        ? mobileNavigation.querySelectorAll("a[href^='#']")
+        : [];
 
-        revealElements.forEach((element) => {
-            element.classList.add("reveal");
-        });
+    const desktopNavigationLinks = document.querySelectorAll(
+        ".desktop-nav a[href^='#']"
+    );
 
-        const revealObserver = new IntersectionObserver(
-            (entries, observer) => {
-
-                entries.forEach((entry) => {
-
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
-
-                    entry.target.classList.add("revealed");
-
-                    observer.unobserve(entry.target);
-                });
-
-            },
-            {
-                threshold: 0.12,
-                rootMargin: "0px 0px -40px 0px"
-            }
-        );
-
-        revealElements.forEach((element) => {
-            revealObserver.observe(element);
-        });
-
-    } else {
-
-        revealElements.forEach((element) => {
-            element.classList.add("revealed");
-        });
-
-    }
-
-
-    /* =====================================================
-       04. ACTIVE NAVIGATION
-    ===================================================== */
+    const revealElements = document.querySelectorAll(
+        ".reveal"
+    );
 
     const sections = document.querySelectorAll(
         "main section[id]"
     );
 
-    const navigationLinks = document.querySelectorAll(
-        ".nav-links a"
-    );
-
-    if (
-        sections.length > 0 &&
-        navigationLinks.length > 0 &&
-        "IntersectionObserver" in window
-    ) {
-
-        const sectionObserver = new IntersectionObserver(
-            (entries) => {
-
-                entries.forEach((entry) => {
-
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
-
-                    const currentId = entry.target.id;
-
-                    navigationLinks.forEach((link) => {
-                        link.classList.remove("active");
-
-                        const target = link.getAttribute("href");
-
-                        if (target === `#${currentId}`) {
-                            link.classList.add("active");
-                        }
-                    });
-
-                });
-
-            },
-            {
-                rootMargin: "-35% 0px -55% 0px",
-                threshold: 0
-            }
-        );
-
-        sections.forEach((section) => {
-            sectionObserver.observe(section);
-        });
-    }
-
-
-    /* =====================================================
-       05. SMOOTH INTERNAL LINKS
-    ===================================================== */
-
-    document.querySelectorAll('a[href^="#"]').forEach((link) => {
-
-        link.addEventListener("click", (event) => {
-
-            const targetId = link.getAttribute("href");
-
-            if (!targetId || targetId === "#") {
-                return;
-            }
-
-            const target = document.querySelector(targetId);
-
-            if (!target) {
-                return;
-            }
-
-            event.preventDefault();
-
-            target.scrollIntoView({
-                behavior: reducedMotion ? "auto" : "smooth",
-                block: "start"
-            });
-
-            // Update browser URL without jumping.
-            history.pushState(null, "", targetId);
-
-        });
-
-    });
-
-
-    /* =====================================================
-       06. EXTERNAL LINKS
-    ===================================================== */
-
-    document
-        .querySelectorAll('a[href^="http"]')
-        .forEach((link) => {
-
-            link.setAttribute("target", "_blank");
-            link.setAttribute("rel", "noopener noreferrer");
-
-        });
-
-
-    /* =====================================================
-       07. PROJECT CARD KEYBOARD ACCESSIBILITY
-    ===================================================== */
-
-    document
-        .querySelectorAll(".project-card")
-        .forEach((card) => {
-
-            const projectLink = card.querySelector(".project-link");
-
-            if (!projectLink) {
-                return;
-            }
-
-            card.addEventListener("click", (event) => {
-
-                // Don't interfere with clicking an actual link.
-                if (event.target.closest("a")) {
-                    return;
-                }
-
-                projectLink.click();
-
-            });
-
-            card.setAttribute("tabindex", "0");
-            card.setAttribute("role", "link");
-
-            card.addEventListener("keydown", (event) => {
-
-                if (
-                    event.key === "Enter" ||
-                    event.key === " "
-                ) {
-
-                    event.preventDefault();
-                    projectLink.click();
-
-                }
-
-            });
-
-        });
-
-
-    /* =====================================================
-       08. CURRENT YEAR
-       Automatically creates a year if a footer element
-       with data-current-year exists.
-    ===================================================== */
-
-    const yearElements = document.querySelectorAll(
+    const currentYearElements = document.querySelectorAll(
         "[data-current-year]"
     );
 
-    yearElements.forEach((element) => {
-        element.textContent = new Date().getFullYear();
+
+    /* ========================================================
+       02. JAVASCRIPT READY
+    ======================================================== */
+
+    documentRoot.classList.add("js-ready");
+
+
+    /* ========================================================
+       03. MOBILE NAVIGATION
+    ======================================================== */
+
+    const setMobileMenuState = (isOpen) => {
+
+        if (!menuToggle || !mobileNavigation) {
+            return;
+        }
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+        );
+
+        menuToggle.setAttribute(
+            "aria-label",
+            isOpen
+                ? "Close navigation"
+                : "Open navigation"
+        );
+
+        mobileNavigation.classList.toggle(
+            "open",
+            isOpen
+        );
+
+        mobileNavigation.setAttribute(
+            "aria-hidden",
+            String(!isOpen)
+        );
+
+        body.classList.toggle(
+            "mobile-menu-open",
+            isOpen
+        );
+    };
+
+
+    if (menuToggle && mobileNavigation) {
+
+        menuToggle.addEventListener(
+            "click",
+            () => {
+
+                const isOpen =
+                    menuToggle.getAttribute(
+                        "aria-expanded"
+                    ) === "true";
+
+                setMobileMenuState(!isOpen);
+            }
+        );
+
+
+        mobileNavigationLinks.forEach((link) => {
+
+            link.addEventListener(
+                "click",
+                () => {
+                    setMobileMenuState(false);
+                }
+            );
+
+        });
+
+
+        document.addEventListener(
+            "click",
+            (event) => {
+
+                const isOpen =
+                    menuToggle.getAttribute(
+                        "aria-expanded"
+                    ) === "true";
+
+                if (!isOpen) {
+                    return;
+                }
+
+                const clickedInsideMenu =
+                    mobileNavigation.contains(event.target);
+
+                const clickedToggle =
+                    menuToggle.contains(event.target);
+
+                if (
+                    !clickedInsideMenu &&
+                    !clickedToggle
+                ) {
+                    setMobileMenuState(false);
+                }
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (event.key === "Escape") {
+                    setMobileMenuState(false);
+                    menuToggle.focus();
+                }
+            }
+        );
+
+    }
+
+
+    /* ========================================================
+       04. CLOSE MOBILE MENU WHEN SCREEN BECOMES DESKTOP
+    ======================================================== */
+
+    const desktopBreakpoint = window.matchMedia(
+        "(min-width: 901px)"
+    );
+
+
+    const handleDesktopChange = (event) => {
+
+        if (event.matches) {
+            setMobileMenuState(false);
+        }
+    };
+
+
+    if (desktopBreakpoint.addEventListener) {
+
+        desktopBreakpoint.addEventListener(
+            "change",
+            handleDesktopChange
+        );
+
+    } else {
+
+        desktopBreakpoint.addListener(
+            handleDesktopChange
+        );
+
+    }
+
+
+    /* ========================================================
+       05. HEADER SCROLL STATE
+    ======================================================== */
+
+    let ticking = false;
+
+
+    const updateHeader = () => {
+
+        if (!header) {
+            return;
+        }
+
+        header.classList.toggle(
+            "scrolled",
+            window.scrollY > 12
+        );
+
+        ticking = false;
+    };
+
+
+    const requestHeaderUpdate = () => {
+
+        if (!ticking) {
+
+            window.requestAnimationFrame(
+                updateHeader
+            );
+
+            ticking = true;
+        }
+    };
+
+
+    window.addEventListener(
+        "scroll",
+        requestHeaderUpdate,
+        {
+            passive: true
+        }
+    );
+
+
+    updateHeader();
+
+
+    /* ========================================================
+       06. SCROLL REVEAL
+    ======================================================== */
+
+    const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+
+    if (
+        !reducedMotion &&
+        "IntersectionObserver" in window
+    ) {
+
+        const revealObserver =
+            new IntersectionObserver(
+                (entries, observer) => {
+
+                    entries.forEach((entry) => {
+
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+
+                        entry.target.classList.add(
+                            "revealed"
+                        );
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    });
+
+                },
+                {
+                    threshold: 0.08,
+                    rootMargin: "0px 0px -40px 0px"
+                }
+            );
+
+
+        revealElements.forEach((element) => {
+
+            revealObserver.observe(element);
+
+        });
+
+    } else {
+
+        revealElements.forEach((element) => {
+
+            element.classList.add(
+                "revealed"
+            );
+
+        });
+
+    }
+
+
+    /* ========================================================
+       07. ACTIVE DESKTOP NAVIGATION
+    ======================================================== */
+
+    const setActiveNavigation = (id) => {
+
+        desktopNavigationLinks.forEach(
+            (link) => {
+
+                const href =
+                    link.getAttribute("href");
+
+                const isActive =
+                    href === `#${id}`;
+
+                link.classList.toggle(
+                    "active",
+                    isActive
+                );
+
+            }
+        );
+
+    };
+
+
+    if (
+        sections.length > 0 &&
+        "IntersectionObserver" in window
+    ) {
+
+        const navigationObserver =
+            new IntersectionObserver(
+                (entries) => {
+
+                    const visibleSections =
+                        Array.from(entries)
+                            .filter(
+                                (entry) =>
+                                    entry.isIntersecting
+                            )
+                            .sort(
+                                (a, b) =>
+                                    b.intersectionRatio -
+                                    a.intersectionRatio
+                            );
+
+                    if (
+                        visibleSections.length > 0
+                    ) {
+
+                        setActiveNavigation(
+                            visibleSections[0]
+                                .target
+                                .id
+                        );
+
+                    }
+
+                },
+                {
+                    rootMargin:
+                        "-20% 0px -65% 0px",
+                    threshold: [
+                        0,
+                        0.1,
+                        0.25,
+                        0.5
+                    ]
+                }
+            );
+
+
+        sections.forEach((section) => {
+
+            navigationObserver.observe(
+                section
+            );
+
+        });
+
+    }
+
+
+    /* ========================================================
+       08. SMOOTH INTERNAL LINKS
+    ======================================================== */
+
+    const internalLinks =
+        document.querySelectorAll(
+            'a[href^="#"]'
+        );
+
+
+    internalLinks.forEach((link) => {
+
+        link.addEventListener(
+            "click",
+            (event) => {
+
+                const targetId =
+                    link.getAttribute("href");
+
+                if (
+                    !targetId ||
+                    targetId === "#"
+                ) {
+                    return;
+                }
+
+                const target =
+                    document.querySelector(
+                        targetId
+                    );
+
+                if (!target) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                const headerHeight =
+                    header
+                        ? header.offsetHeight
+                        : 0;
+
+                const targetPosition =
+                    target.getBoundingClientRect()
+                        .top +
+                    window.scrollY -
+                    headerHeight -
+                    16;
+
+                window.scrollTo({
+                    top: Math.max(
+                        targetPosition,
+                        0
+                    ),
+                    behavior:
+                        reducedMotion
+                            ? "auto"
+                            : "smooth"
+                });
+
+
+                /*
+                 * Update URL without causing
+                 * another jump.
+                 */
+                if (
+                    window.history &&
+                    window.history.replaceState
+                ) {
+
+                    window.history.replaceState(
+                        null,
+                        "",
+                        targetId
+                    );
+
+                }
+
+            }
+        );
+
     });
 
 
-    /* =====================================================
-       09. PAGE LOADED
-    ===================================================== */
+    /* ========================================================
+       09. EXTERNAL LINKS
+    ======================================================== */
 
-    document.documentElement.classList.add("js-ready");
+    const externalLinks =
+        document.querySelectorAll(
+            'a[href^="http://"], a[href^="https://"]'
+        );
 
-});
+
+    externalLinks.forEach((link) => {
+
+        const url =
+            new URL(
+                link.href,
+                window.location.href
+            );
+
+        if (
+            url.origin !==
+            window.location.origin
+        ) {
+
+            link.setAttribute(
+                "target",
+                "_blank"
+            );
+
+            link.setAttribute(
+                "rel",
+                "noopener noreferrer"
+            );
+
+        }
+
+    });
+
+
+    /* ========================================================
+       10. CURRENT YEAR
+    ======================================================== */
+
+    const currentYear =
+        new Date().getFullYear();
+
+
+    currentYearElements.forEach(
+        (element) => {
+
+            element.textContent =
+                String(currentYear);
+
+        }
+    );
+
+
+    /* ========================================================
+       11. PROJECT CARD KEYBOARD SUPPORT
+    ======================================================== */
+
+    const projectCards =
+        document.querySelectorAll(
+            ".project-card"
+        );
+
+
+    projectCards.forEach((card) => {
+
+        const primaryLink =
+            card.querySelector(
+                "a[href]"
+            );
+
+        if (!primaryLink) {
+            return;
+        }
+
+
+        card.addEventListener(
+            "keydown",
+            (event) => {
+
+                /*
+                 * Allow Enter/Space when the user
+                 * focuses the card itself.
+                 */
+
+                if (
+                    event.key !== "Enter" &&
+                    event.key !== " "
+                ) {
+                    return;
+                }
+
+
+                /*
+                 * Don't interfere with an actual
+                 * focused link/button.
+                 */
+
+                if (
+                    event.target.closest(
+                        "a, button"
+                    )
+                ) {
+                    return;
+                }
+
+
+                event.preventDefault();
+
+                primaryLink.click();
+
+            }
+        );
+
+    });
+
+
+    /* ========================================================
+       12. EXTERNAL PAGE VISIBILITY
+    ======================================================== */
+
+    document.addEventListener(
+        "visibilitychange",
+        () => {
+
+            if (
+                document.visibilityState ===
+                "visible"
+            ) {
+
+                updateHeader();
+
+            }
+
+        }
+    );
+
+
+    /* ========================================================
+       13. IMAGE SAFETY
+       ======================================================== */
+
+    /*
+     * If images are added later, prevent broken-image
+     * layout surprises from producing unnecessary
+     * visual noise.
+     */
+
+    const images =
+        document.querySelectorAll(
+            "img"
+        );
+
+
+    images.forEach((image) => {
+
+        image.addEventListener(
+            "error",
+            () => {
+
+                image.classList.add(
+                    "image-load-error"
+                );
+
+            },
+            {
+                once: true
+            }
+        );
+
+    });
+
+
+    /* ========================================================
+       14. INITIAL STATE
+    ======================================================== */
+
+    /*
+     * Mark the first visible navigation area when
+     * the page loads near the top.
+     */
+
+    if (
+        window.scrollY <
+        window.innerHeight * 0.45
+    ) {
+
+        setActiveNavigation("projects");
+
+    }
+
+
+})();
