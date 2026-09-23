@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <!-- =========================================================
+         DOCUMENT
+    ========================================================== -->
+
     <meta charset="UTF-8">
 
     <meta
@@ -10,12 +15,12 @@
 
     <meta
         name="description"
-        content="Shreyansh — student and AI systems enthusiast building Universal, Cortex, AEGIS, and ARGUS."
+        content="Shreyansh Parganiha — Class 11 student and AI systems enthusiast building Universal, Cortex, AEGIS, and ARGUS."
     >
 
     <meta
         name="author"
-        content="Shreyansh"
+        content="Shreyansh Parganiha"
     >
 
     <meta
@@ -28,15 +33,30 @@
         content="dark"
     >
 
-    <title>Shreyansh — Student & AI Systems Enthusiast</title>
+    <meta
+        name="robots"
+        content="index, follow"
+    >
+
+    <title>
+        Shreyansh Parganiha — Student &amp; AI Systems Enthusiast
+    </title>
+
+
+    <!-- =========================================================
+         STYLES
+    ========================================================== -->
 
     <link
         rel="stylesheet"
         href="style.css"
     >
+
 </head>
 
+
 <body>
+
 
     <!-- =========================================================
          ACCESSIBILITY
@@ -58,34 +78,56 @@
         class="site-header"
         id="site-header"
     >
-        <div class="container header-inner">
 
-            <a
-                class="brand"
-                href="#top"
-                aria-label="Shreyansh home"
-            >
-                <span class="brand-mark" aria-hidden="true">
-                    S
-                </span>
+        <div class="header-inner">
 
-                <span class="brand-name">
-                    Shreyansh
-                </span>
-            </a>
-
+            <!-- Desktop navigation -->
 
             <nav
                 class="desktop-nav"
                 aria-label="Primary navigation"
             >
-                <a href="#projects">Projects</a>
-                <a href="#now">Now</a>
-                <a href="#engineering">Engineering</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
+
+                <a
+                    href="#top"
+                >
+                    Home
+                </a>
+
+                <a
+                    href="#projects"
+                >
+                    Projects
+                </a>
+
+                <a
+                    href="#now"
+                >
+                    Now
+                </a>
+
+                <a
+                    href="#engineering"
+                >
+                    Engineering
+                </a>
+
+                <a
+                    href="#about"
+                >
+                    About
+                </a>
+
+                <a
+                    href="#contact"
+                >
+                    Contact
+                </a>
+
             </nav>
 
+
+            <!-- Header actions -->
 
             <div class="header-actions">
 
@@ -94,22 +136,30 @@
                     href="https://github.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="GitHub profile"
+                    aria-label="Open Shreyansh Parganiha on GitHub"
                 >
+
                     <svg
                         viewBox="0 0 24 24"
                         aria-hidden="true"
                         focusable="false"
                     >
+
                         <path
                             fill="currentColor"
                             d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.04c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.75.08-.74.08-.74 1.2.08 1.84 1.23 1.84 1.23 1.07 1.83 2.81 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.23-3.22-.12-.3-.53-1.52.12-3.17 0 0 1-.32 3.3 1.23A11.5 11.5 0 0 1 12 6.1c1.02 0 2.04.14 3 .41 2.3-1.55 3.3-1.23 3.3-1.23.65 1.65.24 2.87.12 3.17.76.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.3c0 .32.22.7.83.58A12 12 0 0 0 12 .5Z"
                         />
+
                     </svg>
 
-                    <span>GitHub</span>
+                    <span>
+                        GitHub
+                    </span>
+
                 </a>
 
+
+                <!-- Mobile navigation toggle -->
 
                 <button
                     class="mobile-menu-toggle"
@@ -118,25 +168,32 @@
                     aria-controls="mobile-navigation"
                     aria-label="Open navigation"
                 >
+
                     <svg
                         class="menu-icon menu-icon-open"
                         viewBox="0 0 24 24"
                         aria-hidden="true"
                     >
+
                         <path
                             d="M4 6h16M4 12h16M4 18h16"
                         />
+
                     </svg>
+
 
                     <svg
                         class="menu-icon menu-icon-close"
                         viewBox="0 0 24 24"
                         aria-hidden="true"
                     >
+
                         <path
                             d="M6 6l12 12M18 6 6 18"
                         />
+
                     </svg>
+
                 </button>
 
             </div>
@@ -144,7 +201,9 @@
         </div>
 
 
-        <!-- Mobile navigation -->
+        <!-- =====================================================
+             MOBILE NAVIGATION
+        ====================================================== -->
 
         <nav
             class="mobile-navigation"
@@ -152,31 +211,65 @@
             aria-label="Mobile navigation"
             aria-hidden="true"
         >
-            <div class="container mobile-navigation-inner">
 
-                <a href="#projects">Projects</a>
-                <a href="#now">Now</a>
-                <a href="#engineering">Engineering</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
+            <div class="mobile-navigation-inner">
 
-                <div class="mobile-navigation-divider"></div>
+                <a href="#top">
+                    Home
+                </a>
+
+                <a href="#projects">
+                    Projects
+                </a>
+
+                <a href="#now">
+                    Now
+                </a>
+
+                <a href="#engineering">
+                    Engineering
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+
+                <div
+                    class="mobile-navigation-divider"
+                    aria-hidden="true"
+                ></div>
+
 
                 <a
                     href="https://github.com/"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    GitHub
+
+                    <span>
+                        GitHub
+                    </span>
+
                     <svg
                         viewBox="0 0 24 24"
                         aria-hidden="true"
                     >
-                        <path d="M7 17 17 7M8 7h9v9" />
+
+                        <path
+                            d="M7 17 17 7M8 7h9v9"
+                        />
+
                     </svg>
+
                 </a>
 
             </div>
+
         </nav>
 
     </header>
@@ -188,6 +281,7 @@
 
     <main id="main-content">
 
+
         <!-- =====================================================
              HERO
         ====================================================== -->
@@ -195,29 +289,52 @@
         <section
             class="hero section"
             id="top"
+            aria-labelledby="hero-title"
         >
+
             <div class="container hero-grid">
+
+
+                <!-- Hero content -->
 
                 <div class="hero-content reveal">
 
                     <div class="eyebrow">
-                        <span class="status-dot"></span>
-                        Student &amp; AI Systems Enthusiast
+
+                        <span
+                            class="status-dot"
+                            aria-hidden="true"
+                        ></span>
+
+                        <span>
+                            Student &amp; AI Systems Enthusiast
+                        </span>
+
                     </div>
 
 
-                    <h1>
+                    <p class="hero-name">
+                        Shreyansh Parganiha
+                    </p>
+
+
+                    <h1 id="hero-title">
+
                         I build software
+
                         <span class="hero-line">
                             to understand how systems work.
                         </span>
+
                     </h1>
 
 
                     <p class="hero-description">
-                        I build projects because I'm curious about how
-                        technology works and want to grow alongside a
-                        world that keeps changing.
+
+                        I build projects because I'm curious about
+                        how technology works and want to grow alongside
+                        a world that keeps changing.
+
                     </p>
 
 
@@ -227,14 +344,22 @@
                             class="button button-primary"
                             href="#projects"
                         >
-                            Explore projects
+
+                            <span>
+                                Explore projects
+                            </span>
 
                             <svg
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"
                             >
-                                <path d="M5 12h13M13 6l6 6-6 6" />
+
+                                <path
+                                    d="M5 12h13M13 6l6 6-6 6"
+                                />
+
                             </svg>
+
                         </a>
 
 
@@ -244,19 +369,26 @@
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            View GitHub
+
+                            <span>
+                                View GitHub
+                            </span>
 
                             <svg
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"
                             >
+
                                 <path
                                     d="M14 5h5v5M19 5 10 14"
                                 />
+
                                 <path
                                     d="M18 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
                                 />
+
                             </svg>
+
                         </a>
 
                     </div>
@@ -264,7 +396,7 @@
                 </div>
 
 
-                <!-- Hero side information -->
+                <!-- Current focus -->
 
                 <aside
                     class="hero-side reveal"
@@ -275,34 +407,73 @@
                         CURRENT FOCUS
                     </div>
 
+
                     <div class="hero-side-project">
+
                         <span class="project-index">
                             01
                         </span>
 
+
                         <div>
-                            <h2>Universal</h2>
+
+                            <h2>
+                                Universal
+                            </h2>
 
                             <p>
                                 Weather infrastructure for developers.
                             </p>
+
                         </div>
+
                     </div>
 
 
-                    <div class="hero-side-divider"></div>
+                    <div
+                        class="hero-side-divider"
+                        aria-hidden="true"
+                    ></div>
 
 
                     <div class="hero-side-meta">
 
                         <div>
-                            <span>Learning</span>
-                            <strong>AI systems</strong>
+
+                            <span>
+                                Primary project
+                            </span>
+
+                            <strong>
+                                Universal
+                            </strong>
+
                         </div>
 
+
                         <div>
-                            <span>Building</span>
-                            <strong>Universal</strong>
+
+                            <span>
+                                Currently learning
+                            </span>
+
+                            <strong>
+                                AI systems
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Education
+                            </span>
+
+                            <strong>
+                                Class 11
+                            </strong>
+
                         </div>
 
                     </div>
@@ -310,6 +481,7 @@
                 </aside>
 
             </div>
+
         </section>
 
 
@@ -320,13 +492,16 @@
         <section
             class="projects section"
             id="projects"
+            aria-labelledby="projects-title"
         >
 
             <div class="container">
 
+
                 <div class="section-heading reveal">
 
                     <div>
+
                         <span class="section-number">
                             01
                         </span>
@@ -334,15 +509,18 @@
                         <span class="section-kicker">
                             Projects
                         </span>
+
                     </div>
 
-                    <h2>
+
+                    <h2 id="projects-title">
                         Things I'm building.
                     </h2>
 
+
                     <p>
-                        Most of what I learn comes from trying to build
-                        systems that are slightly beyond what I already know.
+                        I learn by building systems that are slightly
+                        beyond what I already know.
                     </p>
 
                 </div>
@@ -357,47 +535,56 @@
                     id="universal"
                 >
 
-                    <div class="project-featured-header">
+                    <header class="project-featured-header">
 
                         <div class="project-label">
+
                             <span class="project-number">
                                 01
                             </span>
+
 
                             <span class="project-status status-building">
                                 In development
                             </span>
 
+
                             <span class="project-role">
                                 Flagship project
                             </span>
+
                         </div>
 
 
-                        <div class="project-actions">
+                        <a
+                            href="projects/universal.html"
+                            class="text-link"
+                        >
 
-                            <a
-                                href="projects/universal.html"
-                                class="text-link"
-                            >
+                            <span>
                                 Explore project
+                            </span>
 
-                                <svg
-                                    viewBox="0 0 24 24"
-                                    aria-hidden="true"
-                                >
-                                    <path
-                                        d="M5 12h13M13 6l6 6-6 6"
-                                    />
-                                </svg>
-                            </a>
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
 
-                        </div>
+                                <path
+                                    d="M5 12h13M13 6l6 6-6 6"
+                                />
 
-                    </div>
+                            </svg>
+
+                        </a>
+
+                    </header>
 
 
                     <div class="project-featured-grid">
+
+
+                        <!-- Universal description -->
 
                         <div class="project-content">
 
@@ -405,28 +592,44 @@
                                 Universal
                             </h3>
 
+
                             <p class="project-tagline">
                                 Weather infrastructure without
                                 provider-specific complexity.
                             </p>
 
+
                             <p>
+
                                 Universal is a weather-data infrastructure
                                 project I'm refining to make weather data
                                 easier to consume through a consistent API.
+
                                 It handles the complexity behind the scenes:
                                 resolving locations, selecting weather
                                 providers, falling back when a provider
                                 fails, and normalizing the resulting data.
+
                             </p>
 
 
                             <div class="project-tech-list">
 
-                                <span>API design</span>
-                                <span>Backend systems</span>
-                                <span>Provider abstraction</span>
-                                <span>Data normalization</span>
+                                <span>
+                                    API design
+                                </span>
+
+                                <span>
+                                    Backend systems
+                                </span>
+
+                                <span>
+                                    Provider abstraction
+                                </span>
+
+                                <span>
+                                    Data normalization
+                                </span>
 
                             </div>
 
@@ -435,14 +638,22 @@
                                 href="projects/universal.html"
                                 class="button button-primary"
                             >
-                                View Universal
+
+                                <span>
+                                    View Universal
+                                </span>
 
                                 <svg
                                     viewBox="0 0 24 24"
                                     aria-hidden="true"
                                 >
-                                    <path d="M5 12h13M13 6l6 6-6 6" />
+
+                                    <path
+                                        d="M5 12h13M13 6l6 6-6 6"
+                                    />
+
                                 </svg>
+
                             </a>
 
                         </div>
@@ -452,7 +663,7 @@
 
                         <div
                             class="architecture-card"
-                            aria-label="Universal architecture"
+                            aria-label="Universal request flow"
                         >
 
                             <div class="architecture-header">
@@ -470,10 +681,21 @@
 
                             <div class="architecture-flow">
 
+
                                 <div class="architecture-node">
-                                    <span class="node-number">01</span>
-                                    <strong>Coordinates</strong>
-                                    <small>Input</small>
+
+                                    <span class="node-number">
+                                        01
+                                    </span>
+
+                                    <strong>
+                                        Coordinates
+                                    </strong>
+
+                                    <small>
+                                        Input
+                                    </small>
+
                                 </div>
 
 
@@ -486,9 +708,19 @@
 
 
                                 <div class="architecture-node">
-                                    <span class="node-number">02</span>
-                                    <strong>Location</strong>
-                                    <small>Resolution</small>
+
+                                    <span class="node-number">
+                                        02
+                                    </span>
+
+                                    <strong>
+                                        Location
+                                    </strong>
+
+                                    <small>
+                                        Resolution
+                                    </small>
+
                                 </div>
 
 
@@ -501,9 +733,19 @@
 
 
                                 <div class="architecture-node">
-                                    <span class="node-number">03</span>
-                                    <strong>Provider</strong>
-                                    <small>Selection</small>
+
+                                    <span class="node-number">
+                                        03
+                                    </span>
+
+                                    <strong>
+                                        Provider
+                                    </strong>
+
+                                    <small>
+                                        Selection
+                                    </small>
+
                                 </div>
 
 
@@ -516,9 +758,19 @@
 
 
                                 <div class="architecture-node">
-                                    <span class="node-number">04</span>
-                                    <strong>Fallback</strong>
-                                    <small>Reliability</small>
+
+                                    <span class="node-number">
+                                        04
+                                    </span>
+
+                                    <strong>
+                                        Fallback
+                                    </strong>
+
+                                    <small>
+                                        Reliability
+                                    </small>
+
                                 </div>
 
 
@@ -531,9 +783,19 @@
 
 
                                 <div class="architecture-node architecture-node-final">
-                                    <span class="node-number">05</span>
-                                    <strong>Universal API</strong>
-                                    <small>Normalized data</small>
+
+                                    <span class="node-number">
+                                        05
+                                    </span>
+
+                                    <strong>
+                                        Universal API
+                                    </strong>
+
+                                    <small>
+                                        Normalized data
+                                    </small>
+
                                 </div>
 
                             </div>
@@ -546,12 +808,15 @@
 
 
                 <!-- =================================================
-                     PROJECT GRID
+                     OTHER PROJECTS
                 ================================================== -->
 
                 <div class="projects-grid">
 
-                    <!-- Cortex -->
+
+                    <!-- =================================================
+                         CORTEX
+                    ================================================== -->
 
                     <article
                         class="project project-card reveal"
@@ -573,18 +838,24 @@
 
                         <div class="project-card-content">
 
-                            <h3>Cortex</h3>
+                            <h3>
+                                Cortex
+                            </h3>
+
 
                             <p class="project-tagline">
                                 An open-source autonomous
                                 deep-research system.
                             </p>
 
+
                             <p>
-                                A research system designed to break complex
-                                questions into tasks, plan research, gather
-                                evidence, reason over sources, and produce
-                                structured results.
+
+                                A research system designed to break
+                                complex questions into tasks, plan
+                                research, gather evidence, reason over
+                                sources, and produce structured results.
+
                             </p>
 
                         </div>
@@ -593,11 +864,27 @@
                         <div class="project-card-footer">
 
                             <div class="project-mini-flow">
-                                <span>Question</span>
-                                <span>→</span>
-                                <span>Research</span>
-                                <span>→</span>
-                                <span>Synthesis</span>
+
+                                <span>
+                                    Question
+                                </span>
+
+                                <span aria-hidden="true">
+                                    →
+                                </span>
+
+                                <span>
+                                    Research
+                                </span>
+
+                                <span aria-hidden="true">
+                                    →
+                                </span>
+
+                                <span>
+                                    Synthesis
+                                </span>
+
                             </div>
 
 
@@ -606,12 +893,18 @@
                                 class="project-arrow"
                                 aria-label="Open Cortex project"
                             >
+
                                 <svg
                                     viewBox="0 0 24 24"
                                     aria-hidden="true"
                                 >
-                                    <path d="M5 12h13M13 6l6 6-6 6" />
+
+                                    <path
+                                        d="M5 12h13M13 6l6 6-6 6"
+                                    />
+
                                 </svg>
+
                             </a>
 
                         </div>
@@ -619,7 +912,9 @@
                     </article>
 
 
-                    <!-- AEGIS -->
+                    <!-- =================================================
+                         AEGIS
+                    ================================================== -->
 
                     <article
                         class="project project-card reveal"
@@ -641,16 +936,24 @@
 
                         <div class="project-card-content">
 
-                            <h3>AEGIS</h3>
+                            <h3>
+                                AEGIS
+                            </h3>
+
 
                             <p class="project-tagline">
                                 A free Windows content blocker.
                             </p>
 
+
                             <p>
-                                A system focused on blocking unwanted and
-                                adult content on Windows. Android support
-                                is planned for a later stage.
+
+                                A system focused on blocking unwanted
+                                and adult content on Windows.
+
+                                Android support is planned for a
+                                later stage.
+
                             </p>
 
                         </div>
@@ -659,9 +962,19 @@
                         <div class="project-card-footer">
 
                             <div class="project-mini-tags">
-                                <span>Windows</span>
-                                <span>Systems</span>
-                                <span>Android later</span>
+
+                                <span>
+                                    Windows
+                                </span>
+
+                                <span>
+                                    Systems
+                                </span>
+
+                                <span>
+                                    Android later
+                                </span>
+
                             </div>
 
 
@@ -670,12 +983,18 @@
                                 class="project-arrow"
                                 aria-label="Open AEGIS project"
                             >
+
                                 <svg
                                     viewBox="0 0 24 24"
                                     aria-hidden="true"
                                 >
-                                    <path d="M5 12h13M13 6l6 6-6 6" />
+
+                                    <path
+                                        d="M5 12h13M13 6l6 6-6 6"
+                                    />
+
                                 </svg>
+
                             </a>
 
                         </div>
@@ -683,7 +1002,9 @@
                     </article>
 
 
-                    <!-- ARGUS -->
+                    <!-- =================================================
+                         ARGUS
+                    ================================================== -->
 
                     <article
                         class="project project-card project-card-wide reveal"
@@ -705,18 +1026,26 @@
 
                         <div class="project-card-content">
 
-                            <h3>ARGUS</h3>
+                            <h3>
+                                ARGUS
+                            </h3>
+
 
                             <p class="project-tagline">
                                 An autonomous Minecraft bot and AI system.
                             </p>
 
+
                             <p>
-                                What started as an experiment became a
-                                hosted, continuously running system. ARGUS
-                                explores Minecraft APIs, automation,
-                                event-driven systems, state management,
-                                and long-running software.
+
+                                What started as an experiment became
+                                a hosted, continuously running system.
+
+                                ARGUS explores Minecraft APIs,
+                                automation, event-driven systems,
+                                state management, and long-running
+                                software.
+
                             </p>
 
                         </div>
@@ -725,11 +1054,27 @@
                         <div class="project-card-footer">
 
                             <div class="project-mini-flow">
-                                <span>Observe</span>
-                                <span>→</span>
-                                <span>Decide</span>
-                                <span>→</span>
-                                <span>Act</span>
+
+                                <span>
+                                    Observe
+                                </span>
+
+                                <span aria-hidden="true">
+                                    →
+                                </span>
+
+                                <span>
+                                    Decide
+                                </span>
+
+                                <span aria-hidden="true">
+                                    →
+                                </span>
+
+                                <span>
+                                    Act
+                                </span>
+
                             </div>
 
 
@@ -739,16 +1084,22 @@
                                     href="projects/argus.html"
                                     class="text-link"
                                 >
-                                    Project
+
+                                    <span>
+                                        Project
+                                    </span>
 
                                     <svg
                                         viewBox="0 0 24 24"
                                         aria-hidden="true"
                                     >
+
                                         <path
                                             d="M5 12h13M13 6l6 6-6 6"
                                         />
+
                                     </svg>
+
                                 </a>
 
 
@@ -758,19 +1109,26 @@
                                     rel="noopener noreferrer"
                                     class="text-link"
                                 >
-                                    Website
+
+                                    <span>
+                                        Website
+                                    </span>
 
                                     <svg
                                         viewBox="0 0 24 24"
                                         aria-hidden="true"
                                     >
+
                                         <path
                                             d="M14 5h5v5M19 5 10 14"
                                         />
+
                                         <path
                                             d="M18 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
                                         />
+
                                     </svg>
+
                                 </a>
 
                             </div>
@@ -793,13 +1151,16 @@
         <section
             class="now section section-alt"
             id="now"
+            aria-labelledby="now-title"
         >
 
             <div class="container">
 
+
                 <div class="section-heading reveal">
 
                     <div>
+
                         <span class="section-number">
                             02
                         </span>
@@ -807,9 +1168,11 @@
                         <span class="section-kicker">
                             Now
                         </span>
+
                     </div>
 
-                    <h2>
+
+                    <h2 id="now-title">
                         What I'm working on.
                     </h2>
 
@@ -818,33 +1181,53 @@
 
                 <div class="now-grid">
 
+
+                    <!-- Primary focus -->
+
                     <div class="now-main reveal">
 
                         <span class="now-label">
                             PRIMARY FOCUS
                         </span>
 
+
                         <h3>
                             Refining Universal.
                         </h3>
 
+
                         <p>
+
                             I'm currently spending most of my development
                             time improving Universal's architecture and
                             thinking about how a reliable weather-data
                             infrastructure layer should work.
+
                         </p>
 
 
                         <div class="now-progress">
 
                             <div class="now-progress-item">
-                                <span>Universal</span>
-                                <span>Active</span>
+
+                                <span>
+                                    Universal
+                                </span>
+
+                                <span>
+                                    Active
+                                </span>
+
                             </div>
 
+
                             <div class="progress-track">
-                                <span class="progress-fill"></span>
+
+                                <span
+                                    class="progress-fill"
+                                    aria-hidden="true"
+                                ></span>
+
                             </div>
 
                         </div>
@@ -852,7 +1235,10 @@
                     </div>
 
 
+                    <!-- Current work -->
+
                     <div class="now-list reveal">
+
 
                         <div class="now-item">
 
@@ -860,12 +1246,19 @@
                                 01
                             </span>
 
+
                             <div>
-                                <strong>Learning AI</strong>
+
+                                <strong>
+                                    Learning AI
+                                </strong>
+
                                 <p>
                                     Exploring newer developments in AI
-                                    through courses and experiments.
+                                    through courses, experiments,
+                                    and projects.
                                 </p>
+
                             </div>
 
                         </div>
@@ -877,12 +1270,18 @@
                                 02
                             </span>
 
+
                             <div>
-                                <strong>Building Cortex</strong>
+
+                                <strong>
+                                    Building Cortex
+                                </strong>
+
                                 <p>
                                     Exploring the architecture behind
                                     autonomous research systems.
                                 </p>
+
                             </div>
 
                         </div>
@@ -894,12 +1293,41 @@
                                 03
                             </span>
 
+
                             <div>
-                                <strong>Building AEGIS</strong>
+
+                                <strong>
+                                    Building AEGIS
+                                </strong>
+
                                 <p>
                                     Developing the Windows version first,
                                     with Android planned later.
                                 </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="now-item">
+
+                            <span class="now-item-index">
+                                04
+                            </span>
+
+
+                            <div>
+
+                                <strong>
+                                    Maintaining ARGUS
+                                </strong>
+
+                                <p>
+                                    Keeping the hosted Minecraft system
+                                    running and experimenting with it.
+                                </p>
+
                             </div>
 
                         </div>
@@ -920,13 +1348,16 @@
         <section
             class="engineering section"
             id="engineering"
+            aria-labelledby="engineering-title"
         >
 
             <div class="container">
 
+
                 <div class="section-heading reveal">
 
                     <div>
+
                         <span class="section-number">
                             03
                         </span>
@@ -934,16 +1365,21 @@
                         <span class="section-kicker">
                             Engineering
                         </span>
+
                     </div>
 
-                    <h2>
+
+                    <h2 id="engineering-title">
                         What I'm learning and building with.
                     </h2>
 
+
                     <p>
-                        I learn technologies by using them to build real
-                        projects rather than treating them as isolated
-                        subjects.
+
+                        I learn technologies by using them to build
+                        real projects rather than treating them as
+                        isolated subjects.
+
                     </p>
 
                 </div>
@@ -951,32 +1387,67 @@
 
                 <div class="technology-layout">
 
+
+                    <!-- Languages -->
+
                     <div class="technology-primary reveal">
 
                         <span class="technology-label">
                             LANGUAGES
                         </span>
 
+
                         <div class="technology-list">
 
                             <div class="technology-item">
-                                <span class="technology-index">01</span>
-                                <strong>Python</strong>
+
+                                <span class="technology-index">
+                                    01
+                                </span>
+
+                                <strong>
+                                    Python
+                                </strong>
+
                             </div>
 
-                            <div class="technology-item">
-                                <span class="technology-index">02</span>
-                                <strong>Go</strong>
-                            </div>
 
                             <div class="technology-item">
-                                <span class="technology-index">03</span>
-                                <strong>Java</strong>
+
+                                <span class="technology-index">
+                                    02
+                                </span>
+
+                                <strong>
+                                    Go
+                                </strong>
+
                             </div>
 
+
                             <div class="technology-item">
-                                <span class="technology-index">04</span>
-                                <strong>HTML / CSS</strong>
+
+                                <span class="technology-index">
+                                    03
+                                </span>
+
+                                <strong>
+                                    Java
+                                </strong>
+
+                            </div>
+
+
+                            <div class="technology-item">
+
+                                <span class="technology-index">
+                                    04
+                                </span>
+
+                                <strong>
+                                    HTML / CSS
+                                </strong>
+
                             </div>
 
                         </div>
@@ -984,22 +1455,40 @@
                     </div>
 
 
+                    <!-- Frameworks -->
+
                     <div class="technology-secondary reveal">
 
                         <span class="technology-label">
-                            TOOLS &amp; FRAMEWORKS
+                            RUNTIME &amp; FRAMEWORKS
                         </span>
+
 
                         <div class="technology-list">
 
                             <div class="technology-item">
-                                <span class="technology-index">05</span>
-                                <strong>Node.js</strong>
+
+                                <span class="technology-index">
+                                    05
+                                </span>
+
+                                <strong>
+                                    Node.js
+                                </strong>
+
                             </div>
 
+
                             <div class="technology-item">
-                                <span class="technology-index">06</span>
-                                <strong>React</strong>
+
+                                <span class="technology-index">
+                                    06
+                                </span>
+
+                                <strong>
+                                    React
+                                </strong>
+
                             </div>
 
                         </div>
@@ -1011,10 +1500,13 @@
                                 *
                             </span>
 
+
                             <p>
+
                                 This is a snapshot of what I'm currently
                                 learning and using — not a list of things
                                 I claim to have mastered.
+
                             </p>
 
                         </div>
@@ -1034,6 +1526,7 @@
 
         <section
             class="philosophy section section-alt"
+            aria-labelledby="philosophy-title"
         >
 
             <div class="container">
@@ -1044,18 +1537,32 @@
                         HOW I BUILD
                     </span>
 
-                    <h2>
+
+                    <h2 id="philosophy-title">
+
                         Build.
-                        <span>Break.</span>
+
+                        <span>
+                            Break.
+                        </span>
+
                         Understand.
-                        <span>Improve.</span>
+
+                        <span>
+                            Improve.
+                        </span>
+
                     </h2>
 
+
                     <p>
-                        I prefer learning through real systems. I build
-                        something, find where it breaks, understand why,
-                        and then improve it. The project becomes part of
-                        the learning process.
+
+                        I prefer learning through real systems.
+                        I build something, find where it breaks,
+                        understand why, and then improve it.
+
+                        The project becomes part of the learning process.
+
                     </p>
 
                 </div>
@@ -1072,13 +1579,16 @@
         <section
             class="about section"
             id="about"
+            aria-labelledby="about-title"
         >
 
             <div class="container">
 
+
                 <div class="section-heading reveal">
 
                     <div>
+
                         <span class="section-number">
                             04
                         </span>
@@ -1086,9 +1596,11 @@
                         <span class="section-kicker">
                             About
                         </span>
+
                     </div>
 
-                    <h2>
+
+                    <h2 id="about-title">
                         A little about me.
                     </h2>
 
@@ -1097,33 +1609,73 @@
 
                 <div class="about-grid">
 
+
+                    <!-- Story -->
+
                     <div class="about-story reveal">
 
                         <p class="about-lead">
+
                             I'm a Class 11 student interested in AI,
-                            software systems, and engineering.
+                            software systems, algorithms, and engineering.
+
                         </p>
 
+
                         <p>
+
                             I started making projects because I'm curious
                             about how technology works and because I want
                             to keep growing with a world that is changing
                             quickly.
+
                         </p>
 
+
                         <p>
-                            Some projects start as experiments. ARGUS,
-                            for example, started with curiosity about
-                            Minecraft automation and gradually turned into
-                            a hosted system. That's how I like learning:
-                            start with a question, build something, and
-                            discover the answer through the process.
+
+                            I enjoy building complex algorithms and backend
+                            systems, especially when I don't completely
+                            understand the problem at the beginning.
+
+                        </p>
+
+
+                        <p>
+
+                            Some projects start as experiments.
+
+                            ARGUS, for example, started with curiosity
+                            about Minecraft automation and gradually
+                            became a hosted system.
+
+                            That's how I like learning:
+                            start with a question, build something,
+                            discover what breaks, and understand the
+                            system through the process.
+
                         </p>
 
                     </div>
 
 
+                    <!-- Facts -->
+
                     <div class="about-facts reveal">
+
+
+                        <div class="fact">
+
+                            <span class="fact-label">
+                                NAME
+                            </span>
+
+                            <strong>
+                                Shreyansh Parganiha
+                            </strong>
+
+                        </div>
+
 
                         <div class="fact">
 
@@ -1178,13 +1730,16 @@
 
         <section
             class="beyond section section-alt"
+            aria-labelledby="beyond-title"
         >
 
             <div class="container">
 
+
                 <div class="section-heading reveal">
 
                     <div>
+
                         <span class="section-number">
                             05
                         </span>
@@ -1192,9 +1747,11 @@
                         <span class="section-kicker">
                             Beyond code
                         </span>
+
                     </div>
 
-                    <h2>
+
+                    <h2 id="beyond-title">
                         Things I enjoy outside programming.
                     </h2>
 
@@ -1203,24 +1760,35 @@
 
                 <div class="beyond-grid">
 
+
+                    <!-- Drones -->
+
                     <article class="beyond-card reveal">
 
                         <div class="beyond-number">
                             01
                         </div>
 
+
                         <h3>
                             Drones
                         </h3>
 
+
                         <p>
+
                             I fly drones and I'm interested in drone
-                            technology, with a long-term goal of working
-                            in the drone industry as a vendor.
+                            technology.
+
+                            Long term, I'd like to work in the drone
+                            industry as a vendor.
+
                         </p>
 
                     </article>
 
+
+                    <!-- Badminton -->
 
                     <article class="beyond-card reveal">
 
@@ -1228,13 +1796,17 @@
                             02
                         </div>
 
+
                         <h3>
                             Badminton
                         </h3>
 
+
                         <p>
-                            When I'm away from a screen, badminton is one
-                            of the things I enjoy playing.
+
+                            Outside technology, badminton is one of
+                            the things I enjoy playing.
+
                         </p>
 
                     </article>
@@ -1247,28 +1819,33 @@
 
 
         <!-- =====================================================
-             TIMELINE
+             LEARNING JOURNEY
         ====================================================== -->
 
         <section
             class="timeline section"
+            aria-labelledby="journey-title"
         >
 
             <div class="container">
 
+
                 <div class="section-heading reveal">
 
                     <div>
+
                         <span class="section-number">
                             06
                         </span>
 
                         <span class="section-kicker">
-                            Journey
+                            Learning loop
                         </span>
+
                     </div>
 
-                    <h2>
+
+                    <h2 id="journey-title">
                         Building by experimenting.
                     </h2>
 
@@ -1277,11 +1854,13 @@
 
                 <div class="timeline-list">
 
+
                     <div class="timeline-item reveal">
 
                         <span class="timeline-index">
                             01
                         </span>
+
 
                         <div class="timeline-content">
 
@@ -1289,13 +1868,15 @@
                                 EXPERIMENT
                             </span>
 
+
                             <h3>
                                 Start with curiosity.
                             </h3>
 
+
                             <p>
-                                A question or an idea becomes a small
-                                experiment.
+                                A question or an idea becomes
+                                a small experiment.
                             </p>
 
                         </div>
@@ -1309,15 +1890,18 @@
                             02
                         </span>
 
+
                         <div class="timeline-content">
 
                             <span class="timeline-label">
                                 BUILD
                             </span>
 
+
                             <h3>
                                 Turn the experiment into a system.
                             </h3>
+
 
                             <p>
                                 This is where the interesting engineering
@@ -1335,15 +1919,18 @@
                             03
                         </span>
 
+
                         <div class="timeline-content">
 
                             <span class="timeline-label">
                                 LEARN
                             </span>
 
+
                             <h3>
                                 Understand what went wrong.
                             </h3>
+
 
                             <p>
                                 Debugging becomes part of the learning
@@ -1361,19 +1948,22 @@
                             04
                         </span>
 
+
                         <div class="timeline-content">
 
                             <span class="timeline-label">
                                 IMPROVE
                             </span>
 
+
                             <h3>
                                 Build the next version.
                             </h3>
 
+
                             <p>
-                                Keep the useful parts, replace what didn't
-                                work, and continue.
+                                Keep the useful parts, replace what
+                                didn't work, and continue.
                             </p>
 
                         </div>
@@ -1394,11 +1984,13 @@
         <section
             class="contact section section-alt"
             id="contact"
+            aria-labelledby="contact-title"
         >
 
             <div class="container">
 
                 <div class="contact-card reveal">
+
 
                     <div class="contact-content">
 
@@ -1406,13 +1998,17 @@
                             CONTACT
                         </span>
 
-                        <h2>
+
+                        <h2 id="contact-title">
                             Want to see what I'm building?
                         </h2>
 
+
                         <p>
-                            Most of my work lives on GitHub. You can also
-                            reach me by email.
+
+                            Most of my work lives on GitHub.
+                            You can also reach me by email.
+
                         </p>
 
                     </div>
@@ -1420,25 +2016,33 @@
 
                     <div class="contact-actions">
 
+
                         <a
                             class="button button-primary"
                             href="https://github.com/"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            GitHub
+
+                            <span>
+                                GitHub
+                            </span>
 
                             <svg
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"
                             >
+
                                 <path
                                     d="M14 5h5v5M19 5 10 14"
                                 />
+
                                 <path
                                     d="M18 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
                                 />
+
                             </svg>
+
                         </a>
 
 
@@ -1446,19 +2050,26 @@
                             class="button button-secondary"
                             href="mailto:shreyansh2502@outlook.com"
                         >
-                            Email me
+
+                            <span>
+                                Email me
+                            </span>
 
                             <svg
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"
                             >
+
                                 <path
                                     d="M4 6h16v12H4z"
                                 />
+
                                 <path
                                     d="m4 7 8 6 8-6"
                                 />
+
                             </svg>
+
                         </a>
 
                     </div>
@@ -1480,13 +2091,17 @@
 
         <div class="container footer-inner">
 
+
             <div class="footer-left">
 
                 <span class="footer-brand">
                     Shreyansh Parganiha
                 </span>
 
-                <span class="footer-separator">
+                <span
+                    class="footer-separator"
+                    aria-hidden="true"
+                >
                     /
                 </span>
 
@@ -1504,7 +2119,9 @@
                 </span>
 
                 <span>
-                    © <span data-current-year></span> Shreyansh Parganiha
+                    &copy;
+                    <span data-current-year></span>
+                    Shreyansh Parganiha
                 </span>
 
             </div>
