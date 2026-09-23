@@ -1,238 +1,228 @@
 /* ============================================================
-   SHREYANSH — PERSONAL ENGINEERING WEBSITE
-   Lightweight interaction layer
+   SHREYANSH PARGANIHA
+   Personal Engineering Website
+   Interaction layer
    ============================================================ */
 
-(() => {
-    "use strict";
+"use strict";
 
 
-    /* ========================================================
-       01. DOM
-    ======================================================== */
+/* ============================================================
+   01. DOM READY
+   ============================================================ */
 
-    const documentRoot = document.documentElement;
-    const body = document.body;
+document.addEventListener("DOMContentLoaded", () => {
 
-    const header = document.querySelector("#site-header");
+    document.documentElement.classList.add("js-enhanced");
 
-    const menuToggle = document.querySelector(
-        ".mobile-menu-toggle"
-    );
-
-    const mobileNavigation = document.querySelector(
-        "#mobile-navigation"
-    );
-
-    const mobileNavigationLinks = mobileNavigation
-        ? mobileNavigation.querySelectorAll("a[href^='#']")
-        : [];
-
-    const desktopNavigationLinks = document.querySelectorAll(
-        ".desktop-nav a[href^='#']"
-    );
-
-    const revealElements = document.querySelectorAll(
-        ".reveal"
-    );
-
-    const sections = document.querySelectorAll(
-        "main section[id]"
-    );
-
-    const currentYearElements = document.querySelectorAll(
-        "[data-current-year]"
-    );
+    initMobileNavigation();
+    initHeaderScroll();
+    initRevealAnimations();
+    initActiveNavigation();
+    initSmoothScrolling();
+    initExternalLinks();
+    initCurrentYear();
+    initProjectCards();
+});
 
 
-    /* ========================================================
-       02. JAVASCRIPT READY
-    ======================================================== */
+/* ============================================================
+   02. MOBILE NAVIGATION
+   ============================================================ */
 
-    documentRoot.classList.add("js-ready");
+function initMobileNavigation() {
+
+    const toggle =
+        document.querySelector(".mobile-menu-toggle");
+
+    const navigation =
+        document.querySelector(".mobile-navigation");
+
+    if (!toggle || !navigation) {
+        return;
+    }
 
 
-    /* ========================================================
-       03. MOBILE NAVIGATION
-    ======================================================== */
+    const navigationLinks =
+        navigation.querySelectorAll("a");
 
-    const setMobileMenuState = (isOpen) => {
 
-        if (!menuToggle || !mobileNavigation) {
-            return;
+    function openMenu() {
+
+        toggle.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+        toggle.setAttribute(
+            "aria-label",
+            "Close navigation"
+        );
+
+        navigation.classList.add("open");
+
+        navigation.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+        document.body.classList.add(
+            "mobile-menu-open"
+        );
+    }
+
+
+    function closeMenu() {
+
+        toggle.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        toggle.setAttribute(
+            "aria-label",
+            "Open navigation"
+        );
+
+        navigation.classList.remove("open");
+
+        navigation.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        document.body.classList.remove(
+            "mobile-menu-open"
+        );
+    }
+
+
+    toggle.addEventListener("click", () => {
+
+        const isOpen =
+            toggle.getAttribute("aria-expanded")
+            === "true";
+
+        if (isOpen) {
+            closeMenu();
+        } else {
+            openMenu();
         }
 
-        menuToggle.setAttribute(
-            "aria-expanded",
-            String(isOpen)
-        );
-
-        menuToggle.setAttribute(
-            "aria-label",
-            isOpen
-                ? "Close navigation"
-                : "Open navigation"
-        );
-
-        mobileNavigation.classList.toggle(
-            "open",
-            isOpen
-        );
-
-        mobileNavigation.setAttribute(
-            "aria-hidden",
-            String(!isOpen)
-        );
-
-        body.classList.toggle(
-            "mobile-menu-open",
-            isOpen
-        );
-    };
+    });
 
 
-    if (menuToggle && mobileNavigation) {
+    navigationLinks.forEach(link => {
 
-        menuToggle.addEventListener(
-            "click",
-            () => {
-
-                const isOpen =
-                    menuToggle.getAttribute(
-                        "aria-expanded"
-                    ) === "true";
-
-                setMobileMenuState(!isOpen);
-            }
-        );
-
-
-        mobileNavigationLinks.forEach((link) => {
-
-            link.addEventListener(
-                "click",
-                () => {
-                    setMobileMenuState(false);
-                }
-            );
-
+        link.addEventListener("click", () => {
+            closeMenu();
         });
 
+    });
 
-        document.addEventListener(
-            "click",
-            (event) => {
 
-                const isOpen =
-                    menuToggle.getAttribute(
-                        "aria-expanded"
-                    ) === "true";
+    document.addEventListener("click", event => {
 
-                if (!isOpen) {
-                    return;
-                }
+        const clickedInsideNavigation =
+            navigation.contains(event.target);
 
-                const clickedInsideMenu =
-                    mobileNavigation.contains(event.target);
+        const clickedToggle =
+            toggle.contains(event.target);
 
-                const clickedToggle =
-                    menuToggle.contains(event.target);
+        const isOpen =
+            toggle.getAttribute("aria-expanded")
+            === "true";
 
-                if (
-                    !clickedInsideMenu &&
-                    !clickedToggle
-                ) {
-                    setMobileMenuState(false);
-                }
+        if (
+            isOpen &&
+            !clickedInsideNavigation &&
+            !clickedToggle
+        ) {
+            closeMenu();
+        }
+
+    });
+
+
+    document.addEventListener("keydown", event => {
+
+        if (event.key === "Escape") {
+            closeMenu();
+        }
+
+    });
+
+
+    /*
+     * If the screen becomes desktop-sized while
+     * the mobile menu is open, reset it.
+     */
+
+    window.addEventListener(
+        "resize",
+        debounce(() => {
+
+            if (window.innerWidth > 900) {
+                closeMenu();
             }
-        );
 
-
-        document.addEventListener(
-            "keydown",
-            (event) => {
-
-                if (event.key === "Escape") {
-                    setMobileMenuState(false);
-                    menuToggle.focus();
-                }
-            }
-        );
-
-    }
-
-
-    /* ========================================================
-       04. CLOSE MOBILE MENU WHEN SCREEN BECOMES DESKTOP
-    ======================================================== */
-
-    const desktopBreakpoint = window.matchMedia(
-        "(min-width: 901px)"
+        }, 100)
     );
 
-
-    const handleDesktopChange = (event) => {
-
-        if (event.matches) {
-            setMobileMenuState(false);
-        }
-    };
+}
 
 
-    if (desktopBreakpoint.addEventListener) {
+/* ============================================================
+   03. HEADER SCROLL STATE
+   ============================================================ */
 
-        desktopBreakpoint.addEventListener(
-            "change",
-            handleDesktopChange
-        );
+function initHeaderScroll() {
 
-    } else {
+    const header =
+        document.querySelector(".site-header");
 
-        desktopBreakpoint.addListener(
-            handleDesktopChange
-        );
-
+    if (!header) {
+        return;
     }
 
-
-    /* ========================================================
-       05. HEADER SCROLL STATE
-    ======================================================== */
 
     let ticking = false;
 
 
-    const updateHeader = () => {
+    function updateHeader() {
 
-        if (!header) {
-            return;
-        }
+        if (window.scrollY > 12) {
 
-        header.classList.toggle(
-            "scrolled",
-            window.scrollY > 12
-        );
-
-        ticking = false;
-    };
-
-
-    const requestHeaderUpdate = () => {
-
-        if (!ticking) {
-
-            window.requestAnimationFrame(
-                updateHeader
+            header.classList.add(
+                "scrolled"
             );
 
-            ticking = true;
+        } else {
+
+            header.classList.remove(
+                "scrolled"
+            );
+
         }
-    };
+
+        ticking = false;
+    }
 
 
     window.addEventListener(
         "scroll",
-        requestHeaderUpdate,
+        () => {
+
+            if (!ticking) {
+
+                window.requestAnimationFrame(
+                    updateHeader
+                );
+
+                ticking = true;
+            }
+
+        },
         {
             passive: true
         }
@@ -241,58 +231,36 @@
 
     updateHeader();
 
-
-    /* ========================================================
-       06. SCROLL REVEAL
-    ======================================================== */
-
-    const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
+}
 
 
-    if (
-        !reducedMotion &&
-        "IntersectionObserver" in window
-    ) {
+/* ============================================================
+   04. SCROLL REVEAL
+   ============================================================ */
 
-        const revealObserver =
-            new IntersectionObserver(
-                (entries, observer) => {
+function initRevealAnimations() {
 
-                    entries.forEach((entry) => {
+    const elements =
+        document.querySelectorAll(".reveal");
 
-                        if (!entry.isIntersecting) {
-                            return;
-                        }
-
-                        entry.target.classList.add(
-                            "revealed"
-                        );
-
-                        observer.unobserve(
-                            entry.target
-                        );
-
-                    });
-
-                },
-                {
-                    threshold: 0.08,
-                    rootMargin: "0px 0px -40px 0px"
-                }
-            );
+    if (!elements.length) {
+        return;
+    }
 
 
-        revealElements.forEach((element) => {
+    /*
+     * Respect reduced-motion preferences.
+     */
 
-            revealObserver.observe(element);
+    const reducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
 
-        });
 
-    } else {
+    if (reducedMotion) {
 
-        revealElements.forEach((element) => {
+        elements.forEach(element => {
 
             element.classList.add(
                 "revealed"
@@ -300,158 +268,332 @@
 
         });
 
+        return;
     }
 
 
-    /* ========================================================
-       07. ACTIVE DESKTOP NAVIGATION
-    ======================================================== */
+    /*
+     * Initial state.
+     *
+     * CSS keeps everything visible by default.
+     * We only hide elements after JS has successfully loaded.
+     */
 
-    const setActiveNavigation = (id) => {
+    elements.forEach(element => {
 
-        desktopNavigationLinks.forEach(
-            (link) => {
-
-                const href =
-                    link.getAttribute("href");
-
-                const isActive =
-                    href === `#${id}`;
-
-                link.classList.toggle(
-                    "active",
-                    isActive
-                );
-
-            }
+        element.classList.add(
+            "reveal-pending"
         );
 
-    };
+    });
 
 
-    if (
-        sections.length > 0 &&
-        "IntersectionObserver" in window
-    ) {
+    /*
+     * IntersectionObserver is used only as
+     * progressive enhancement.
+     */
 
-        const navigationObserver =
-            new IntersectionObserver(
-                (entries) => {
+    if (!("IntersectionObserver" in window)) {
 
-                    const visibleSections =
-                        Array.from(entries)
-                            .filter(
-                                (entry) =>
-                                    entry.isIntersecting
-                            )
-                            .sort(
-                                (a, b) =>
-                                    b.intersectionRatio -
-                                    a.intersectionRatio
-                            );
+        elements.forEach(element => {
 
-                    if (
-                        visibleSections.length > 0
-                    ) {
-
-                        setActiveNavigation(
-                            visibleSections[0]
-                                .target
-                                .id
-                        );
-
-                    }
-
-                },
-                {
-                    rootMargin:
-                        "-20% 0px -65% 0px",
-                    threshold: [
-                        0,
-                        0.1,
-                        0.25,
-                        0.5
-                    ]
-                }
+            element.classList.remove(
+                "reveal-pending"
             );
 
-
-        sections.forEach((section) => {
-
-            navigationObserver.observe(
-                section
+            element.classList.add(
+                "revealed"
             );
 
         });
 
+        return;
     }
 
 
-    /* ========================================================
-       08. SMOOTH INTERNAL LINKS
-    ======================================================== */
+    const observer =
+        new IntersectionObserver(
+            entries => {
 
-    const internalLinks =
+                entries.forEach(entry => {
+
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+
+                    entry.target.classList.remove(
+                        "reveal-pending"
+                    );
+
+                    entry.target.classList.add(
+                        "revealed"
+                    );
+
+
+                    observer.unobserve(
+                        entry.target
+                    );
+
+                });
+
+            },
+            {
+                threshold: 0.08,
+                rootMargin: "0px 0px -45px 0px"
+            }
+        );
+
+
+    elements.forEach(element => {
+
+        observer.observe(element);
+
+    });
+
+
+    /*
+     * Safety fallback.
+     *
+     * If something prevents an observer callback,
+     * content will never remain hidden indefinitely.
+     */
+
+    window.setTimeout(() => {
+
+        elements.forEach(element => {
+
+            element.classList.remove(
+                "reveal-pending"
+            );
+
+            element.classList.add(
+                "revealed"
+            );
+
+        });
+
+    }, 2500);
+
+}
+
+
+/* ============================================================
+   05. ACTIVE NAVIGATION
+   ============================================================ */
+
+function initActiveNavigation() {
+
+    const navigationLinks =
+        document.querySelectorAll(
+            ".desktop-nav a[href^='#']"
+        );
+
+    if (!navigationLinks.length) {
+        return;
+    }
+
+
+    const sections = [];
+
+
+    navigationLinks.forEach(link => {
+
+        const id =
+            link.getAttribute("href");
+
+        if (!id || id === "#") {
+            return;
+        }
+
+
+        const section =
+            document.querySelector(id);
+
+        if (section) {
+            sections.push({
+                link,
+                section
+            });
+        }
+
+    });
+
+
+    if (!sections.length) {
+        return;
+    }
+
+
+    function setActiveLink(activeLink) {
+
+        navigationLinks.forEach(link => {
+
+            link.classList.remove(
+                "active"
+            );
+
+        });
+
+
+        if (activeLink) {
+
+            activeLink.classList.add(
+                "active"
+            );
+
+        }
+
+    }
+
+
+    /*
+     * Home is active at the top.
+     */
+
+    if (window.scrollY < 200) {
+
+        const homeLink =
+            document.querySelector(
+                '.desktop-nav a[href="#top"]'
+            );
+
+        setActiveLink(homeLink);
+
+    }
+
+
+    if (!("IntersectionObserver" in window)) {
+        return;
+    }
+
+
+    const observer =
+        new IntersectionObserver(
+            entries => {
+
+                const visible =
+                    entries
+                        .filter(
+                            entry =>
+                                entry.isIntersecting
+                        )
+                        .sort(
+                            (a, b) =>
+                                b.intersectionRatio -
+                                a.intersectionRatio
+                        );
+
+
+                if (!visible.length) {
+                    return;
+                }
+
+
+                const current =
+                    sections.find(
+                        item =>
+                            item.section ===
+                            visible[0].target
+                    );
+
+
+                if (current) {
+
+                    setActiveLink(
+                        current.link
+                    );
+
+                }
+
+            },
+            {
+                rootMargin:
+                    "-25% 0px -60% 0px",
+
+                threshold:
+                    [0.05, 0.15, 0.3]
+            }
+        );
+
+
+    sections.forEach(
+        ({ section }) =>
+            observer.observe(section)
+    );
+
+}
+
+
+/* ============================================================
+   06. SMOOTH INTERNAL LINKS
+   ============================================================ */
+
+function initSmoothScrolling() {
+
+    const links =
         document.querySelectorAll(
             'a[href^="#"]'
         );
 
+    if (!links.length) {
+        return;
+    }
 
-    internalLinks.forEach((link) => {
+
+    const reducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+
+    links.forEach(link => {
 
         link.addEventListener(
             "click",
-            (event) => {
+            event => {
 
-                const targetId =
+                const href =
                     link.getAttribute("href");
 
+
                 if (
-                    !targetId ||
-                    targetId === "#"
+                    !href ||
+                    href === "#" ||
+                    href.length <= 1
                 ) {
                     return;
                 }
 
+
                 const target =
-                    document.querySelector(
-                        targetId
-                    );
+                    document.querySelector(href);
+
 
                 if (!target) {
                     return;
                 }
 
+
                 event.preventDefault();
 
-                const headerHeight =
-                    header
-                        ? header.offsetHeight
-                        : 0;
 
-                const targetPosition =
-                    target.getBoundingClientRect()
-                        .top +
-                    window.scrollY -
-                    headerHeight -
-                    16;
-
-                window.scrollTo({
-                    top: Math.max(
-                        targetPosition,
-                        0
-                    ),
+                target.scrollIntoView({
                     behavior:
                         reducedMotion
                             ? "auto"
-                            : "smooth"
+                            : "smooth",
+
+                    block:
+                        "start"
                 });
 
 
                 /*
                  * Update URL without causing
-                 * another jump.
+                 * another browser jump.
                  */
+
                 if (
                     window.history &&
                     window.history.replaceState
@@ -460,7 +602,7 @@
                     window.history.replaceState(
                         null,
                         "",
-                        targetId
+                        href
                     );
 
                 }
@@ -470,34 +612,39 @@
 
     });
 
+}
 
-    /* ========================================================
-       09. EXTERNAL LINKS
-    ======================================================== */
 
-    const externalLinks =
+/* ============================================================
+   07. EXTERNAL LINKS
+   ============================================================ */
+
+function initExternalLinks() {
+
+    const links =
         document.querySelectorAll(
-            'a[href^="http://"], a[href^="https://"]'
+            'a[href^="http"]'
         );
 
 
-    externalLinks.forEach((link) => {
+    links.forEach(link => {
 
-        const url =
-            new URL(
-                link.href,
-                window.location.href
-            );
+        /*
+         * Do not modify links that already
+         * explicitly define their behavior.
+         */
 
-        if (
-            url.origin !==
-            window.location.origin
-        ) {
+        if (!link.hasAttribute("target")) {
 
             link.setAttribute(
                 "target",
                 "_blank"
             );
+
+        }
+
+
+        if (!link.hasAttribute("rel")) {
 
             link.setAttribute(
                 "rel",
@@ -508,161 +655,273 @@
 
     });
 
+}
 
-    /* ========================================================
-       10. CURRENT YEAR
-    ======================================================== */
 
-    const currentYear =
+/* ============================================================
+   08. CURRENT YEAR
+   ============================================================ */
+
+function initCurrentYear() {
+
+    const elements =
+        document.querySelectorAll(
+            "[data-current-year]"
+        );
+
+    if (!elements.length) {
+        return;
+    }
+
+
+    const year =
         new Date().getFullYear();
 
 
-    currentYearElements.forEach(
-        (element) => {
+    elements.forEach(element => {
 
-            element.textContent =
-                String(currentYear);
+        element.textContent =
+            String(year);
 
-        }
-    );
+    });
+
+}
 
 
-    /* ========================================================
-       11. PROJECT CARD KEYBOARD SUPPORT
-    ======================================================== */
+/* ============================================================
+   09. PROJECT CARD INTERACTION
+   ============================================================ */
 
-    const projectCards =
+function initProjectCards() {
+
+    const cards =
         document.querySelectorAll(
             ".project-card"
         );
 
 
-    projectCards.forEach((card) => {
+    cards.forEach(card => {
 
         const primaryLink =
             card.querySelector(
-                "a[href]"
+                ".project-arrow"
             );
+
 
         if (!primaryLink) {
             return;
         }
 
 
+        /*
+         * Keyboard support is handled naturally
+         * by the actual anchor.
+         *
+         * We intentionally don't make the entire
+         * card a fake button because that creates
+         * accessibility problems with nested links.
+         */
+
+
         card.addEventListener(
-            "keydown",
-            (event) => {
-
-                /*
-                 * Allow Enter/Space when the user
-                 * focuses the card itself.
-                 */
-
-                if (
-                    event.key !== "Enter" &&
-                    event.key !== " "
-                ) {
-                    return;
-                }
-
-
-                /*
-                 * Don't interfere with an actual
-                 * focused link/button.
-                 */
-
-                if (
-                    event.target.closest(
-                        "a, button"
-                    )
-                ) {
-                    return;
-                }
-
-
-                event.preventDefault();
-
-                primaryLink.click();
-
-            }
-        );
-
-    });
-
-
-    /* ========================================================
-       12. EXTERNAL PAGE VISIBILITY
-    ======================================================== */
-
-    document.addEventListener(
-        "visibilitychange",
-        () => {
-
-            if (
-                document.visibilityState ===
-                "visible"
-            ) {
-
-                updateHeader();
-
-            }
-
-        }
-    );
-
-
-    /* ========================================================
-       13. IMAGE SAFETY
-       ======================================================== */
-
-    /*
-     * If images are added later, prevent broken-image
-     * layout surprises from producing unnecessary
-     * visual noise.
-     */
-
-    const images =
-        document.querySelectorAll(
-            "img"
-        );
-
-
-    images.forEach((image) => {
-
-        image.addEventListener(
-            "error",
+            "mouseenter",
             () => {
 
-                image.classList.add(
-                    "image-load-error"
+                card.classList.add(
+                    "is-hovered"
                 );
 
-            },
-            {
-                once: true
+            }
+        );
+
+
+        card.addEventListener(
+            "mouseleave",
+            () => {
+
+                card.classList.remove(
+                    "is-hovered"
+                );
+
             }
         );
 
     });
 
+}
 
-    /* ========================================================
-       14. INITIAL STATE
-    ======================================================== */
 
-    /*
-     * Mark the first visible navigation area when
-     * the page loads near the top.
-     */
+/* ============================================================
+   10. EXTERNAL LINK SAFETY
+   ============================================================ */
 
-    if (
-        window.scrollY <
-        window.innerHeight * 0.45
-    ) {
+window.addEventListener(
+    "error",
+    event => {
 
-        setActiveNavigation("projects");
+        /*
+         * Prevent an individual resource error
+         * from affecting the rest of the page.
+         */
+
+        if (
+            event.target &&
+            event.target.tagName === "IMG"
+        ) {
+
+            event.target.classList.add(
+                "image-load-error"
+            );
+
+        }
+
+    },
+    true
+);
+
+
+/* ============================================================
+   11. KEYBOARD SCROLL SUPPORT
+   ============================================================ */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        /*
+         * Don't interfere with typing.
+         */
+
+        const active =
+            document.activeElement;
+
+        const isTyping =
+            active &&
+            (
+                active.tagName === "INPUT" ||
+                active.tagName === "TEXTAREA" ||
+                active.isContentEditable
+            );
+
+
+        if (isTyping) {
+            return;
+        }
+
+
+        /*
+         * Pressing Home returns to the top.
+         */
+
+        if (
+            event.key === "Home" &&
+            !event.ctrlKey &&
+            !event.metaKey
+        ) {
+
+            event.preventDefault();
+
+            window.scrollTo({
+                top: 0,
+                behavior:
+                    getScrollBehavior()
+            });
+
+        }
 
     }
+);
 
 
-})();
+/* ============================================================
+   12. PAGE VISIBILITY
+   ============================================================ */
+
+document.addEventListener(
+    "visibilitychange",
+    () => {
+
+        /*
+         * Nothing heavy runs while the tab
+         * isn't visible.
+         *
+         * This is intentionally lightweight because
+         * the website doesn't need a continuous loop.
+         */
+
+        if (document.hidden) {
+            document.body.classList.add(
+                "page-hidden"
+            );
+        } else {
+            document.body.classList.remove(
+                "page-hidden"
+            );
+        }
+
+    }
+);
+
+
+/* ============================================================
+   13. UTILITIES
+   ============================================================ */
+
+function getScrollBehavior() {
+
+    const reducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+
+    return reducedMotion
+        ? "auto"
+        : "smooth";
+
+}
+
+
+function debounce(
+    callback,
+    delay = 100
+) {
+
+    let timeout;
+
+
+    return (...args) => {
+
+        window.clearTimeout(
+            timeout
+        );
+
+
+        timeout =
+            window.setTimeout(
+                () => {
+                    callback(...args);
+                },
+                delay
+            );
+
+    };
+
+}
+
+
+/* ============================================================
+   14. FINAL INITIALIZATION MARK
+   ============================================================ */
+
+/*
+ * This class lets CSS know that JavaScript
+ * successfully initialized.
+ *
+ * The HTML therefore remains usable even if
+ * JavaScript is disabled or fails to load.
+ */
+
+document.documentElement.classList.add(
+    "site-ready"
+);
