@@ -1,628 +1,573 @@
 /* =========================================================
-   SHREYANSH PARGANIHA — PERSONAL WEBSITE
-   Interaction & UI Logic
+   SHREYANSH PARGANIHA — PERSONAL SITE
+   Interaction + Navigation
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
-    "use strict";
+  "use strict";
 
-    /* =====================================================
-       01. CONFIGURATION
-    ===================================================== */
+  /* =======================================================
+     01. CONFIG
+     ======================================================= */
 
-    const CLASS_CHANGE_DATE = new Date("2027-04-01T00:00:00");
-    const DEFAULT_CLASS = 11;
+  const CLASS_12_DATE = new Date("2027-04-01T00:00:00");
+  const DEFAULT_CLASS = 11;
 
-    const SELECTORS = {
-        menuToggle: ".menu-toggle",
-        navLinks: ".nav-links a",
-        navContainer: ".nav-links",
-        sections: "main section[id]",
-        revealTargets: [
-            ".section-intro",
-            ".thinking-description",
-            ".learning-process li",
-            ".about-block",
-            ".question-item",
-            ".project",
-            ".technical-row",
-            ".now-item",
-            ".outside-item",
-            ".contact-content"
-        ],
-        copyEmail: ".copy-email",
-        currentClass: "[data-current-class]",
-        currentYear: "[data-current-year]",
-        currentDate: ".hero-current + *"
-    };
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
 
-    /* =====================================================
-       02. UTILITY FUNCTIONS
-    ===================================================== */
+  /* =======================================================
+     02. HELPERS
+     ======================================================= */
 
-    const $ = (selector, parent = document) =>
-        parent.querySelector(selector);
+  const $ = (selector, parent = document) =>
+    parent.querySelector(selector);
 
-    const $$ = (selector, parent = document) =>
-        [...parent.querySelectorAll(selector)];
-
-
-    /* =====================================================
-       03. CURRENT CLASS
-       Automatically changes:
-       Class 11 → Class 12 on April 1, 2027
-    ===================================================== */
-
-    function getCurrentClass() {
-        const now = new Date();
-
-        return now >= CLASS_CHANGE_DATE
-            ? 12
-            : DEFAULT_CLASS;
-    }
-
-    function updateCurrentClass() {
-        const currentClass = getCurrentClass();
-
-        $$(SELECTORS.currentClass).forEach((element) => {
-            element.textContent = currentClass;
-        });
-    }
+  const $$ = (selector, parent = document) =>
+    [...parent.querySelectorAll(selector)];
 
 
-    /* =====================================================
-       04. CURRENT YEAR
-    ===================================================== */
+  /* =======================================================
+     03. CURRENT CLASS
+     ======================================================= */
 
-    function updateCurrentYear() {
-        const year = new Date().getFullYear();
+  function updateCurrentClass() {
+    const currentClass =
+      new Date() >= CLASS_12_DATE ? 12 : DEFAULT_CLASS;
 
-        $$(SELECTORS.currentYear).forEach((element) => {
-            element.textContent = year;
-        });
-    }
-
-
-    /* =====================================================
-       05. CURRENT MONTH / YEAR LABEL
-       Keeps "September 2026" dynamic.
-    ===================================================== */
-
-    function updateCurrentDateLabel() {
-        const dateLabel = $(".now .eyebrow");
-
-        if (!dateLabel) return;
-
-        const now = new Date();
-
-        const formatter = new Intl.DateTimeFormat("en-US", {
-            month: "long",
-            year: "numeric"
-        });
-
-        dateLabel.textContent = formatter.format(now);
-    }
-
-
-    /* =====================================================
-       06. MOBILE NAVIGATION
-    ===================================================== */
-
-    const menuToggle = $(SELECTORS.menuToggle);
-    const navContainer = $(SELECTORS.navContainer);
-
-    function openMenu() {
-        document.body.classList.add("menu-open");
-
-        menuToggle?.setAttribute("aria-expanded", "true");
-        menuToggle?.setAttribute("aria-label", "Close navigation menu");
-    }
-
-    function closeMenu() {
-        document.body.classList.remove("menu-open");
-
-        menuToggle?.setAttribute("aria-expanded", "false");
-        menuToggle?.setAttribute("aria-label", "Open navigation menu");
-    }
-
-    function toggleMenu() {
-        const isOpen =
-            document.body.classList.contains("menu-open");
-
-        if (isOpen) {
-            closeMenu();
-        } else {
-            openMenu();
-        }
-    }
-
-    menuToggle?.addEventListener("click", toggleMenu);
-
-
-    /* Close menu after clicking a navigation link */
-
-    $$(SELECTORS.navLinks).forEach((link) => {
-        link.addEventListener("click", () => {
-            closeMenu();
-        });
+    $$("[data-current-class]").forEach((element) => {
+      element.textContent = currentClass;
     });
+  }
 
 
-    /* Close menu with Escape */
+  /* =======================================================
+     04. CURRENT YEAR
+     ======================================================= */
 
-    document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-            closeMenu();
-        }
+  function updateCurrentYear() {
+    const year = new Date().getFullYear();
+
+    $$("[data-current-year]").forEach((element) => {
+      element.textContent = year;
     });
+  }
 
 
-    /* Close menu if viewport becomes desktop */
+  /* =======================================================
+     05. CURRENT MONTH / YEAR
+     ======================================================= */
 
-    window.addEventListener("resize", () => {
-        if (window.innerWidth > 720) {
-            closeMenu();
-        }
+  function updateCurrentDate() {
+    const dateElement = $(".now .eyebrow");
+
+    if (!dateElement) return;
+
+    const now = new Date();
+
+    const formatted = new Intl.DateTimeFormat("en-US", {
+      month: "long",
+      year: "numeric"
+    }).format(now);
+
+    dateElement.textContent = formatted;
+  }
+
+
+  /* =======================================================
+     06. MOBILE NAVIGATION
+     ======================================================= */
+
+  const menuButton = $(".menu-toggle");
+  const navigation = $(".site-nav");
+
+  function setMenu(open) {
+    if (!menuButton || !navigation) return;
+
+    document.body.classList.toggle("menu-open", open);
+    navigation.classList.toggle("is-open", open);
+
+    menuButton.setAttribute(
+      "aria-expanded",
+      String(open)
+    );
+
+    menuButton.setAttribute(
+      "aria-label",
+      open ? "Close navigation" : "Open navigation"
+    );
+  }
+
+  function toggleMenu() {
+    if (!navigation) return;
+
+    const isOpen =
+      navigation.classList.contains("is-open");
+
+    setMenu(!isOpen);
+  }
+
+  if (menuButton) {
+    menuButton.addEventListener("click", toggleMenu);
+  }
+
+
+  /* Close menu when navigation link is clicked */
+
+  $$(".site-nav a").forEach((link) => {
+    link.addEventListener("click", () => {
+      setMenu(false);
     });
+  });
 
 
-    /* =====================================================
-       07. ACTIVE NAVIGATION
-    ===================================================== */
+  /* Close with Escape */
 
-    const navigationLinks = $$(SELECTORS.navLinks);
-    const sections = $$(SELECTORS.sections);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      setMenu(false);
+    }
+  });
 
-    const sectionObserver = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
 
-                const id = entry.target.id;
+  /* Close if resized to desktop */
 
-                navigationLinks.forEach((link) => {
-                    const target =
-                        link.getAttribute("href");
+  window.addEventListener(
+    "resize",
+    () => {
+      if (window.innerWidth > 720) {
+        setMenu(false);
+      }
+    },
+    { passive: true }
+  );
 
-                    const isActive =
-                        target === `#${id}`;
 
-                    link.classList.toggle(
-                        "active",
-                        isActive
-                    );
-                });
-            });
-        },
-        {
-            rootMargin: "-35% 0px -55% 0px",
-            threshold: 0
-        }
+  /* =======================================================
+     07. ACTIVE NAVIGATION
+     ======================================================= */
+
+  const navLinks = $$(".site-nav a");
+  const sections = $$("main section[id]");
+
+  if ("IntersectionObserver" in window && sections.length) {
+    const navObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const id = entry.target.id;
+
+          navLinks.forEach((link) => {
+            const target = link.getAttribute("href");
+
+            link.classList.toggle(
+              "is-active",
+              target === `#${id}`
+            );
+          });
+        });
+      },
+      {
+        rootMargin: "-35% 0px -55% 0px",
+        threshold: 0
+      }
     );
 
     sections.forEach((section) => {
-        sectionObserver.observe(section);
+      navObserver.observe(section);
     });
+  }
 
 
-    /* =====================================================
-       08. SCROLL REVEAL
-    ===================================================== */
+  /* =======================================================
+     08. SCROLL REVEAL
+     ======================================================= */
 
-    const revealSelector =
-        SELECTORS.revealTargets.join(",");
+  const revealSelectors = [
+    ".section-header",
+    ".thinking-description",
+    ".learning-process li",
+    ".about-block",
+    ".question-item",
+    ".project",
+    ".technical-row",
+    ".now-item",
+    ".outside-item",
+    ".contact-content"
+  ];
 
-    const revealElements = $$(revealSelector);
+  const revealElements = $$(revealSelectors.join(","));
 
-    revealElements.forEach((element, index) => {
-        element.classList.add("js-reveal");
+  revealElements.forEach((element) => {
+    element.classList.add("js-reveal");
+  });
 
-        /*
-         * Small stagger without creating excessive animation.
-         */
-        const delay =
-            Math.min(index % 5, 4) * 45;
-
-        element.style.transitionDelay = `${delay}ms`;
+  if (
+    reducedMotion ||
+    !("IntersectionObserver" in window)
+  ) {
+    revealElements.forEach((element) => {
+      element.classList.add("is-visible");
     });
-
-    const revealObserver = new IntersectionObserver(
+  } else {
+    const revealObserver =
+      new IntersectionObserver(
         (entries, observer) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
 
-                entry.target.classList.add("is-visible");
+            const element = entry.target;
 
-                observer.unobserve(entry.target);
-            });
+            const siblings = [
+              ...element.parentElement.children
+            ];
+
+            const index = siblings.indexOf(element);
+
+            const delay =
+              Math.min(Math.max(index, 0), 5) * 55;
+
+            element.style.transitionDelay =
+              `${delay}ms`;
+
+            element.classList.add("is-visible");
+
+            observer.unobserve(element);
+          });
         },
         {
-            threshold: 0.08,
-            rootMargin: "0px 0px -40px 0px"
+          rootMargin: "0px 0px -8% 0px",
+          threshold: 0.05
         }
-    );
+      );
 
     revealElements.forEach((element) => {
-        revealObserver.observe(element);
+      revealObserver.observe(element);
     });
+  }
 
 
-    /* =====================================================
-       09. COPY EMAIL
-    ===================================================== */
+  /* =======================================================
+     09. SMOOTH ANCHOR NAVIGATION
+     ======================================================= */
 
-    const copyButtons = $$(SELECTORS.copyEmail);
+  const header = $(".site-header");
 
-    copyButtons.forEach((button) => {
+  function getHeaderHeight() {
+    return header
+      ? header.getBoundingClientRect().height
+      : 0;
+  }
 
-        button.addEventListener("click", async () => {
+  function scrollToTarget(target) {
+    if (!target) return;
 
-            const email =
-                button.dataset.email;
+    const headerHeight = getHeaderHeight();
 
-            if (!email) return;
+    const targetTop =
+      target.getBoundingClientRect().top +
+      window.scrollY -
+      headerHeight -
+      20;
 
-            const originalText =
-                button.textContent;
-
-            try {
-
-                await navigator.clipboard.writeText(email);
-
-                button.textContent = "Copied";
-                button.classList.add("copied");
-
-                window.setTimeout(() => {
-                    button.textContent = originalText;
-                    button.classList.remove("copied");
-                }, 1800);
-
-            } catch (error) {
-
-                /*
-                 * Clipboard API may be unavailable
-                 * in some browsers / contexts.
-                 */
-
-                const temporaryInput =
-                    document.createElement("input");
-
-                temporaryInput.value = email;
-
-                document.body.appendChild(
-                    temporaryInput
-                );
-
-                temporaryInput.select();
-
-                try {
-                    document.execCommand("copy");
-
-                    button.textContent = "Copied";
-                    button.classList.add("copied");
-
-                    window.setTimeout(() => {
-                        button.textContent = originalText;
-                        button.classList.remove("copied");
-                    }, 1800);
-
-                } catch {
-                    button.textContent = "Copy failed";
-
-                    window.setTimeout(() => {
-                        button.textContent = originalText;
-                    }, 1800);
-                }
-
-                temporaryInput.remove();
-            }
-        });
-
+    window.scrollTo({
+      top: Math.max(targetTop, 0),
+      behavior: reducedMotion ? "auto" : "smooth"
     });
+  }
 
+  $$('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href");
 
-    /* =====================================================
-       10. SMOOTH ANCHOR NAVIGATION
-       ===================================================== */
+      if (!href || href === "#") return;
 
-    $$('a[href^="#"]').forEach((link) => {
+      const target = document.querySelector(href);
 
-        link.addEventListener("click", (event) => {
+      if (!target) return;
 
-            const targetId =
-                link.getAttribute("href");
+      event.preventDefault();
 
-            if (
-                !targetId ||
-                targetId === "#"
-            ) {
-                return;
-            }
+      setMenu(false);
 
-            const target =
-                document.querySelector(targetId);
+      scrollToTarget(target);
 
-            if (!target) return;
-
-            event.preventDefault();
-
-            const header =
-                $(".site-header");
-
-            const headerHeight =
-                header?.offsetHeight || 0;
-
-            const targetPosition =
-                target.getBoundingClientRect().top +
-                window.scrollY -
-                headerHeight -
-                18;
-
-            window.scrollTo({
-                top: targetPosition,
-                behavior: "smooth"
-            });
-
-            /*
-             * Update URL without jumping.
-             */
-            history.replaceState(
-                null,
-                "",
-                targetId
-            );
-        });
-
+      try {
+        history.replaceState(
+          null,
+          "",
+          href
+        );
+      } catch {
+        /* Ignore history API errors */
+      }
     });
+  });
 
 
-    /* =====================================================
-       11. HERO SYSTEM VISUAL
-       Subtle movement based on pointer position.
-       Disabled for touch / reduced-motion users.
-    ===================================================== */
+  /* =======================================================
+     10. INITIAL HASH
+     ======================================================= */
 
-    const heroSystem = $(".hero-system");
+  function handleInitialHash() {
+    const hash = window.location.hash;
 
-    const supportsHover =
-        window.matchMedia("(hover: hover)").matches;
+    if (!hash || hash === "#") return;
 
-    const prefersReducedMotion =
-        window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches;
+    const target = document.querySelector(hash);
 
+    if (!target) return;
+
+    setTimeout(() => {
+      scrollToTarget(target);
+    }, 80);
+  }
+
+
+  /* =======================================================
+     11. COPY EMAIL
+     ======================================================= */
+
+  const copyButtons = $$(".copy-email");
+
+  async function copyText(text) {
     if (
-        heroSystem &&
-        supportsHover &&
-        !prefersReducedMotion
+      navigator.clipboard &&
+      window.isSecureContext
     ) {
-
-        const nodes =
-            $$(".system-node", heroSystem);
-
-        let frame = null;
-
-        heroSystem.addEventListener(
-            "pointermove",
-            (event) => {
-
-                const rect =
-                    heroSystem.getBoundingClientRect();
-
-                const x =
-                    (event.clientX - rect.left) /
-                    rect.width;
-
-                const y =
-                    (event.clientY - rect.top) /
-                    rect.height;
-
-                const moveX =
-                    (x - 0.5) * 10;
-
-                const moveY =
-                    (y - 0.5) * 10;
-
-                if (frame) {
-                    cancelAnimationFrame(frame);
-                }
-
-                frame = requestAnimationFrame(() => {
-
-                    nodes.forEach((node, index) => {
-
-                        const strength =
-                            (index + 1) * 0.35;
-
-                        node.style.transform =
-                            `translate(
-                                ${moveX * strength}px,
-                                ${moveY * strength}px
-                            )`;
-                    });
-
-                });
-            }
-        );
-
-        heroSystem.addEventListener(
-            "pointerleave",
-            () => {
-
-                nodes.forEach((node) => {
-                    node.style.transform = "";
-                });
-
-            }
-        );
+      await navigator.clipboard.writeText(text);
+      return true;
     }
 
+    const textarea =
+      document.createElement("textarea");
 
-    /* =====================================================
-       12. PROJECT ARCHITECTURE HOVER
-       Desktop-only micro interaction.
-    ===================================================== */
+    textarea.value = text;
 
-    if (supportsHover && !prefersReducedMotion) {
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    textarea.style.top = "-9999px";
 
-        $$(".architecture-node").forEach((node) => {
+    document.body.appendChild(textarea);
 
-            node.addEventListener(
-                "mouseenter",
-                () => {
-                    node.setAttribute(
-                        "data-hovered",
-                        "true"
-                    );
-                }
-            );
+    textarea.focus();
+    textarea.select();
 
-            node.addEventListener(
-                "mouseleave",
-                () => {
-                    node.removeAttribute(
-                        "data-hovered"
-                    );
-                }
-            );
+    let success = false;
 
-        });
+    try {
+      success =
+        document.execCommand("copy");
+    } catch {
+      success = false;
     }
 
+    textarea.remove();
 
-    /* =====================================================
-       13. EXTERNAL LINK SAFETY
-       Ensures target="_blank" links have
-       rel="noopener noreferrer".
-    ===================================================== */
+    return success;
+  }
 
-    $$('a[target="_blank"]').forEach((link) => {
+  copyButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const email =
+        button.dataset.email ||
+        button.textContent.trim();
 
-        const rel =
-            link.getAttribute("rel") || "";
+      const originalText =
+        button.textContent;
 
-        const values =
-            new Set(
-                rel.split(/\s+/).filter(Boolean)
-            );
+      try {
+        const success =
+          await copyText(email);
 
-        values.add("noopener");
-        values.add("noreferrer");
+        if (!success) return;
 
-        link.setAttribute(
-            "rel",
-            [...values].join(" ")
-        );
+        button.classList.add("copied");
+
+        button.textContent = "Copied";
+
+        setTimeout(() => {
+          button.textContent =
+            originalText;
+
+          button.classList.remove(
+            "copied"
+          );
+        }, 1500);
+
+      } catch {
+        /* Clipboard unavailable */
+      }
     });
+  });
 
 
-    /* =====================================================
-       14. DYNAMIC CURRENT PROJECT YEAR
-       ===================================================== */
+  /* =======================================================
+     12. EXTERNAL LINKS
+     ======================================================= */
 
-    function updateYearReferences() {
+  $$("a[target='_blank']").forEach((link) => {
+    const existing =
+      link.getAttribute("rel") || "";
 
-        const year =
-            new Date().getFullYear();
+    const values =
+      new Set(existing.split(/\s+/).filter(Boolean));
 
-        $$("[data-current-year]").forEach(
-            (element) => {
-                element.textContent = year;
-            }
-        );
-    }
+    values.add("noopener");
+    values.add("noreferrer");
 
-
-    /* =====================================================
-       15. HANDLE HASH ON INITIAL LOAD
-       ===================================================== */
-
-    function handleInitialHash() {
-
-        const hash =
-            window.location.hash;
-
-        if (!hash) return;
-
-        const target =
-            document.querySelector(hash);
-
-        if (!target) return;
-
-        /*
-         * Give the browser time to finish layout
-         * before positioning.
-         */
-        window.requestAnimationFrame(() => {
-
-            const header =
-                $(".site-header");
-
-            const offset =
-                header?.offsetHeight || 0;
-
-            window.scrollTo({
-                top:
-                    target.getBoundingClientRect().top +
-                    window.scrollY -
-                    offset -
-                    18,
-                behavior: "instant"
-            });
-
-        });
-    }
+    link.setAttribute(
+      "rel",
+      [...values].join(" ")
+    );
+  });
 
 
-    /* =====================================================
-       16. PAGE VISIBILITY
-       Avoid unnecessary animation work when the
-       browser tab is hidden.
-    ===================================================== */
+  /* =======================================================
+     13. HERO SYSTEM VISUAL
+     ======================================================= */
 
-    let pageVisible =
-        !document.hidden;
+  const systemVisual =
+    $(".system-visual");
 
-    document.addEventListener(
-        "visibilitychange",
-        () => {
-            pageVisible = !document.hidden;
-        }
+  /*
+   * Subtle pointer interaction only on devices
+   * that actually have a fine pointer.
+   *
+   * This prevents Android touch devices from
+   * receiving unnecessary mouse calculations.
+   */
+
+  const hasFinePointer =
+    window.matchMedia(
+      "(hover: hover) and (pointer: fine)"
+    ).matches;
+
+  if (
+    systemVisual &&
+    hasFinePointer &&
+    !reducedMotion
+  ) {
+    systemVisual.addEventListener(
+      "pointermove",
+      (event) => {
+        const rect =
+          systemVisual.getBoundingClientRect();
+
+        const x =
+          (event.clientX - rect.left) /
+          rect.width;
+
+        const y =
+          (event.clientY - rect.top) /
+          rect.height;
+
+        const rotateX =
+          (0.5 - y) * 4;
+
+        const rotateY =
+          (x - 0.5) * 4;
+
+        systemVisual.style.transform =
+          `perspective(800px)
+           rotateX(${rotateX}deg)
+           rotateY(${rotateY}deg)`;
+      }
     );
 
+    systemVisual.addEventListener(
+      "pointerleave",
+      () => {
+        systemVisual.style.transform =
+          "perspective(800px) rotateX(0deg) rotateY(0deg)";
+      }
+    );
+  }
 
-    /* =====================================================
-       17. INITIALIZATION
-    ===================================================== */
 
-    updateCurrentClass();
-    updateCurrentYear();
-    updateYearReferences();
-    updateCurrentDateLabel();
+  /* =======================================================
+     14. ARCHITECTURE NODE INTERACTION
+     ======================================================= */
 
-    /*
-     * Run after the first layout frame so that
-     * initial hash navigation doesn't fight
-     * browser rendering.
-     */
-    window.requestAnimationFrame(() => {
-        handleInitialHash();
+  $$(".architecture-node").forEach((node) => {
+    node.addEventListener("mouseenter", () => {
+      node.style.borderColor =
+        "rgba(185, 214, 200, 0.45)";
     });
 
+    node.addEventListener("mouseleave", () => {
+      node.style.borderColor = "";
+    });
+  });
 
-    /* =====================================================
-       18. DEVELOPMENT CHECK
-    ===================================================== */
 
-    if (
-        typeof window !== "undefined" &&
-        window.location.hostname === "localhost"
-    ) {
-        console.info(
-            "Shreyansh Parganiha — portfolio initialized."
-        );
+  /* =======================================================
+     15. PAGE VISIBILITY
+     ======================================================= */
+
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+      if (document.hidden) {
+        setMenu(false);
+      }
     }
+  );
+
+
+  /* =======================================================
+     16. SAFER MOBILE HEIGHT HANDLING
+     ======================================================= */
+
+  /*
+   * Some Android browsers report viewport changes
+   * when their browser controls appear/disappear.
+   *
+   * We expose the actual viewport height as a CSS
+   * variable without forcing the layout to depend
+   * on it.
+   */
+
+  function updateViewportUnit() {
+    const viewportHeight =
+      window.visualViewport
+        ? window.visualViewport.height
+        : window.innerHeight;
+
+    document.documentElement.style.setProperty(
+      "--app-height",
+      `${viewportHeight}px`
+    );
+  }
+
+  updateViewportUnit();
+
+  window.addEventListener(
+    "resize",
+    updateViewportUnit,
+    { passive: true }
+  );
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener(
+      "resize",
+      updateViewportUnit,
+      { passive: true }
+    );
+  }
+
+
+  /* =======================================================
+     17. INITIALIZE
+     ======================================================= */
+
+  updateCurrentClass();
+  updateCurrentYear();
+  updateCurrentDate();
+
+  handleInitialHash();
 
 });
