@@ -2,22 +2,42 @@
    SHREYANSH PARGANIHA
    Personal Portfolio
    Editorial / Engineering / Minimal
+   Dark Edition
 ========================================================= */
 
 :root {
-  --bg: #f5f4f0;
-  --bg-alt: #ecebe6;
-  --text: #11110f;
-  --text-secondary: #4f4f4a;
-  --text-muted: #85847d;
+  /* -------------------------------------------------------
+     CORE PALETTE
+  ------------------------------------------------------- */
 
-  --line: #d5d4ce;
-  --line-strong: #b7b6af;
+  --bg: #0a0a0a;
+  --bg-alt: #111111;
+  --bg-elevated: #151515;
+
+  --text: #f2f2ee;
+  --text-secondary: #a3a39d;
+  --text-muted: #686862;
+
+  --line: #272727;
+  --line-strong: #3b3b3b;
+
+  --accent: #f2f2ee;
+
+  /* -------------------------------------------------------
+     LAYOUT
+  ------------------------------------------------------- */
 
   --max-width: 1280px;
-  --page-padding: clamp(22px, 4vw, 54px);
 
-  --section-space: clamp(120px, 15vw, 220px);
+  --page-padding:
+    clamp(22px, 4vw, 54px);
+
+  --section-space:
+    clamp(120px, 15vw, 220px);
+
+  /* -------------------------------------------------------
+     TYPOGRAPHY
+  ------------------------------------------------------- */
 
   --sans:
     Inter,
@@ -30,9 +50,18 @@
     "SFMono-Regular",
     "Cascadia Code",
     Consolas,
+    "Liberation Mono",
     monospace;
 
-  --ease: cubic-bezier(.22, 1, .36, 1);
+  /* -------------------------------------------------------
+     MOTION
+  ------------------------------------------------------- */
+
+  --ease:
+    cubic-bezier(.22, 1, .36, 1);
+
+  --ease-soft:
+    cubic-bezier(.25, .8, .25, 1);
 }
 
 
@@ -49,9 +78,13 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
+
+  background: var(--bg);
 }
 
 body {
+  min-height: 100vh;
+
   margin: 0;
 
   background: var(--bg);
@@ -62,6 +95,8 @@ body {
   line-height: 1.65;
 
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   text-rendering: optimizeLegibility;
 }
 
@@ -75,8 +110,15 @@ a {
   text-decoration: none;
 }
 
-button {
+button,
+input,
+textarea,
+select {
   font: inherit;
+}
+
+button {
+  color: inherit;
 }
 
 img,
@@ -104,13 +146,21 @@ p {
   );
 
   margin-inline: auto;
+
   padding-block: var(--section-space);
 }
 
 .section-heading {
   display: grid;
-  grid-template-columns: 80px minmax(0, 1fr);
-  gap: clamp(25px, 4vw, 55px);
+
+  grid-template-columns:
+    80px
+    minmax(0, 1fr);
+
+  gap:
+    clamp(25px, 4vw, 55px);
+
+  align-items: start;
 }
 
 .section-index {
@@ -120,16 +170,24 @@ p {
 
   font-family: var(--mono);
   font-size: 10px;
+
+  line-height: 1;
+
   letter-spacing: .12em;
 }
 
 .section-heading h2 {
-  margin: 0;
-
   max-width: 900px;
 
-  font-size: clamp(46px, 6.4vw, 86px);
+  margin: 0;
+
+  color: var(--text);
+
+  font-size:
+    clamp(46px, 6.4vw, 86px);
+
   line-height: .94;
+
   font-weight: 500;
 
   letter-spacing: -.065em;
@@ -154,6 +212,7 @@ p {
 
 .site-header {
   position: fixed;
+
   z-index: 1000;
 
   top: 0;
@@ -161,12 +220,17 @@ p {
 
   width: 100%;
 
-  background: rgba(245, 244, 240, .82);
+  background:
+    rgba(10, 10, 10, .78);
 
-  border-bottom: 1px solid transparent;
+  border-bottom:
+    1px solid transparent;
 
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
 
   transition:
     background .35s ease,
@@ -174,8 +238,11 @@ p {
 }
 
 .site-header.scrolled {
-  background: rgba(245, 244, 240, .94);
-  border-bottom-color: var(--line);
+  background:
+    rgba(10, 10, 10, .94);
+
+  border-bottom-color:
+    var(--line);
 }
 
 .navbar {
@@ -189,6 +256,7 @@ p {
   margin-inline: auto;
 
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 }
@@ -202,11 +270,13 @@ p {
   position: relative;
 
   display: inline-flex;
+
   align-items: center;
 
   color: var(--text);
 
   font-size: 15px;
+
   font-weight: 650;
 
   letter-spacing: -.035em;
@@ -227,7 +297,9 @@ p {
 
 .nav-links {
   display: flex;
+
   align-items: center;
+
   gap: 34px;
 }
 
@@ -237,9 +309,11 @@ p {
   color: var(--text-secondary);
 
   font-size: 12px;
+
   letter-spacing: -.01em;
 
-  transition: color .25s ease;
+  transition:
+    color .25s ease;
 }
 
 .nav-links a::after {
@@ -255,10 +329,14 @@ p {
 
   background: var(--text);
 
-  transform: scaleX(0);
-  transform-origin: right;
+  transform:
+    scaleX(0);
 
-  transition: transform .35s var(--ease);
+  transform-origin:
+    right;
+
+  transition:
+    transform .35s var(--ease);
 }
 
 .nav-links a:hover {
@@ -266,13 +344,16 @@ p {
 }
 
 .nav-links a:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+  transform:
+    scaleX(1);
+
+  transform-origin:
+    left;
 }
 
 
 /* =========================================================
-   MOBILE MENU BUTTON
+   MOBILE MENU
 ========================================================= */
 
 .menu-toggle {
@@ -284,6 +365,8 @@ p {
   padding: 0;
 
   background: transparent;
+
+  border: 0;
 
   cursor: pointer;
 }
@@ -304,17 +387,25 @@ p {
 }
 
 .menu-toggle span + span {
-  margin-top: 6px;
   width: 14px;
+
+  margin-top: 6px;
 }
 
-.menu-toggle[aria-expanded="true"] span:first-child {
-  transform: translateY(3.5px) rotate(45deg);
+.menu-toggle[aria-expanded="true"]
+span:first-child {
+  transform:
+    translateY(3.5px)
+    rotate(45deg);
 }
 
-.menu-toggle[aria-expanded="true"] span:last-child {
+.menu-toggle[aria-expanded="true"]
+span:last-child {
   width: 21px;
-  transform: translateY(-3.5px) rotate(-45deg);
+
+  transform:
+    translateY(-3.5px)
+    rotate(-45deg);
 }
 
 
@@ -325,10 +416,13 @@ p {
 .hero {
   min-height: 100svh;
 
-  padding-top: clamp(150px, 19vh, 220px);
+  padding-top:
+    clamp(150px, 19vh, 220px);
+
   padding-bottom: 100px;
 
   display: flex;
+
   align-items: center;
 }
 
@@ -338,7 +432,7 @@ p {
 
 
 /* =========================================================
-   HERO IDENTITY
+   HERO EYEBROW
 ========================================================= */
 
 .eyebrow {
@@ -347,27 +441,28 @@ p {
   color: var(--text-muted);
 
   font-family: var(--mono);
+
   font-size: 10px;
+
+  line-height: 1.2;
+
   letter-spacing: .14em;
 }
 
 
-/*
-   THIS IS THE MAIN IDENTITY MOMENT.
-   The name is intentionally separated from the
-   positioning statement.
-*/
+/* =========================================================
+   HERO TITLE
+========================================================= */
 
 .hero h1 {
   max-width: 1100px;
 
   margin: 0;
 
-  font-size: clamp(
-    64px,
-    9.4vw,
-    132px
-  );
+  color: var(--text);
+
+  font-size:
+    clamp(64px, 9.4vw, 132px);
 
   line-height: .86;
 
@@ -377,11 +472,24 @@ p {
 }
 
 
-/* Make the person's name visually dominant */
+/* =========================================================
+   SHREYANSH PARGANIHA
+========================================================= */
 
-.hero h1 .name,
-.hero h1 strong {
+.hero-name {
+  display: block;
+
+  margin-bottom: .12em;
+
+  color: var(--text);
+
+  font-size: .42em;
+
+  line-height: 1;
+
   font-weight: 600;
+
+  letter-spacing: -.055em;
 }
 
 
@@ -396,7 +504,9 @@ p {
 
   color: var(--text-secondary);
 
-  font-size: clamp(18px, 2vw, 21px);
+  font-size:
+    clamp(18px, 2vw, 21px);
+
   line-height: 1.55;
 
   letter-spacing: -.015em;
@@ -415,6 +525,7 @@ p {
 
 .hero-actions {
   display: flex;
+
   gap: 10px;
 
   margin-top: 42px;
@@ -423,42 +534,53 @@ p {
 .button {
   min-height: 47px;
 
-  padding: 0 23px;
+  padding:
+    0 23px;
 
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
 
-  border: 1px solid var(--text);
+  border:
+    1px solid var(--text);
 
   font-size: 12px;
 
   transition:
     background .25s ease,
     color .25s ease,
+    border-color .25s ease,
     transform .35s var(--ease);
 }
 
 .button:hover {
-  transform: translateY(-2px);
+  transform:
+    translateY(-2px);
 }
 
 .button-primary {
   background: var(--text);
+
   color: var(--bg);
 }
 
 .button-primary:hover {
   background: transparent;
+
   color: var(--text);
 }
 
 .button-secondary {
-  border-color: var(--line-strong);
+  border-color:
+    var(--line-strong);
+
+  color: var(--text);
 }
 
 .button-secondary:hover {
-  border-color: var(--text);
+  border-color:
+    var(--text);
 }
 
 
@@ -470,12 +592,16 @@ p {
   max-width: 900px;
 
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+
+  grid-template-columns:
+    repeat(3, 1fr);
 
   margin-top: 110px;
+
   padding-top: 20px;
 
-  border-top: 1px solid var(--line);
+  border-top:
+    1px solid var(--line);
 }
 
 .hero-meta > div {
@@ -490,7 +616,11 @@ p {
   color: var(--text-muted);
 
   font-family: var(--mono);
+
   font-size: 9px;
+
+  line-height: 1.2;
+
   letter-spacing: .11em;
 }
 
@@ -504,7 +634,7 @@ p {
 
 
 /* =========================================================
-   PROCESS
+   SECTION BORDERS
 ========================================================= */
 
 .process,
@@ -514,14 +644,24 @@ p {
 .foundation,
 .outside,
 .contact {
-  border-top: 1px solid var(--line);
+  border-top:
+    1px solid var(--line);
 }
+
+
+/* =========================================================
+   PROCESS
+========================================================= */
 
 .process-intro,
 .process-list,
 .about-content,
 .questions-list {
-  margin-left: calc(80px + clamp(25px, 4vw, 55px));
+  margin-left:
+    calc(
+      80px +
+      clamp(25px, 4vw, 55px)
+    );
 }
 
 .process-intro {
@@ -533,7 +673,11 @@ p {
 
   margin: 0;
 
-  font-size: clamp(24px, 3.2vw, 38px);
+  color: var(--text);
+
+  font-size:
+    clamp(24px, 3.2vw, 38px);
+
   line-height: 1.2;
 
   letter-spacing: -.045em;
@@ -542,18 +686,23 @@ p {
 .process-list {
   margin-top: 90px;
 
-  border-top: 1px solid var(--line);
+  border-top:
+    1px solid var(--line);
 }
 
 .process-item {
   display: grid;
-  grid-template-columns: 65px 1fr;
+
+  grid-template-columns:
+    65px 1fr;
 
   padding: 32px 0;
 
-  border-bottom: 1px solid var(--line);
+  border-bottom:
+    1px solid var(--line);
 
-  transition: padding-left .4s var(--ease);
+  transition:
+    padding-left .4s var(--ease);
 }
 
 .process-item:hover {
@@ -564,14 +713,19 @@ p {
   color: var(--text-muted);
 
   font-family: var(--mono);
+
   font-size: 10px;
 }
 
 .process-item h3 {
   margin-bottom: 5px;
 
+  color: var(--text);
+
   font-size: 25px;
+
   line-height: 1.2;
+
   font-weight: 500;
 
   letter-spacing: -.035em;
@@ -603,7 +757,9 @@ p {
 .about-content .lead {
   color: var(--text);
 
-  font-size: clamp(25px, 3.3vw, 38px);
+  font-size:
+    clamp(25px, 3.3vw, 38px);
+
   line-height: 1.22;
 
   letter-spacing: -.045em;
@@ -617,20 +773,23 @@ p {
 .questions-list {
   margin-top: 100px;
 
-  border-top: 1px solid var(--line);
+  border-top:
+    1px solid var(--line);
 }
 
 .question {
   display: grid;
-  grid-template-columns: 65px 1fr;
+
+  grid-template-columns:
+    65px 1fr;
 
   padding: 44px 0;
 
-  border-bottom: 1px solid var(--line);
+  border-bottom:
+    1px solid var(--line);
 
   transition:
-    padding-left .4s var(--ease),
-    background .3s ease;
+    padding-left .4s var(--ease);
 }
 
 .question:hover {
@@ -641,6 +800,7 @@ p {
   color: var(--text-muted);
 
   font-family: var(--mono);
+
   font-size: 10px;
 }
 
@@ -649,7 +809,11 @@ p {
 
   margin-bottom: 14px;
 
-  font-size: clamp(23px, 3vw, 36px);
+  color: var(--text);
+
+  font-size:
+    clamp(23px, 3vw, 36px);
+
   line-height: 1.12;
 
   font-weight: 450;
@@ -663,8 +827,11 @@ p {
   color: var(--text-muted);
 
   font-family: var(--mono);
+
   font-size: 9px;
+
   letter-spacing: .1em;
+
   text-transform: uppercase;
 }
 
@@ -675,9 +842,11 @@ p {
 
 .project {
   margin-top: 125px;
+
   padding-top: 35px;
 
-  border-top: 1px solid var(--line-strong);
+  border-top:
+    1px solid var(--line-strong);
 }
 
 .project-featured {
@@ -686,7 +855,9 @@ p {
 
 .project-header {
   display: flex;
+
   justify-content: space-between;
+
   align-items: flex-start;
 
   gap: 30px;
@@ -698,14 +869,20 @@ p {
   color: var(--text-muted);
 
   font-family: var(--mono);
+
   font-size: 9px;
+
   letter-spacing: .11em;
 }
 
 .project h3 {
   margin: 0;
 
-  font-size: clamp(48px, 6.8vw, 88px);
+  color: var(--text);
+
+  font-size:
+    clamp(48px, 6.8vw, 88px);
+
   line-height: .9;
 
   font-weight: 500;
@@ -719,7 +896,9 @@ p {
   color: var(--text-muted);
 
   font-family: var(--mono);
+
   font-size: 9px;
+
   letter-spacing: .1em;
 
   white-space: nowrap;
@@ -732,7 +911,9 @@ p {
 
   color: var(--text-secondary);
 
-  font-size: clamp(20px, 2.5vw, 28px);
+  font-size:
+    clamp(20px, 2.5vw, 28px);
+
   line-height: 1.38;
 
   letter-spacing: -.03em;
@@ -748,7 +929,8 @@ p {
 
   padding: 27px 0;
 
-  border-block: 1px solid var(--line);
+  border-block:
+    1px solid var(--line);
 }
 
 .architecture-label {
@@ -757,12 +939,15 @@ p {
   color: var(--text-muted);
 
   font-family: var(--mono);
+
   font-size: 9px;
+
   letter-spacing: .12em;
 }
 
 .architecture-flow {
   display: flex;
+
   align-items: center;
 
   gap: 12px;
@@ -781,26 +966,38 @@ p {
 .architecture-node {
   flex: 0 0 auto;
 
-  padding: 12px 16px;
+  padding:
+    12px 16px;
 
-  border: 1px solid var(--line-strong);
+  border:
+    1px solid var(--line-strong);
 
-  background: var(--bg-alt);
+  background:
+    var(--bg-alt);
+
+  color: var(--text);
 
   font-family: var(--mono);
+
   font-size: 10px;
 
   white-space: nowrap;
 
   transition:
     background .25s ease,
-    border-color .25s ease;
+    border-color .25s ease,
+    color .25s ease;
 }
 
 .architecture-node:hover {
-  background: var(--text);
-  border-color: var(--text);
-  color: var(--bg);
+  background:
+    var(--text);
+
+  border-color:
+    var(--text);
+
+  color:
+    var(--bg);
 }
 
 .architecture-arrow {
@@ -816,12 +1013,17 @@ p {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+
+  grid-template-columns:
+    repeat(2, 1fr);
 
   margin-top: 70px;
 
-  border-top: 1px solid var(--line);
-  border-left: 1px solid var(--line);
+  border-top:
+    1px solid var(--line);
+
+  border-left:
+    1px solid var(--line);
 }
 
 .project-block {
@@ -829,8 +1031,11 @@ p {
 
   padding: 32px;
 
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  border-right:
+    1px solid var(--line);
+
+  border-bottom:
+    1px solid var(--line);
 }
 
 .block-label {
@@ -841,7 +1046,9 @@ p {
   color: var(--text-muted);
 
   font-family: var(--mono);
+
   font-size: 9px;
+
   letter-spacing: .12em;
 }
 
@@ -853,6 +1060,7 @@ p {
   color: var(--text-secondary);
 
   font-size: 14px;
+
   line-height: 1.72;
 }
 
@@ -863,6 +1071,7 @@ p {
 
 .project-footer {
   display: flex;
+
   flex-wrap: wrap;
 
   gap: 30px;
@@ -874,6 +1083,8 @@ p {
   position: relative;
 
   padding-bottom: 5px;
+
+  color: var(--text);
 
   font-size: 12px;
 }
@@ -889,34 +1100,45 @@ p {
   width: 100%;
   height: 1px;
 
-  background: var(--text);
+  background:
+    var(--text);
 
-  transform-origin: right;
-  transform: scaleX(1);
+  transform:
+    scaleX(1);
 
-  transition: transform .3s var(--ease);
+  transform-origin:
+    right;
+
+  transition:
+    transform .3s var(--ease);
 }
 
 .project-footer a:hover::after {
-  transform-origin: left;
-  transform: scaleX(.35);
+  transform:
+    scaleX(.35);
+
+  transform-origin:
+    left;
 }
 
 
 /* =========================================================
-   AEGIS FLOW
+   AEGIS CONTENT FLOW
 ========================================================= */
 
 .content-flow {
   display: flex;
+
   align-items: center;
 
   gap: 14px;
 
   margin-top: 70px;
+
   padding: 25px 0;
 
-  border-block: 1px solid var(--line);
+  border-block:
+    1px solid var(--line);
 
   overflow-x: auto;
 
@@ -930,14 +1152,21 @@ p {
 .content-flow-item {
   flex: 0 0 auto;
 
-  padding: 13px 18px;
+  padding:
+    13px 18px;
 
-  border: 1px solid var(--line-strong);
+  border:
+    1px solid var(--line-strong);
 
-  background: var(--bg-alt);
+  background:
+    var(--bg-alt);
+
+  color: var(--text);
 
   font-family: var(--mono);
+
   font-size: 10px;
+
   letter-spacing: .05em;
 }
 
@@ -948,12 +1177,17 @@ p {
 
 .argus-timeline {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+
+  grid-template-columns:
+    repeat(4, 1fr);
 
   margin-top: 70px;
 
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  border-top:
+    1px solid var(--line);
+
+  border-bottom:
+    1px solid var(--line);
 }
 
 .argus-timeline > div {
@@ -961,7 +1195,8 @@ p {
 
   padding: 23px;
 
-  border-right: 1px solid var(--line);
+  border-right:
+    1px solid var(--line);
 }
 
 .argus-timeline > div:last-child {
@@ -976,11 +1211,15 @@ p {
   color: var(--text-muted);
 
   font-family: var(--mono);
+
   font-size: 10px;
 }
 
 .argus-timeline strong {
+  color: var(--text);
+
   font-size: 15px;
+
   font-weight: 500;
 }
 
@@ -991,12 +1230,17 @@ p {
 
 .foundation-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+
+  grid-template-columns:
+    repeat(3, 1fr);
 
   margin-top: 100px;
 
-  border-top: 1px solid var(--line);
-  border-left: 1px solid var(--line);
+  border-top:
+    1px solid var(--line);
+
+  border-left:
+    1px solid var(--line);
 }
 
 .foundation-grid article {
@@ -1004,8 +1248,11 @@ p {
 
   padding: 32px;
 
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  border-right:
+    1px solid var(--line);
+
+  border-bottom:
+    1px solid var(--line);
 }
 
 .foundation-label {
@@ -1016,15 +1263,21 @@ p {
   color: var(--text-muted);
 
   font-family: var(--mono);
+
   font-size: 9px;
+
   letter-spacing: .12em;
 }
 
 .foundation-grid h3 {
   margin-bottom: 18px;
 
+  color: var(--text);
+
   font-size: 29px;
+
   line-height: 1;
+
   font-weight: 500;
 
   letter-spacing: -.045em;
@@ -1047,12 +1300,17 @@ p {
 
 .outside-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+
+  grid-template-columns:
+    repeat(2, 1fr);
 
   margin-top: 100px;
 
-  border-top: 1px solid var(--line);
-  border-left: 1px solid var(--line);
+  border-top:
+    1px solid var(--line);
+
+  border-left:
+    1px solid var(--line);
 }
 
 .outside-grid article {
@@ -1060,8 +1318,11 @@ p {
 
   padding: 35px;
 
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  border-right:
+    1px solid var(--line);
+
+  border-bottom:
+    1px solid var(--line);
 }
 
 .outside-number {
@@ -1072,13 +1333,17 @@ p {
   color: var(--text-muted);
 
   font-family: var(--mono);
+
   font-size: 10px;
 }
 
 .outside-grid h3 {
   margin-bottom: 13px;
 
+  color: var(--text);
+
   font-size: 31px;
+
   font-weight: 500;
 
   letter-spacing: -.045em;
@@ -1101,7 +1366,10 @@ p {
   min-height: 80vh;
 
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
 
   gap: 80px;
 }
@@ -1131,7 +1399,8 @@ p {
 }
 
 .contact-links {
-  border-top: 1px solid var(--line);
+  border-top:
+    1px solid var(--line);
 }
 
 .contact-links a,
@@ -1141,6 +1410,7 @@ p {
   min-height: 62px;
 
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
@@ -1149,7 +1419,9 @@ p {
   background: transparent;
 
   border: 0;
-  border-bottom: 1px solid var(--line);
+
+  border-bottom:
+    1px solid var(--line);
 
   color: var(--text);
 
@@ -1177,6 +1449,7 @@ p {
   color: var(--text-muted);
 
   font-family: var(--mono);
+
   font-size: 9px;
 }
 
@@ -1193,14 +1466,18 @@ p {
 
   margin-inline: auto;
 
-  padding: 55px 0 30px;
+  padding:
+    55px 0 30px;
 
-  border-top: 1px solid var(--line);
+  border-top:
+    1px solid var(--line);
 }
 
 .footer-main {
   display: flex;
+
   align-items: flex-start;
+
   justify-content: space-between;
 
   gap: 40px;
@@ -1211,7 +1488,10 @@ p {
 
   margin-bottom: 4px;
 
+  color: var(--text);
+
   font-size: 14px;
+
   font-weight: 600;
 }
 
@@ -1227,36 +1507,45 @@ p {
   color: var(--text-secondary);
 
   font-family: var(--mono);
+
   font-size: 10px;
+
   letter-spacing: .07em;
 }
 
 .footer-bottom {
   display: flex;
+
   justify-content: space-between;
 
   gap: 30px;
 
   margin-top: 80px;
+
   padding-top: 18px;
 
-  border-top: 1px solid var(--line);
+  border-top:
+    1px solid var(--line);
 
   color: var(--text-muted);
 
   font-family: var(--mono);
+
   font-size: 9px;
 }
 
 
 /* =========================================================
-   FOCUS
+   ACCESSIBILITY / FOCUS
 ========================================================= */
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--text);
-  outline-offset: 5px;
+  outline:
+    2px solid var(--text);
+
+  outline-offset:
+    5px;
 }
 
 
@@ -1267,7 +1556,9 @@ button:focus-visible {
 @media (max-width: 900px) {
 
   .section-heading {
-    grid-template-columns: 55px minmax(0, 1fr);
+    grid-template-columns:
+      55px
+      minmax(0, 1fr);
   }
 
   .process-intro,
@@ -1283,6 +1574,7 @@ button:focus-visible {
 
   .contact {
     grid-template-columns: 1fr;
+
     min-height: auto;
   }
 
@@ -1319,21 +1611,30 @@ button:focus-visible {
     width: 100%;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: stretch;
 
     gap: 0;
 
-    padding: 10px var(--page-padding) 25px;
+    padding:
+      10px
+      var(--page-padding)
+      25px;
 
-    background: var(--bg);
+    background:
+      rgba(10, 10, 10, .98);
 
-    border-bottom: 1px solid var(--line);
+    border-bottom:
+      1px solid var(--line);
 
     opacity: 0;
+
     visibility: hidden;
 
-    transform: translateY(-12px);
+    transform:
+      translateY(-12px);
 
     transition:
       opacity .25s ease,
@@ -1343,14 +1644,20 @@ button:focus-visible {
 
   .nav-links.open {
     opacity: 1;
+
     visibility: visible;
-    transform: translateY(0);
+
+    transform:
+      translateY(0);
   }
 
   .nav-links a {
     padding: 15px 0;
 
-    border-bottom: 1px solid var(--line);
+    border-bottom:
+      1px solid var(--line);
+
+    color: var(--text-secondary);
 
     font-size: 13px;
   }
@@ -1360,18 +1667,27 @@ button:focus-visible {
   }
 
 
-  /* HERO */
+  /* -------------------------------------------------------
+     HERO
+  ------------------------------------------------------- */
 
   .hero {
     min-height: auto;
 
     padding-top: 145px;
+
     padding-bottom: 95px;
   }
 
   .hero h1 {
-    font-size: clamp(57px, 15vw, 82px);
+    font-size:
+      clamp(57px, 15vw, 82px);
+
     letter-spacing: -.08em;
+  }
+
+  .hero-name {
+    font-size: .40em;
   }
 
   .hero-description {
@@ -1403,7 +1719,9 @@ button:focus-visible {
   }
 
 
-  /* SECTION HEADINGS */
+  /* -------------------------------------------------------
+     SECTION HEADINGS
+  ------------------------------------------------------- */
 
   .section-heading {
     display: block;
@@ -1414,7 +1732,8 @@ button:focus-visible {
   }
 
   .section-heading h2 {
-    font-size: clamp(45px, 13vw, 66px);
+    font-size:
+      clamp(45px, 13vw, 66px);
   }
 
   .section-description {
@@ -1422,7 +1741,9 @@ button:focus-visible {
   }
 
 
-  /* PROCESS / ABOUT */
+  /* -------------------------------------------------------
+     PROCESS / ABOUT
+  ------------------------------------------------------- */
 
   .process-intro,
   .process-list,
@@ -1440,14 +1761,18 @@ button:focus-visible {
   }
 
 
-  /* QUESTIONS */
+  /* -------------------------------------------------------
+     QUESTIONS
+  ------------------------------------------------------- */
 
   .questions-list {
     margin-top: 65px;
   }
 
   .question {
-    grid-template-columns: 40px 1fr;
+    grid-template-columns:
+      40px
+      1fr;
 
     padding: 34px 0;
   }
@@ -1457,7 +1782,9 @@ button:focus-visible {
   }
 
 
-  /* PROJECTS */
+  /* -------------------------------------------------------
+     PROJECTS
+  ------------------------------------------------------- */
 
   .project {
     margin-top: 90px;
@@ -1474,7 +1801,8 @@ button:focus-visible {
   }
 
   .project h3 {
-    font-size: clamp(50px, 15vw, 75px);
+    font-size:
+      clamp(50px, 15vw, 75px);
   }
 
   .project-lead {
@@ -1500,10 +1828,13 @@ button:focus-visible {
   }
 
 
-  /* ARGUS */
+  /* -------------------------------------------------------
+     ARGUS
+  ------------------------------------------------------- */
 
   .argus-timeline {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:
+      repeat(2, 1fr);
   }
 
   .argus-timeline > div:nth-child(2) {
@@ -1511,7 +1842,9 @@ button:focus-visible {
   }
 
 
-  /* FOUNDATION */
+  /* -------------------------------------------------------
+     FOUNDATION
+  ------------------------------------------------------- */
 
   .foundation-grid,
   .outside-grid {
@@ -1521,14 +1854,18 @@ button:focus-visible {
   }
 
 
-  /* OUTSIDE */
+  /* -------------------------------------------------------
+     OUTSIDE
+  ------------------------------------------------------- */
 
   .outside-grid article {
     min-height: 255px;
   }
 
 
-  /* CONTACT */
+  /* -------------------------------------------------------
+     CONTACT
+  ------------------------------------------------------- */
 
   .contact {
     gap: 70px;
@@ -1539,7 +1876,9 @@ button:focus-visible {
   }
 
 
-  /* FOOTER */
+  /* -------------------------------------------------------
+     FOOTER
+  ------------------------------------------------------- */
 
   .footer-main,
   .footer-bottom {
@@ -1579,6 +1918,10 @@ button:focus-visible {
     font-size: 51px;
   }
 
+  .hero-name {
+    font-size: .39em;
+  }
+
   .section-heading h2 {
     font-size: 43px;
   }
@@ -1589,7 +1932,83 @@ button:focus-visible {
 
   .argus-timeline > div {
     min-height: 105px;
+
     padding: 18px;
+  }
+}
+
+
+/* =========================================================
+   SAFARI / WEBKIT
+========================================================= */
+
+@supports (-webkit-touch-callout: none) {
+
+  body {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .site-header {
+    -webkit-backdrop-filter:
+      blur(18px);
+  }
+
+  .architecture-flow,
+  .content-flow {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+
+/* =========================================================
+   FIREFOX
+========================================================= */
+
+@-moz-document url-prefix() {
+
+  body {
+    scrollbar-width: thin;
+  }
+
+  .architecture-flow,
+  .content-flow {
+    scrollbar-width: none;
+  }
+}
+
+
+/* =========================================================
+   PERFORMANCE
+========================================================= */
+
+@supports (content-visibility: auto) {
+
+  .process,
+  .about,
+  .questions,
+  .foundation,
+  .outside {
+    content-visibility: auto;
+
+    contain-intrinsic-size:
+      auto 700px;
+  }
+}
+
+
+/* =========================================================
+   TOUCH DEVICES
+========================================================= */
+
+@media (hover: none) {
+
+  .question:hover,
+  .process-item:hover {
+    padding-left: 0;
+  }
+
+  .button:hover {
+    transform: none;
   }
 }
 
@@ -1608,6 +2027,12 @@ button:focus-visible {
   *::before,
   *::after {
     animation: none !important;
+
     transition: none !important;
+  }
+
+  .hero,
+  .section {
+    scroll-margin-top: 80px;
   }
 }
