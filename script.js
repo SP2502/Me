@@ -1,573 +1,858 @@
 /* =========================================================
-   SHREYANSH PARGANIHA — PERSONAL SITE
-   Interaction + Navigation
-   ========================================================= */
+   SHREYANSH PARGANIHA
+   Personal Website
+   script.js
+========================================================= */
+
+"use strict";
+
+
+/* =========================================================
+   01. DOM READY
+========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
-  "use strict";
 
-  /* =======================================================
-     01. CONFIG
-     ======================================================= */
+    /* -----------------------------------------------------
+       Elements
+    ----------------------------------------------------- */
 
-  const CLASS_12_DATE = new Date("2027-04-01T00:00:00");
-  const DEFAULT_CLASS = 11;
+    const header =
+        document.querySelector(".site-header");
 
-  const reducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
+    const menuToggle =
+        document.querySelector(".menu-toggle");
 
+    const navLinks =
+        document.querySelector(".nav-links");
 
-  /* =======================================================
-     02. HELPERS
-     ======================================================= */
+    const navItems =
+        document.querySelectorAll(".nav-links a");
 
-  const $ = (selector, parent = document) =>
-    parent.querySelector(selector);
+    const sections =
+        document.querySelectorAll("main section[id]");
 
-  const $$ = (selector, parent = document) =>
-    [...parent.querySelectorAll(selector)];
+    const classElements =
+        document.querySelectorAll("[data-current-class]");
 
+    const yearElements =
+        document.querySelectorAll("[data-current-year]");
 
-  /* =======================================================
-     03. CURRENT CLASS
-     ======================================================= */
-
-  function updateCurrentClass() {
-    const currentClass =
-      new Date() >= CLASS_12_DATE ? 12 : DEFAULT_CLASS;
-
-    $$("[data-current-class]").forEach((element) => {
-      element.textContent = currentClass;
-    });
-  }
+    const copyEmailButton =
+        document.querySelector(".copy-email");
 
 
-  /* =======================================================
-     04. CURRENT YEAR
-     ======================================================= */
+    /* =====================================================
+       02. ACADEMIC YEAR
+       
+       Class 11:
+       Before April 1, 2027
 
-  function updateCurrentYear() {
-    const year = new Date().getFullYear();
+       Class 12:
+       April 1, 2027 onward
+    ===================================================== */
 
-    $$("[data-current-year]").forEach((element) => {
-      element.textContent = year;
-    });
-  }
+    function getCurrentClass() {
 
+        const now = new Date();
 
-  /* =======================================================
-     05. CURRENT MONTH / YEAR
-     ======================================================= */
+        const classTwelveStart =
+            new Date(2027, 3, 1, 0, 0, 0);
 
-  function updateCurrentDate() {
-    const dateElement = $(".now .eyebrow");
-
-    if (!dateElement) return;
-
-    const now = new Date();
-
-    const formatted = new Intl.DateTimeFormat("en-US", {
-      month: "long",
-      year: "numeric"
-    }).format(now);
-
-    dateElement.textContent = formatted;
-  }
-
-
-  /* =======================================================
-     06. MOBILE NAVIGATION
-     ======================================================= */
-
-  const menuButton = $(".menu-toggle");
-  const navigation = $(".site-nav");
-
-  function setMenu(open) {
-    if (!menuButton || !navigation) return;
-
-    document.body.classList.toggle("menu-open", open);
-    navigation.classList.toggle("is-open", open);
-
-    menuButton.setAttribute(
-      "aria-expanded",
-      String(open)
-    );
-
-    menuButton.setAttribute(
-      "aria-label",
-      open ? "Close navigation" : "Open navigation"
-    );
-  }
-
-  function toggleMenu() {
-    if (!navigation) return;
-
-    const isOpen =
-      navigation.classList.contains("is-open");
-
-    setMenu(!isOpen);
-  }
-
-  if (menuButton) {
-    menuButton.addEventListener("click", toggleMenu);
-  }
-
-
-  /* Close menu when navigation link is clicked */
-
-  $$(".site-nav a").forEach((link) => {
-    link.addEventListener("click", () => {
-      setMenu(false);
-    });
-  });
-
-
-  /* Close with Escape */
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      setMenu(false);
+        return now >= classTwelveStart
+            ? "12"
+            : "11";
     }
-  });
 
 
-  /* Close if resized to desktop */
+    function updateCurrentClass() {
 
-  window.addEventListener(
-    "resize",
-    () => {
-      if (window.innerWidth > 720) {
-        setMenu(false);
-      }
-    },
-    { passive: true }
-  );
+        const currentClass =
+            getCurrentClass();
+
+        classElements.forEach((element) => {
+
+            element.textContent =
+                currentClass;
+
+        });
+    }
 
 
-  /* =======================================================
-     07. ACTIVE NAVIGATION
-     ======================================================= */
+    /* =====================================================
+       03. CURRENT YEAR
+    ===================================================== */
 
-  const navLinks = $$(".site-nav a");
-  const sections = $$("main section[id]");
+    function updateCurrentYear() {
 
-  if ("IntersectionObserver" in window && sections.length) {
-    const navObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
+        const year =
+            new Date().getFullYear();
 
-          const id = entry.target.id;
+        yearElements.forEach((element) => {
 
-          navLinks.forEach((link) => {
-            const target = link.getAttribute("href");
+            element.textContent =
+                year;
+
+        });
+    }
+
+
+    updateCurrentClass();
+    updateCurrentYear();
+
+
+    /* =====================================================
+       04. MOBILE NAVIGATION
+    ===================================================== */
+
+    function setMenuState(isOpen) {
+
+        if (!menuToggle || !navLinks) {
+            return;
+        }
+
+        menuToggle.classList.toggle(
+            "is-open",
+            isOpen
+        );
+
+        navLinks.classList.toggle(
+            "is-open",
+            isOpen
+        );
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+        );
+
+        menuToggle.setAttribute(
+            "aria-label",
+            isOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
+        );
+
+        document.body.classList.toggle(
+            "menu-open",
+            isOpen
+        );
+    }
+
+
+    function toggleMenu() {
+
+        const isOpen =
+            navLinks?.classList.contains("is-open");
+
+        setMenuState(!isOpen);
+    }
+
+
+    if (menuToggle) {
+
+        menuToggle.addEventListener(
+            "click",
+            toggleMenu
+        );
+
+    }
+
+
+    /* =====================================================
+       05. CLOSE MOBILE NAVIGATION
+    ===================================================== */
+
+    navItems.forEach((link) => {
+
+        link.addEventListener(
+            "click",
+            () => setMenuState(false)
+        );
+
+    });
+
+
+    document.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (event.key !== "Escape") {
+                return;
+            }
+
+            if (
+                navLinks?.classList.contains("is-open")
+            ) {
+
+                setMenuState(false);
+
+                menuToggle?.focus();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       06. CLICK OUTSIDE MENU
+    ===================================================== */
+
+    document.addEventListener(
+        "click",
+        (event) => {
+
+            if (
+                !navLinks ||
+                !menuToggle
+            ) {
+                return;
+            }
+
+            if (
+                !navLinks.classList.contains("is-open")
+            ) {
+                return;
+            }
+
+            const clickedMenu =
+                menuToggle.contains(event.target);
+
+            const clickedNavigation =
+                navLinks.contains(event.target);
+
+            if (
+                !clickedMenu &&
+                !clickedNavigation
+            ) {
+
+                setMenuState(false);
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       07. HEADER SCROLL STATE
+    ===================================================== */
+
+    function updateHeader() {
+
+        if (!header) {
+            return;
+        }
+
+        header.classList.toggle(
+            "scrolled",
+            window.scrollY > 20
+        );
+    }
+
+
+    updateHeader();
+
+
+    window.addEventListener(
+        "scroll",
+        updateHeader,
+        {
+            passive: true
+        }
+    );
+
+
+    /* =====================================================
+       08. ACTIVE NAVIGATION
+    ===================================================== */
+
+    function updateActiveNavigation() {
+
+        if (!sections.length) {
+            return;
+        }
+
+        const scrollPosition =
+            window.scrollY +
+            window.innerHeight * 0.30;
+
+        let activeSection = "";
+
+
+        sections.forEach((section) => {
+
+            const top =
+                section.offsetTop;
+
+            const bottom =
+                top +
+                section.offsetHeight;
+
+            if (
+                scrollPosition >= top &&
+                scrollPosition < bottom
+            ) {
+
+                activeSection =
+                    section.id;
+
+            }
+
+        });
+
+
+        navItems.forEach((link) => {
+
+            const target =
+                link.getAttribute("href");
+
+            const isActive =
+                target === `#${activeSection}`;
 
             link.classList.toggle(
-              "is-active",
-              target === `#${id}`
+                "active",
+                isActive
             );
-          });
+
         });
-      },
-      {
-        rootMargin: "-35% 0px -55% 0px",
-        threshold: 0
-      }
+
+    }
+
+
+    updateActiveNavigation();
+
+
+    window.addEventListener(
+        "scroll",
+        updateActiveNavigation,
+        {
+            passive: true
+        }
     );
 
-    sections.forEach((section) => {
-      navObserver.observe(section);
-    });
-  }
 
+    /* =====================================================
+       09. SMOOTH INTERNAL NAVIGATION
+    ===================================================== */
 
-  /* =======================================================
-     08. SCROLL REVEAL
-     ======================================================= */
-
-  const revealSelectors = [
-    ".section-header",
-    ".thinking-description",
-    ".learning-process li",
-    ".about-block",
-    ".question-item",
-    ".project",
-    ".technical-row",
-    ".now-item",
-    ".outside-item",
-    ".contact-content"
-  ];
-
-  const revealElements = $$(revealSelectors.join(","));
-
-  revealElements.forEach((element) => {
-    element.classList.add("js-reveal");
-  });
-
-  if (
-    reducedMotion ||
-    !("IntersectionObserver" in window)
-  ) {
-    revealElements.forEach((element) => {
-      element.classList.add("is-visible");
-    });
-  } else {
-    const revealObserver =
-      new IntersectionObserver(
-        (entries, observer) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-
-            const element = entry.target;
-
-            const siblings = [
-              ...element.parentElement.children
-            ];
-
-            const index = siblings.indexOf(element);
-
-            const delay =
-              Math.min(Math.max(index, 0), 5) * 55;
-
-            element.style.transitionDelay =
-              `${delay}ms`;
-
-            element.classList.add("is-visible");
-
-            observer.unobserve(element);
-          });
-        },
-        {
-          rootMargin: "0px 0px -8% 0px",
-          threshold: 0.05
-        }
-      );
-
-    revealElements.forEach((element) => {
-      revealObserver.observe(element);
-    });
-  }
-
-
-  /* =======================================================
-     09. SMOOTH ANCHOR NAVIGATION
-     ======================================================= */
-
-  const header = $(".site-header");
-
-  function getHeaderHeight() {
-    return header
-      ? header.getBoundingClientRect().height
-      : 0;
-  }
-
-  function scrollToTarget(target) {
-    if (!target) return;
-
-    const headerHeight = getHeaderHeight();
-
-    const targetTop =
-      target.getBoundingClientRect().top +
-      window.scrollY -
-      headerHeight -
-      20;
-
-    window.scrollTo({
-      top: Math.max(targetTop, 0),
-      behavior: reducedMotion ? "auto" : "smooth"
-    });
-  }
-
-  $$('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const href = link.getAttribute("href");
-
-      if (!href || href === "#") return;
-
-      const target = document.querySelector(href);
-
-      if (!target) return;
-
-      event.preventDefault();
-
-      setMenu(false);
-
-      scrollToTarget(target);
-
-      try {
-        history.replaceState(
-          null,
-          "",
-          href
+    const internalLinks =
+        document.querySelectorAll(
+            'a[href^="#"]'
         );
-      } catch {
-        /* Ignore history API errors */
-      }
+
+
+    internalLinks.forEach((link) => {
+
+        link.addEventListener(
+            "click",
+            (event) => {
+
+                const targetId =
+                    link.getAttribute("href");
+
+                if (
+                    !targetId ||
+                    targetId === "#"
+                ) {
+                    return;
+                }
+
+
+                const target =
+                    document.querySelector(targetId);
+
+                if (!target) {
+                    return;
+                }
+
+
+                event.preventDefault();
+
+
+                const headerHeight =
+                    header?.offsetHeight || 0;
+
+
+                const targetPosition =
+                    target.getBoundingClientRect().top +
+                    window.scrollY -
+                    headerHeight -
+                    18;
+
+
+                const reducedMotion =
+                    window.matchMedia(
+                        "(prefers-reduced-motion: reduce)"
+                    ).matches;
+
+
+                window.scrollTo({
+
+                    top: targetPosition,
+
+                    behavior:
+                        reducedMotion
+                            ? "auto"
+                            : "smooth"
+
+                });
+
+
+                /*
+                 * Update the URL without causing
+                 * another browser jump.
+                 */
+
+                if (
+                    history.pushState
+                ) {
+
+                    history.pushState(
+                        null,
+                        "",
+                        targetId
+                    );
+
+                }
+
+            }
+        );
+
     });
-  });
 
 
-  /* =======================================================
-     10. INITIAL HASH
-     ======================================================= */
+    /* =====================================================
+       10. SCROLL REVEAL
+       
+       Only subtle movement.
+       No exaggerated animation.
+    ===================================================== */
 
-  function handleInitialHash() {
-    const hash = window.location.hash;
+    const revealTargets =
+        document.querySelectorAll(
+            ".section-intro, " +
+            ".learning-copy, " +
+            ".learning-process, " +
+            ".about-main, " +
+            ".about-story, " +
+            ".question, " +
+            ".project, " +
+            ".now-block, " +
+            ".foundation-row, " +
+            ".outside-item, " +
+            ".contact-content"
+        );
 
-    if (!hash || hash === "#") return;
 
-    const target = document.querySelector(hash);
-
-    if (!target) return;
-
-    setTimeout(() => {
-      scrollToTarget(target);
-    }, 80);
-  }
+    const prefersReducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
 
 
-  /* =======================================================
-     11. COPY EMAIL
-     ======================================================= */
-
-  const copyButtons = $$(".copy-email");
-
-  async function copyText(text) {
     if (
-      navigator.clipboard &&
-      window.isSecureContext
+        !prefersReducedMotion &&
+        "IntersectionObserver" in window
     ) {
-      await navigator.clipboard.writeText(text);
-      return true;
+
+        document.documentElement.classList.add(
+            "reveal-ready"
+        );
+
+
+        revealTargets.forEach((element) => {
+
+            element.classList.add(
+                "reveal-target"
+            );
+
+        });
+
+
+        /*
+         * The CSS provided earlier expects:
+         *
+         * .is-visible
+         *
+         * to reveal content.
+         *
+         * Add the necessary initial state here
+         * without requiring another CSS rewrite.
+         */
+
+        revealTargets.forEach((element) => {
+
+            element.style.opacity = "0";
+            element.style.transform =
+                "translateY(18px)";
+            element.style.transition =
+                "opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), " +
+                "transform 700ms cubic-bezier(0.22, 1, 0.36, 1)";
+
+        });
+
+
+        const revealObserver =
+            new IntersectionObserver(
+                (entries, observer) => {
+
+                    entries.forEach((entry) => {
+
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+
+
+                        entry.target.style.opacity =
+                            "1";
+
+                        entry.target.style.transform =
+                            "translateY(0)";
+
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    });
+
+                },
+                {
+                    threshold: 0.10,
+                    rootMargin:
+                        "0px 0px -45px 0px"
+                }
+            );
+
+
+        revealTargets.forEach((element) => {
+
+            revealObserver.observe(element);
+
+        });
+
     }
 
-    const textarea =
-      document.createElement("textarea");
 
-    textarea.value = text;
+    /* =====================================================
+       11. COPY EMAIL
+    ===================================================== */
 
-    textarea.style.position = "fixed";
-    textarea.style.left = "-9999px";
-    textarea.style.top = "-9999px";
+    if (copyEmailButton) {
 
-    document.body.appendChild(textarea);
+        const email =
+            copyEmailButton.dataset.email;
 
-    textarea.focus();
-    textarea.select();
+        const originalText =
+            copyEmailButton.textContent;
 
-    let success = false;
+        let resetTimer;
 
-    try {
-      success =
-        document.execCommand("copy");
-    } catch {
-      success = false;
+
+        async function copyEmail() {
+
+            if (!email) {
+                return;
+            }
+
+
+            try {
+
+                /*
+                 * Modern clipboard API
+                 */
+
+                await navigator.clipboard.writeText(
+                    email
+                );
+
+                showCopiedState();
+
+            } catch {
+
+                /*
+                 * Fallback for browsers that don't
+                 * expose navigator.clipboard.
+                 */
+
+                fallbackCopy(email);
+
+            }
+
+        }
+
+
+        function showCopiedState() {
+
+            copyEmailButton.textContent =
+                "Copied";
+
+            copyEmailButton.classList.add(
+                "copied"
+            );
+
+            copyEmailButton.setAttribute(
+                "aria-label",
+                "Email address copied"
+            );
+
+
+            clearTimeout(resetTimer);
+
+
+            resetTimer =
+                setTimeout(() => {
+
+                    copyEmailButton.textContent =
+                        originalText;
+
+                    copyEmailButton.classList.remove(
+                        "copied"
+                    );
+
+                    copyEmailButton.setAttribute(
+                        "aria-label",
+                        "Copy email address"
+                    );
+
+                }, 1800);
+
+        }
+
+
+        function fallbackCopy(value) {
+
+            const input =
+                document.createElement("textarea");
+
+            input.value = value;
+
+            input.setAttribute(
+                "readonly",
+                ""
+            );
+
+            input.style.position =
+                "fixed";
+
+            input.style.left =
+                "-9999px";
+
+            document.body.appendChild(input);
+
+            input.select();
+
+            try {
+
+                document.execCommand(
+                    "copy"
+                );
+
+                showCopiedState();
+
+            } finally {
+
+                input.remove();
+
+            }
+
+        }
+
+
+        copyEmailButton.addEventListener(
+            "click",
+            copyEmail
+        );
+
     }
 
-    textarea.remove();
 
-    return success;
-  }
+    /* =====================================================
+       12. EXTERNAL LINK SAFETY
+    ===================================================== */
 
-  copyButtons.forEach((button) => {
-    button.addEventListener("click", async () => {
-      const email =
-        button.dataset.email ||
-        button.textContent.trim();
+    document
+        .querySelectorAll(
+            'a[target="_blank"]'
+        )
+        .forEach((link) => {
 
-      const originalText =
-        button.textContent;
+            const existingRel =
+                link.getAttribute("rel") || "";
 
-      try {
-        const success =
-          await copyText(email);
+            const relValues =
+                new Set(
+                    existingRel
+                        .split(/\s+/)
+                        .filter(Boolean)
+                );
 
-        if (!success) return;
+            relValues.add("noopener");
+            relValues.add("noreferrer");
 
-        button.classList.add("copied");
+            link.setAttribute(
+                "rel",
+                Array.from(relValues).join(" ")
+            );
 
-        button.textContent = "Copied";
+        });
+
+
+    /* =====================================================
+       13. SYSTEM VISUAL INTERACTION
+       
+       Very subtle interaction.
+       It should feel like a system visualization,
+       not a flashy animation.
+    ===================================================== */
+
+    const heroSystem =
+        document.querySelector(".hero-system");
+
+
+    if (
+        heroSystem &&
+        !prefersReducedMotion
+    ) {
+
+        const nodes =
+            heroSystem.querySelectorAll(
+                ".system-node"
+            );
+
+
+        nodes.forEach((node, index) => {
+
+            node.addEventListener(
+                "mouseenter",
+                () => {
+
+                    node.style.borderColor =
+                        "rgba(169, 200, 189, 0.45)";
+
+                    node.style.color =
+                        "#f1f1ee";
+
+                    node.style.background =
+                        "rgba(169, 200, 189, 0.06)";
+
+                }
+            );
+
+
+            node.addEventListener(
+                "mouseleave",
+                () => {
+
+                    node.style.borderColor =
+                        "";
+
+                    node.style.color =
+                        "";
+
+                    node.style.background =
+                        "";
+
+                }
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       14. DYNAMIC YEAR REFRESH
+       
+       Keeps the academic class and footer year
+       correct if the page remains open overnight.
+    ===================================================== */
+
+    function scheduleDailyRefresh() {
+
+        const now =
+            new Date();
+
+        const tomorrow =
+            new Date(now);
+
+        tomorrow.setDate(
+            now.getDate() + 1
+        );
+
+        tomorrow.setHours(
+            0,
+            0,
+            5,
+            0
+        );
+
+
+        const delay =
+            tomorrow.getTime() -
+            now.getTime();
+
 
         setTimeout(() => {
-          button.textContent =
-            originalText;
 
-          button.classList.remove(
-            "copied"
-          );
-        }, 1500);
+            updateCurrentClass();
+            updateCurrentYear();
 
-      } catch {
-        /* Clipboard unavailable */
-      }
-    });
-  });
+            scheduleDailyRefresh();
 
+        }, delay);
 
-  /* =======================================================
-     12. EXTERNAL LINKS
-     ======================================================= */
-
-  $$("a[target='_blank']").forEach((link) => {
-    const existing =
-      link.getAttribute("rel") || "";
-
-    const values =
-      new Set(existing.split(/\s+/).filter(Boolean));
-
-    values.add("noopener");
-    values.add("noreferrer");
-
-    link.setAttribute(
-      "rel",
-      [...values].join(" ")
-    );
-  });
-
-
-  /* =======================================================
-     13. HERO SYSTEM VISUAL
-     ======================================================= */
-
-  const systemVisual =
-    $(".system-visual");
-
-  /*
-   * Subtle pointer interaction only on devices
-   * that actually have a fine pointer.
-   *
-   * This prevents Android touch devices from
-   * receiving unnecessary mouse calculations.
-   */
-
-  const hasFinePointer =
-    window.matchMedia(
-      "(hover: hover) and (pointer: fine)"
-    ).matches;
-
-  if (
-    systemVisual &&
-    hasFinePointer &&
-    !reducedMotion
-  ) {
-    systemVisual.addEventListener(
-      "pointermove",
-      (event) => {
-        const rect =
-          systemVisual.getBoundingClientRect();
-
-        const x =
-          (event.clientX - rect.left) /
-          rect.width;
-
-        const y =
-          (event.clientY - rect.top) /
-          rect.height;
-
-        const rotateX =
-          (0.5 - y) * 4;
-
-        const rotateY =
-          (x - 0.5) * 4;
-
-        systemVisual.style.transform =
-          `perspective(800px)
-           rotateX(${rotateX}deg)
-           rotateY(${rotateY}deg)`;
-      }
-    );
-
-    systemVisual.addEventListener(
-      "pointerleave",
-      () => {
-        systemVisual.style.transform =
-          "perspective(800px) rotateX(0deg) rotateY(0deg)";
-      }
-    );
-  }
-
-
-  /* =======================================================
-     14. ARCHITECTURE NODE INTERACTION
-     ======================================================= */
-
-  $$(".architecture-node").forEach((node) => {
-    node.addEventListener("mouseenter", () => {
-      node.style.borderColor =
-        "rgba(185, 214, 200, 0.45)";
-    });
-
-    node.addEventListener("mouseleave", () => {
-      node.style.borderColor = "";
-    });
-  });
-
-
-  /* =======================================================
-     15. PAGE VISIBILITY
-     ======================================================= */
-
-  document.addEventListener(
-    "visibilitychange",
-    () => {
-      if (document.hidden) {
-        setMenu(false);
-      }
     }
-  );
 
 
-  /* =======================================================
-     16. SAFER MOBILE HEIGHT HANDLING
-     ======================================================= */
+    scheduleDailyRefresh();
 
-  /*
-   * Some Android browsers report viewport changes
-   * when their browser controls appear/disappear.
-   *
-   * We expose the actual viewport height as a CSS
-   * variable without forcing the layout to depend
-   * on it.
-   */
 
-  function updateViewportUnit() {
-    const viewportHeight =
-      window.visualViewport
-        ? window.visualViewport.height
-        : window.innerHeight;
+    /* =====================================================
+       15. RESIZE HANDLING
+       
+       Closes mobile navigation if the viewport becomes
+       desktop-sized.
+    ===================================================== */
 
-    document.documentElement.style.setProperty(
-      "--app-height",
-      `${viewportHeight}px`
+    let resizeTimer;
+
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            clearTimeout(resizeTimer);
+
+
+            resizeTimer =
+                setTimeout(() => {
+
+                    if (
+                        window.innerWidth > 700
+                    ) {
+
+                        setMenuState(false);
+
+                    }
+
+                    updateActiveNavigation();
+
+                }, 100);
+
+        }
     );
-  }
-
-  updateViewportUnit();
-
-  window.addEventListener(
-    "resize",
-    updateViewportUnit,
-    { passive: true }
-  );
-
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener(
-      "resize",
-      updateViewportUnit,
-      { passive: true }
-    );
-  }
 
 
-  /* =======================================================
-     17. INITIALIZE
-     ======================================================= */
+    /* =====================================================
+       16. INITIAL STATE
+    ===================================================== */
 
-  updateCurrentClass();
-  updateCurrentYear();
-  updateCurrentDate();
-
-  handleInitialHash();
+    updateCurrentClass();
+    updateCurrentYear();
+    updateHeader();
+    updateActiveNavigation();
 
 });
