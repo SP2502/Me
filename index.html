@@ -2,10 +2,6 @@
 <html lang="en">
 <head>
 
-    <!-- =========================================================
-         DOCUMENT
-    ========================================================== -->
-
     <meta charset="UTF-8">
 
     <meta
@@ -34,18 +30,23 @@
     >
 
     <meta
-        name="robots"
-        content="index, follow"
+        property="og:title"
+        content="Shreyansh Parganiha — Student & AI Systems Enthusiast"
+    >
+
+    <meta
+        property="og:description"
+        content="Building AI systems, infrastructure, automation and software to understand how systems work."
+    >
+
+    <meta
+        property="og:type"
+        content="website"
     >
 
     <title>
-        Shreyansh Parganiha — Student &amp; AI Systems Enthusiast
+        Shreyansh Parganiha — Student & AI Systems Enthusiast
     </title>
-
-
-    <!-- =========================================================
-         STYLES
-    ========================================================== -->
 
     <link
         rel="stylesheet"
@@ -57,10 +58,9 @@
 
 <body>
 
-
-    <!-- =========================================================
+    <!-- =====================================================
          ACCESSIBILITY
-    ========================================================== -->
+    ====================================================== -->
 
     <a
         class="skip-link"
@@ -70,73 +70,61 @@
     </a>
 
 
-    <!-- =========================================================
+    <!-- =====================================================
          HEADER
-    ========================================================== -->
+    ====================================================== -->
 
     <header
         class="site-header"
         id="site-header"
     >
 
-        <div class="header-inner">
+        <div class="container header-inner">
 
-            <!-- Desktop navigation -->
+
+            <!-- Intentionally minimal.
+                 No logo/name block. -->
+
+            <div class="header-spacer" aria-hidden="true"></div>
+
 
             <nav
                 class="desktop-nav"
                 aria-label="Primary navigation"
             >
 
-                <a
-                    href="#top"
-                >
-                    Home
-                </a>
-
-                <a
-                    href="#projects"
-                >
+                <a href="#projects">
                     Projects
                 </a>
 
-                <a
-                    href="#now"
-                >
+                <a href="#now">
                     Now
                 </a>
 
-                <a
-                    href="#engineering"
-                >
+                <a href="#engineering">
                     Engineering
                 </a>
 
-                <a
-                    href="#about"
-                >
+                <a href="#about">
                     About
                 </a>
 
-                <a
-                    href="#contact"
-                >
+                <a href="#contact">
                     Contact
                 </a>
 
             </nav>
 
 
-            <!-- Header actions -->
-
             <div class="header-actions">
+
 
                 <a
                     class="header-github"
-                    href="https://github.com/"
+                    href="https://github.com/SP2502"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Open Shreyansh Parganiha on GitHub"
+                    aria-label="Open Shreyansh's GitHub profile"
                 >
 
                     <svg
@@ -159,8 +147,6 @@
                 </a>
 
 
-                <!-- Mobile navigation toggle -->
-
                 <button
                     class="mobile-menu-toggle"
                     type="button"
@@ -174,11 +160,7 @@
                         viewBox="0 0 24 24"
                         aria-hidden="true"
                     >
-
-                        <path
-                            d="M4 6h16M4 12h16M4 18h16"
-                        />
-
+                        <path d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
 
 
@@ -187,11 +169,7 @@
                         viewBox="0 0 24 24"
                         aria-hidden="true"
                     >
-
-                        <path
-                            d="M6 6l12 12M18 6 6 18"
-                        />
-
+                        <path d="M6 6l12 12M18 6 6 18" />
                     </svg>
 
                 </button>
@@ -201,9 +179,9 @@
         </div>
 
 
-        <!-- =====================================================
+        <!-- =================================================
              MOBILE NAVIGATION
-        ====================================================== -->
+        ================================================== -->
 
         <nav
             class="mobile-navigation"
@@ -212,11 +190,7 @@
             aria-hidden="true"
         >
 
-            <div class="mobile-navigation-inner">
-
-                <a href="#top">
-                    Home
-                </a>
+            <div class="container mobile-navigation-inner">
 
                 <a href="#projects">
                     Projects
@@ -239,31 +213,40 @@
                 </a>
 
 
-                <div
-                    class="mobile-navigation-divider"
-                    aria-hidden="true"
-                ></div>
+                <div class="mobile-navigation-divider"></div>
 
 
                 <a
-                    href="https://github.com/"
+                    href="https://github.com/SP2502"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
 
-                    <span>
-                        GitHub
-                    </span>
+                    GitHub
 
                     <svg
                         viewBox="0 0 24 24"
                         aria-hidden="true"
                     >
+                        <path d="M7 17 17 7M8 7h9v9" />
+                    </svg>
 
-                        <path
-                            d="M7 17 17 7M8 7h9v9"
-                        />
+                </a>
 
+
+                <a
+                    href="https://sp2502.github.io/Me/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    Website
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <path d="M7 17 17 7M8 7h9v9" />
                     </svg>
 
                 </a>
@@ -275,50 +258,38 @@
     </header>
 
 
-    <!-- =========================================================
+    <!-- =====================================================
          MAIN
-    ========================================================== -->
+    ====================================================== -->
 
     <main id="main-content">
 
 
-        <!-- =====================================================
+        <!-- =================================================
              HERO
-        ====================================================== -->
+        ================================================== -->
 
         <section
             class="hero section"
             id="top"
-            aria-labelledby="hero-title"
         >
 
             <div class="container hero-grid">
 
 
-                <!-- Hero content -->
-
                 <div class="hero-content reveal">
+
 
                     <div class="eyebrow">
 
-                        <span
-                            class="status-dot"
-                            aria-hidden="true"
-                        ></span>
+                        <span class="status-dot"></span>
 
-                        <span>
-                            Student &amp; AI Systems Enthusiast
-                        </span>
+                        Student &amp; AI Systems Enthusiast
 
                     </div>
 
 
-                    <p class="hero-name">
-                        Shreyansh Parganiha
-                    </p>
-
-
-                    <h1 id="hero-title">
+                    <h1>
 
                         I build software
 
@@ -331,33 +302,30 @@
 
                     <p class="hero-description">
 
-                        I build projects because I'm curious about
-                        how technology works and want to grow alongside
-                        a world that keeps changing.
+                        Most of my projects start with a question,
+                        an idea, or something I want to understand.
+
+                        I learn by building the first version,
+                        finding what breaks, and figuring out why.
 
                     </p>
 
 
                     <div class="hero-actions">
 
+
                         <a
                             class="button button-primary"
                             href="#projects"
                         >
 
-                            <span>
-                                Explore projects
-                            </span>
+                            Explore projects
 
                             <svg
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"
                             >
-
-                                <path
-                                    d="M5 12h13M13 6l6 6-6 6"
-                                />
-
+                                <path d="M5 12h13M13 6l6 6-6 6" />
                             </svg>
 
                         </a>
@@ -365,23 +333,18 @@
 
                         <a
                             class="button button-secondary"
-                            href="https://github.com/"
+                            href="https://github.com/SP2502"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
 
-                            <span>
-                                View GitHub
-                            </span>
+                            View GitHub
 
                             <svg
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"
                             >
-
-                                <path
-                                    d="M14 5h5v5M19 5 10 14"
-                                />
+                                <path d="M14 5h5v5M19 5 10 14" />
 
                                 <path
                                     d="M18 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
@@ -396,7 +359,7 @@
                 </div>
 
 
-                <!-- Current focus -->
+                <!-- HERO SIDE -->
 
                 <aside
                     class="hero-side reveal"
@@ -422,7 +385,7 @@
                             </h2>
 
                             <p>
-                                Weather infrastructure for developers.
+                                Weather-data infrastructure.
                             </p>
 
                         </div>
@@ -430,18 +393,16 @@
                     </div>
 
 
-                    <div
-                        class="hero-side-divider"
-                        aria-hidden="true"
-                    ></div>
+                    <div class="hero-side-divider"></div>
 
 
                     <div class="hero-side-meta">
 
+
                         <div>
 
                             <span>
-                                Primary project
+                                Building
                             </span>
 
                             <strong>
@@ -454,7 +415,7 @@
                         <div>
 
                             <span>
-                                Currently learning
+                                Learning
                             </span>
 
                             <strong>
@@ -485,14 +446,13 @@
         </section>
 
 
-        <!-- =====================================================
+        <!-- =================================================
              PROJECTS
-        ====================================================== -->
+        ================================================== -->
 
         <section
             class="projects section"
             id="projects"
-            aria-labelledby="projects-title"
         >
 
             <div class="container">
@@ -513,29 +473,31 @@
                     </div>
 
 
-                    <h2 id="projects-title">
+                    <h2>
                         Things I'm building.
                     </h2>
 
 
                     <p>
-                        I learn by building systems that are slightly
-                        beyond what I already know.
+                        Most of what I learn comes from building systems
+                        that are slightly beyond what I already know.
                     </p>
 
                 </div>
 
 
-                <!-- =================================================
-                     UNIVERSAL — FLAGSHIP
-                ================================================== -->
+                <!-- =========================================
+                     UNIVERSAL
+                ========================================== -->
 
                 <article
                     class="project project-featured reveal"
                     id="universal"
                 >
 
-                    <header class="project-featured-header">
+
+                    <div class="project-featured-header">
+
 
                         <div class="project-label">
 
@@ -545,7 +507,7 @@
 
 
                             <span class="project-status status-building">
-                                In development
+                                Early development
                             </span>
 
 
@@ -556,37 +518,34 @@
                         </div>
 
 
-                        <a
-                            href="projects/universal.html"
-                            class="text-link"
-                        >
+                        <div class="project-actions">
 
-                            <span>
-                                Explore project
-                            </span>
-
-                            <svg
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
+                            <a
+                                href="projects/universal.html"
+                                class="text-link"
                             >
 
-                                <path
-                                    d="M5 12h13M13 6l6 6-6 6"
-                                />
+                                Explore project
 
-                            </svg>
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M5 12h13M13 6l6 6-6 6" />
+                                </svg>
 
-                        </a>
+                            </a>
 
-                    </header>
+                        </div>
+
+                    </div>
 
 
                     <div class="project-featured-grid">
 
 
-                        <!-- Universal description -->
-
                         <div class="project-content">
+
 
                             <h3>
                                 Universal
@@ -594,22 +553,20 @@
 
 
                             <p class="project-tagline">
-                                Weather infrastructure without
-                                provider-specific complexity.
+                                Weather data without provider-specific
+                                complexity.
                             </p>
 
 
                             <p>
-
                                 Universal is a weather-data infrastructure
-                                project I'm refining to make weather data
-                                easier to consume through a consistent API.
+                                project designed to sit between applications
+                                and weather providers.
 
-                                It handles the complexity behind the scenes:
-                                resolving locations, selecting weather
-                                providers, falling back when a provider
-                                fails, and normalizing the resulting data.
-
+                                A developer provides coordinates while
+                                Universal handles location resolution,
+                                provider selection, fallbacks and
+                                data normalization.
                             </p>
 
 
@@ -628,6 +585,10 @@
                                 </span>
 
                                 <span>
+                                    Fallbacks
+                                </span>
+
+                                <span>
                                     Data normalization
                                 </span>
 
@@ -639,19 +600,13 @@
                                 class="button button-primary"
                             >
 
-                                <span>
-                                    View Universal
-                                </span>
+                                View Universal
 
                                 <svg
                                     viewBox="0 0 24 24"
                                     aria-hidden="true"
                                 >
-
-                                    <path
-                                        d="M5 12h13M13 6l6 6-6 6"
-                                    />
-
+                                    <path d="M5 12h13M13 6l6 6-6 6" />
                                 </svg>
 
                             </a>
@@ -659,12 +614,13 @@
                         </div>
 
 
-                        <!-- Universal architecture -->
+                        <!-- UNIVERSAL ARCHITECTURE -->
 
                         <div
                             class="architecture-card"
                             aria-label="Universal request flow"
                         >
+
 
                             <div class="architecture-header">
 
@@ -782,7 +738,9 @@
                                 </div>
 
 
-                                <div class="architecture-node architecture-node-final">
+                                <div
+                                    class="architecture-node architecture-node-final"
+                                >
 
                                     <span class="node-number">
                                         05
@@ -807,16 +765,14 @@
                 </article>
 
 
-                <!-- =================================================
-                     OTHER PROJECTS
-                ================================================== -->
+                <!-- =========================================
+                     PROJECT GRID
+                ========================================== -->
 
                 <div class="projects-grid">
 
 
-                    <!-- =================================================
-                         CORTEX
-                    ================================================== -->
+                    <!-- CORTEX -->
 
                     <article
                         class="project project-card reveal"
@@ -830,7 +786,7 @@
                             </span>
 
                             <span class="project-status status-building">
-                                Building
+                                Active development
                             </span>
 
                         </div>
@@ -844,18 +800,15 @@
 
 
                             <p class="project-tagline">
-                                An open-source autonomous
-                                deep-research system.
+                                Open deep-research system.
                             </p>
 
 
                             <p>
-
-                                A research system designed to break
-                                complex questions into tasks, plan
-                                research, gather evidence, reason over
-                                sources, and produce structured results.
-
+                                A research system designed to break complex
+                                questions into tasks, plan research, gather
+                                evidence, compare sources, reason over results,
+                                and produce structured research.
                             </p>
 
                         </div>
@@ -869,7 +822,7 @@
                                     Question
                                 </span>
 
-                                <span aria-hidden="true">
+                                <span>
                                     →
                                 </span>
 
@@ -877,7 +830,7 @@
                                     Research
                                 </span>
 
-                                <span aria-hidden="true">
+                                <span>
                                     →
                                 </span>
 
@@ -898,11 +851,7 @@
                                     viewBox="0 0 24 24"
                                     aria-hidden="true"
                                 >
-
-                                    <path
-                                        d="M5 12h13M13 6l6 6-6 6"
-                                    />
-
+                                    <path d="M5 12h13M13 6l6 6-6 6" />
                                 </svg>
 
                             </a>
@@ -912,9 +861,7 @@
                     </article>
 
 
-                    <!-- =================================================
-                         AEGIS
-                    ================================================== -->
+                    <!-- AEGIS -->
 
                     <article
                         class="project project-card reveal"
@@ -942,18 +889,15 @@
 
 
                             <p class="project-tagline">
-                                A free Windows content blocker.
+                                Free Windows content blocker.
                             </p>
 
 
                             <p>
-
-                                A system focused on blocking unwanted
-                                and adult content on Windows.
-
-                                Android support is planned for a
-                                later stage.
-
+                                A Windows application focused on blocking
+                                unwanted and adult content while exploring
+                                privacy, security, reliability and
+                                system-level behavior.
                             </p>
 
                         </div>
@@ -968,11 +912,11 @@
                                 </span>
 
                                 <span>
-                                    Systems
+                                    Privacy
                                 </span>
 
                                 <span>
-                                    Android later
+                                    Security
                                 </span>
 
                             </div>
@@ -988,11 +932,7 @@
                                     viewBox="0 0 24 24"
                                     aria-hidden="true"
                                 >
-
-                                    <path
-                                        d="M5 12h13M13 6l6 6-6 6"
-                                    />
-
+                                    <path d="M5 12h13M13 6l6 6-6 6" />
                                 </svg>
 
                             </a>
@@ -1002,9 +942,7 @@
                     </article>
 
 
-                    <!-- =================================================
-                         ARGUS
-                    ================================================== -->
+                    <!-- ARGUS -->
 
                     <article
                         class="project project-card project-card-wide reveal"
@@ -1018,7 +956,7 @@
                             </span>
 
                             <span class="project-status status-live">
-                                Hosted
+                                Hosted &amp; running
                             </span>
 
                         </div>
@@ -1032,20 +970,18 @@
 
 
                             <p class="project-tagline">
-                                An autonomous Minecraft bot and AI system.
+                                Autonomous Minecraft bot &amp; AI system.
                             </p>
 
 
                             <p>
+                                What started as a Minecraft automation
+                                experiment became a hosted, continuously
+                                running system.
 
-                                What started as an experiment became
-                                a hosted, continuously running system.
-
-                                ARGUS explores Minecraft APIs,
-                                automation, event-driven systems,
-                                state management, and long-running
-                                software.
-
+                                It taught me about APIs, automation,
+                                event-driven systems, state management,
+                                deployment and long-running software.
                             </p>
 
                         </div>
@@ -1053,13 +989,14 @@
 
                         <div class="project-card-footer">
 
+
                             <div class="project-mini-flow">
 
                                 <span>
                                     Observe
                                 </span>
 
-                                <span aria-hidden="true">
+                                <span>
                                     →
                                 </span>
 
@@ -1067,7 +1004,7 @@
                                     Decide
                                 </span>
 
-                                <span aria-hidden="true">
+                                <span>
                                     →
                                 </span>
 
@@ -1080,24 +1017,19 @@
 
                             <div class="project-card-links">
 
+
                                 <a
                                     href="projects/argus.html"
                                     class="text-link"
                                 >
 
-                                    <span>
-                                        Project
-                                    </span>
+                                    Project
 
                                     <svg
                                         viewBox="0 0 24 24"
                                         aria-hidden="true"
                                     >
-
-                                        <path
-                                            d="M5 12h13M13 6l6 6-6 6"
-                                        />
-
+                                        <path d="M5 12h13M13 6l6 6-6 6" />
                                     </svg>
 
                                 </a>
@@ -1110,18 +1042,13 @@
                                     class="text-link"
                                 >
 
-                                    <span>
-                                        Website
-                                    </span>
+                                    Website
 
                                     <svg
                                         viewBox="0 0 24 24"
                                         aria-hidden="true"
                                     >
-
-                                        <path
-                                            d="M14 5h5v5M19 5 10 14"
-                                        />
+                                        <path d="M14 5h5v5M19 5 10 14" />
 
                                         <path
                                             d="M18 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
@@ -1144,14 +1071,13 @@
         </section>
 
 
-        <!-- =====================================================
+        <!-- =================================================
              NOW
-        ====================================================== -->
+        ================================================== -->
 
         <section
             class="now section section-alt"
             id="now"
-            aria-labelledby="now-title"
         >
 
             <div class="container">
@@ -1172,7 +1098,7 @@
                     </div>
 
 
-                    <h2 id="now-title">
+                    <h2>
                         What I'm working on.
                     </h2>
 
@@ -1181,8 +1107,6 @@
 
                 <div class="now-grid">
 
-
-                    <!-- Primary focus -->
 
                     <div class="now-main reveal">
 
@@ -1197,12 +1121,10 @@
 
 
                         <p>
-
                             I'm currently spending most of my development
                             time improving Universal's architecture and
                             thinking about how a reliable weather-data
                             infrastructure layer should work.
-
                         </p>
 
 
@@ -1223,10 +1145,7 @@
 
                             <div class="progress-track">
 
-                                <span
-                                    class="progress-fill"
-                                    aria-hidden="true"
-                                ></span>
+                                <span class="progress-fill"></span>
 
                             </div>
 
@@ -1234,8 +1153,6 @@
 
                     </div>
 
-
-                    <!-- Current work -->
 
                     <div class="now-list reveal">
 
@@ -1246,7 +1163,6 @@
                                 01
                             </span>
 
-
                             <div>
 
                                 <strong>
@@ -1254,9 +1170,8 @@
                                 </strong>
 
                                 <p>
-                                    Exploring newer developments in AI
-                                    through courses, experiments,
-                                    and projects.
+                                    Exploring current AI developments
+                                    through courses and experiments.
                                 </p>
 
                             </div>
@@ -1270,7 +1185,6 @@
                                 02
                             </span>
 
-
                             <div>
 
                                 <strong>
@@ -1278,8 +1192,8 @@
                                 </strong>
 
                                 <p>
-                                    Exploring the architecture behind
-                                    autonomous research systems.
+                                    Exploring research planning,
+                                    tool use, evidence and evaluation.
                                 </p>
 
                             </div>
@@ -1293,7 +1207,6 @@
                                 03
                             </span>
 
-
                             <div>
 
                                 <strong>
@@ -1301,31 +1214,8 @@
                                 </strong>
 
                                 <p>
-                                    Developing the Windows version first,
-                                    with Android planned later.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="now-item">
-
-                            <span class="now-item-index">
-                                04
-                            </span>
-
-
-                            <div>
-
-                                <strong>
-                                    Maintaining ARGUS
-                                </strong>
-
-                                <p>
-                                    Keeping the hosted Minecraft system
-                                    running and experimenting with it.
+                                    Developing the Windows version
+                                    with reliability and privacy in mind.
                                 </p>
 
                             </div>
@@ -1341,14 +1231,13 @@
         </section>
 
 
-        <!-- =====================================================
+        <!-- =================================================
              ENGINEERING
-        ====================================================== -->
+        ================================================== -->
 
         <section
             class="engineering section"
             id="engineering"
-            aria-labelledby="engineering-title"
         >
 
             <div class="container">
@@ -1369,17 +1258,14 @@
                     </div>
 
 
-                    <h2 id="engineering-title">
+                    <h2>
                         What I'm learning and building with.
                     </h2>
 
 
                     <p>
-
-                        I learn technologies by using them to build
-                        real projects rather than treating them as
-                        isolated subjects.
-
+                        I learn technologies by using them in real projects,
+                        not by treating them as isolated subjects.
                     </p>
 
                 </div>
@@ -1387,8 +1273,6 @@
 
                 <div class="technology-layout">
 
-
-                    <!-- Languages -->
 
                     <div class="technology-primary reveal">
 
@@ -1399,55 +1283,28 @@
 
                         <div class="technology-list">
 
+
                             <div class="technology-item">
-
-                                <span class="technology-index">
-                                    01
-                                </span>
-
-                                <strong>
-                                    Python
-                                </strong>
-
+                                <span class="technology-index">01</span>
+                                <strong>Python</strong>
                             </div>
 
 
                             <div class="technology-item">
-
-                                <span class="technology-index">
-                                    02
-                                </span>
-
-                                <strong>
-                                    Go
-                                </strong>
-
+                                <span class="technology-index">02</span>
+                                <strong>Go</strong>
                             </div>
 
 
                             <div class="technology-item">
-
-                                <span class="technology-index">
-                                    03
-                                </span>
-
-                                <strong>
-                                    Java
-                                </strong>
-
+                                <span class="technology-index">03</span>
+                                <strong>Java</strong>
                             </div>
 
 
                             <div class="technology-item">
-
-                                <span class="technology-index">
-                                    04
-                                </span>
-
-                                <strong>
-                                    HTML / CSS
-                                </strong>
-
+                                <span class="technology-index">04</span>
+                                <strong>HTML / CSS</strong>
                             </div>
 
                         </div>
@@ -1455,40 +1312,37 @@
                     </div>
 
 
-                    <!-- Frameworks -->
-
                     <div class="technology-secondary reveal">
 
                         <span class="technology-label">
-                            RUNTIME &amp; FRAMEWORKS
+                            TOOLS &amp; AREAS
                         </span>
 
 
                         <div class="technology-list">
 
+
                             <div class="technology-item">
-
-                                <span class="technology-index">
-                                    05
-                                </span>
-
-                                <strong>
-                                    Node.js
-                                </strong>
-
+                                <span class="technology-index">05</span>
+                                <strong>Node.js</strong>
                             </div>
 
 
                             <div class="technology-item">
+                                <span class="technology-index">06</span>
+                                <strong>React</strong>
+                            </div>
 
-                                <span class="technology-index">
-                                    06
-                                </span>
 
-                                <strong>
-                                    React
-                                </strong>
+                            <div class="technology-item">
+                                <span class="technology-index">07</span>
+                                <strong>AI / LLM Systems</strong>
+                            </div>
 
+
+                            <div class="technology-item">
+                                <span class="technology-index">08</span>
+                                <strong>APIs &amp; Backend</strong>
                             </div>
 
                         </div>
@@ -1502,11 +1356,9 @@
 
 
                             <p>
-
                                 This is a snapshot of what I'm currently
                                 learning and using — not a list of things
                                 I claim to have mastered.
-
                             </p>
 
                         </div>
@@ -1520,16 +1372,16 @@
         </section>
 
 
-        <!-- =====================================================
+        <!-- =================================================
              PHILOSOPHY
-        ====================================================== -->
+        ================================================== -->
 
         <section
             class="philosophy section section-alt"
-            aria-labelledby="philosophy-title"
         >
 
             <div class="container">
+
 
                 <div class="philosophy-content reveal">
 
@@ -1538,7 +1390,7 @@
                     </span>
 
 
-                    <h2 id="philosophy-title">
+                    <h2>
 
                         Build.
 
@@ -1556,13 +1408,9 @@
 
 
                     <p>
-
                         I prefer learning through real systems.
                         I build something, find where it breaks,
-                        understand why, and then improve it.
-
-                        The project becomes part of the learning process.
-
+                        understand why, and improve it.
                     </p>
 
                 </div>
@@ -1572,14 +1420,13 @@
         </section>
 
 
-        <!-- =====================================================
+        <!-- =================================================
              ABOUT
-        ====================================================== -->
+        ================================================== -->
 
         <section
             class="about section"
             id="about"
-            aria-labelledby="about-title"
         >
 
             <div class="container">
@@ -1600,7 +1447,7 @@
                     </div>
 
 
-                    <h2 id="about-title">
+                    <h2>
                         A little about me.
                     </h2>
 
@@ -1610,71 +1457,40 @@
                 <div class="about-grid">
 
 
-                    <!-- Story -->
-
                     <div class="about-story reveal">
 
                         <p class="about-lead">
-
                             I'm a Class 11 student interested in AI,
-                            software systems, algorithms, and engineering.
-
+                            software systems and engineering.
                         </p>
 
 
                         <p>
-
-                            I started making projects because I'm curious
-                            about how technology works and because I want
-                            to keep growing with a world that is changing
-                            quickly.
-
+                            Most of my projects begin because I'm curious
+                            about how something works or because I want
+                            to understand a problem by building a version
+                            of it myself.
                         </p>
 
 
                         <p>
-
-                            I enjoy building complex algorithms and backend
-                            systems, especially when I don't completely
-                            understand the problem at the beginning.
-
+                            I don't consider myself an expert in everything
+                            I work with. Some things I know well enough to
+                            build with, while other things I'm still
+                            figuring out.
                         </p>
 
 
                         <p>
-
-                            Some projects start as experiments.
-
-                            ARGUS, for example, started with curiosity
-                            about Minecraft automation and gradually
-                            became a hosted system.
-
-                            That's how I like learning:
-                            start with a question, build something,
-                            discover what breaks, and understand the
-                            system through the process.
-
+                            That's part of the reason I keep building:
+                            every project gives me a different system
+                            to understand.
                         </p>
 
                     </div>
 
 
-                    <!-- Facts -->
-
                     <div class="about-facts reveal">
-
-
-                        <div class="fact">
-
-                            <span class="fact-label">
-                                NAME
-                            </span>
-
-                            <strong>
-                                Shreyansh Parganiha
-                            </strong>
-
-                        </div>
 
 
                         <div class="fact">
@@ -1684,7 +1500,20 @@
                             </span>
 
                             <strong>
-                                Class 11 student
+                                Class 11
+                            </strong>
+
+                        </div>
+
+
+                        <div class="fact">
+
+                            <span class="fact-label">
+                                CURRENT FOCUS
+                            </span>
+
+                            <strong>
+                                Universal
                             </strong>
 
                         </div>
@@ -1706,11 +1535,11 @@
                         <div class="fact">
 
                             <span class="fact-label">
-                                CURRENT PROJECT
+                                APPROACH
                             </span>
 
                             <strong>
-                                Universal
+                                Build → Break → Understand
                             </strong>
 
                         </div>
@@ -1724,13 +1553,12 @@
         </section>
 
 
-        <!-- =====================================================
+        <!-- =================================================
              BEYOND CODE
-        ====================================================== -->
+        ================================================== -->
 
         <section
             class="beyond section section-alt"
-            aria-labelledby="beyond-title"
         >
 
             <div class="container">
@@ -1751,7 +1579,7 @@
                     </div>
 
 
-                    <h2 id="beyond-title">
+                    <h2>
                         Things I enjoy outside programming.
                     </h2>
 
@@ -1760,8 +1588,6 @@
 
                 <div class="beyond-grid">
 
-
-                    <!-- Drones -->
 
                     <article class="beyond-card reveal">
 
@@ -1776,19 +1602,13 @@
 
 
                         <p>
-
-                            I fly drones and I'm interested in drone
-                            technology.
-
-                            Long term, I'd like to work in the drone
-                            industry as a vendor.
-
+                            I enjoy flying drones and I'm interested in
+                            the technology behind them. I'd like to work
+                            in the drone industry in the future.
                         </p>
 
                     </article>
 
-
-                    <!-- Badminton -->
 
                     <article class="beyond-card reveal">
 
@@ -1803,10 +1623,8 @@
 
 
                         <p>
-
-                            Outside technology, badminton is one of
-                            the things I enjoy playing.
-
+                            One of the things I enjoy away from programming
+                            and screens.
                         </p>
 
                     </article>
@@ -1818,13 +1636,12 @@
         </section>
 
 
-        <!-- =====================================================
-             LEARNING JOURNEY
-        ====================================================== -->
+        <!-- =================================================
+             JOURNEY
+        ================================================== -->
 
         <section
             class="timeline section"
-            aria-labelledby="journey-title"
         >
 
             <div class="container">
@@ -1845,8 +1662,8 @@
                     </div>
 
 
-                    <h2 id="journey-title">
-                        Building by experimenting.
+                    <h2>
+                        How projects become understanding.
                     </h2>
 
                 </div>
@@ -1865,7 +1682,7 @@
                         <div class="timeline-content">
 
                             <span class="timeline-label">
-                                EXPERIMENT
+                                QUESTION
                             </span>
 
 
@@ -1875,8 +1692,8 @@
 
 
                             <p>
-                                A question or an idea becomes
-                                a small experiment.
+                                A question, idea or problem becomes
+                                something I want to investigate.
                             </p>
 
                         </div>
@@ -1899,13 +1716,13 @@
 
 
                             <h3>
-                                Turn the experiment into a system.
+                                Make a first version.
                             </h3>
 
 
                             <p>
-                                This is where the interesting engineering
-                                problems start appearing.
+                                I build something real instead of waiting
+                                until I understand everything.
                             </p>
 
                         </div>
@@ -1923,18 +1740,18 @@
                         <div class="timeline-content">
 
                             <span class="timeline-label">
-                                LEARN
+                                BREAK
                             </span>
 
 
                             <h3>
-                                Understand what went wrong.
+                                Find the failure.
                             </h3>
 
 
                             <p>
-                                Debugging becomes part of the learning
-                                process.
+                                Bugs and unexpected behavior expose what
+                                I don't understand yet.
                             </p>
 
                         </div>
@@ -1962,8 +1779,8 @@
 
 
                             <p>
-                                Keep the useful parts, replace what
-                                didn't work, and continue.
+                                Keep what works, replace what doesn't,
+                                and continue learning.
                             </p>
 
                         </div>
@@ -1977,17 +1794,17 @@
         </section>
 
 
-        <!-- =====================================================
+        <!-- =================================================
              CONTACT
-        ====================================================== -->
+        ================================================== -->
 
         <section
             class="contact section section-alt"
             id="contact"
-            aria-labelledby="contact-title"
         >
 
             <div class="container">
+
 
                 <div class="contact-card reveal">
 
@@ -1999,16 +1816,15 @@
                         </span>
 
 
-                        <h2 id="contact-title">
+                        <h2>
                             Want to see what I'm building?
                         </h2>
 
 
                         <p>
-
-                            Most of my work lives on GitHub.
-                            You can also reach me by email.
-
+                            Most of my work is public on GitHub.
+                            My website gives a broader view of what
+                            I'm working on.
                         </p>
 
                     </div>
@@ -2019,23 +1835,42 @@
 
                         <a
                             class="button button-primary"
-                            href="https://github.com/"
+                            href="https://github.com/SP2502"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
 
-                            <span>
-                                GitHub
-                            </span>
+                            GitHub
 
                             <svg
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"
                             >
+                                <path d="M14 5h5v5M19 5 10 14" />
 
                                 <path
-                                    d="M14 5h5v5M19 5 10 14"
+                                    d="M18 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
                                 />
+
+                            </svg>
+
+                        </a>
+
+
+                        <a
+                            class="button button-secondary"
+                            href="https://sp2502.github.io/Me/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+
+                            Website
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path d="M14 5h5v5M19 5 10 14" />
 
                                 <path
                                     d="M18 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
@@ -2051,22 +1886,16 @@
                             href="mailto:shreyansh2502@outlook.com"
                         >
 
-                            <span>
-                                Email me
-                            </span>
+                            Email
 
                             <svg
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"
                             >
 
-                                <path
-                                    d="M4 6h16v12H4z"
-                                />
+                                <path d="M4 6h16v12H4z" />
 
-                                <path
-                                    d="m4 7 8 6 8-6"
-                                />
+                                <path d="m4 7 8 6 8-6" />
 
                             </svg>
 
@@ -2083,9 +1912,9 @@
     </main>
 
 
-    <!-- =========================================================
+    <!-- =====================================================
          FOOTER
-    ========================================================== -->
+    ====================================================== -->
 
     <footer class="site-footer">
 
@@ -2098,10 +1927,7 @@
                     Shreyansh Parganiha
                 </span>
 
-                <span
-                    class="footer-separator"
-                    aria-hidden="true"
-                >
+                <span class="footer-separator">
                     /
                 </span>
 
@@ -2114,14 +1940,42 @@
 
             <div class="footer-right">
 
-                <span>
-                    Built with curiosity.
-                </span>
+                <a
+                    href="https://github.com/SP2502"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    GitHub
+                </a>
+
+
+                <a
+                    href="https://sp2502.github.io/Me/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Website
+                </a>
+
+
+                <a
+                    href="https://argus-website-nu.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ARGUS
+                </a>
+
+
+                <a
+                    href="mailto:shreyansh2502@outlook.com"
+                >
+                    Email
+                </a>
+
 
                 <span>
-                    &copy;
-                    <span data-current-year></span>
-                    Shreyansh Parganiha
+                    © <span data-current-year></span>
                 </span>
 
             </div>
@@ -2130,10 +1984,6 @@
 
     </footer>
 
-
-    <!-- =========================================================
-         JAVASCRIPT
-    ========================================================== -->
 
     <script src="script.js"></script>
 
