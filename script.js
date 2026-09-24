@@ -1,463 +1,294 @@
-// =========================================================
-// SHREYANSH PARGANIHA
-// Personal Website
-// script.js
-// =========================================================
-
-"use strict";
+/* =========================================================
+   SHREYANSH PARGANIHA — PERSONAL WEBSITE
+   Interaction & UI Logic
+   ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
+    "use strict";
 
     /* =====================================================
-       01. ELEMENT REFERENCES
+       01. CONFIGURATION
     ===================================================== */
 
-    const header = document.querySelector(".site-header");
-    const menuToggle = document.querySelector(".menu-toggle");
-    const navLinks = document.querySelector(".nav-links");
-    const navigationItems = document.querySelectorAll(".nav-links a");
+    const CLASS_CHANGE_DATE = new Date("2027-04-01T00:00:00");
+    const DEFAULT_CLASS = 11;
 
-    const currentClassElements =
-        document.querySelectorAll("[data-current-class]");
-
-    const currentYearElements =
-        document.querySelectorAll("[data-current-year]");
-
-    const copyEmailButton =
-        document.querySelector(".copy-email");
-
-    const sections =
-        document.querySelectorAll("main section[id]");
+    const SELECTORS = {
+        menuToggle: ".menu-toggle",
+        navLinks: ".nav-links a",
+        navContainer: ".nav-links",
+        sections: "main section[id]",
+        revealTargets: [
+            ".section-intro",
+            ".thinking-description",
+            ".learning-process li",
+            ".about-block",
+            ".question-item",
+            ".project",
+            ".technical-row",
+            ".now-item",
+            ".outside-item",
+            ".contact-content"
+        ],
+        copyEmail: ".copy-email",
+        currentClass: "[data-current-class]",
+        currentYear: "[data-current-year]",
+        currentDate: ".hero-current + *"
+    };
 
 
     /* =====================================================
-       02. CURRENT ACADEMIC CLASS
-       
-       Class 11 before:
-       April 1, 2027
+       02. UTILITY FUNCTIONS
+    ===================================================== */
 
-       Class 12 from:
-       April 1, 2027
+    const $ = (selector, parent = document) =>
+        parent.querySelector(selector);
+
+    const $$ = (selector, parent = document) =>
+        [...parent.querySelectorAll(selector)];
+
+
+    /* =====================================================
+       03. CURRENT CLASS
+       Automatically changes:
+       Class 11 → Class 12 on April 1, 2027
     ===================================================== */
 
     function getCurrentClass() {
-
         const now = new Date();
 
-        const classChangeDate =
-            new Date(2027, 3, 1, 0, 0, 0);
-
-        return now >= classChangeDate ? "12" : "11";
+        return now >= CLASS_CHANGE_DATE
+            ? 12
+            : DEFAULT_CLASS;
     }
 
     function updateCurrentClass() {
-
         const currentClass = getCurrentClass();
 
-        currentClassElements.forEach((element) => {
+        $$(SELECTORS.currentClass).forEach((element) => {
             element.textContent = currentClass;
         });
     }
 
-    updateCurrentClass();
-
 
     /* =====================================================
-       03. CURRENT YEAR
+       04. CURRENT YEAR
     ===================================================== */
 
     function updateCurrentYear() {
+        const year = new Date().getFullYear();
 
-        const currentYear =
-            new Date().getFullYear();
-
-        currentYearElements.forEach((element) => {
-            element.textContent = currentYear;
+        $$(SELECTORS.currentYear).forEach((element) => {
+            element.textContent = year;
         });
     }
 
-    updateCurrentYear();
+
+    /* =====================================================
+       05. CURRENT MONTH / YEAR LABEL
+       Keeps "September 2026" dynamic.
+    ===================================================== */
+
+    function updateCurrentDateLabel() {
+        const dateLabel = $(".now .eyebrow");
+
+        if (!dateLabel) return;
+
+        const now = new Date();
+
+        const formatter = new Intl.DateTimeFormat("en-US", {
+            month: "long",
+            year: "numeric"
+        });
+
+        dateLabel.textContent = formatter.format(now);
+    }
 
 
     /* =====================================================
-       04. MOBILE NAVIGATION
+       06. MOBILE NAVIGATION
     ===================================================== */
 
-    function openNavigation() {
+    const menuToggle = $(SELECTORS.menuToggle);
+    const navContainer = $(SELECTORS.navContainer);
 
-        if (!menuToggle || !navLinks) {
-            return;
-        }
-
-        navLinks.classList.add("open");
-        menuToggle.classList.add("active");
-
-        menuToggle.setAttribute(
-            "aria-expanded",
-            "true"
-        );
-
-        menuToggle.setAttribute(
-            "aria-label",
-            "Close navigation menu"
-        );
-
+    function openMenu() {
         document.body.classList.add("menu-open");
+
+        menuToggle?.setAttribute("aria-expanded", "true");
+        menuToggle?.setAttribute("aria-label", "Close navigation menu");
     }
 
-    function closeNavigation() {
-
-        if (!menuToggle || !navLinks) {
-            return;
-        }
-
-        navLinks.classList.remove("open");
-        menuToggle.classList.remove("active");
-
-        menuToggle.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-        menuToggle.setAttribute(
-            "aria-label",
-            "Open navigation menu"
-        );
-
+    function closeMenu() {
         document.body.classList.remove("menu-open");
+
+        menuToggle?.setAttribute("aria-expanded", "false");
+        menuToggle?.setAttribute("aria-label", "Open navigation menu");
     }
 
-    function toggleNavigation() {
-
-        if (!navLinks) {
-            return;
-        }
-
+    function toggleMenu() {
         const isOpen =
-            navLinks.classList.contains("open");
+            document.body.classList.contains("menu-open");
 
         if (isOpen) {
-            closeNavigation();
+            closeMenu();
         } else {
-            openNavigation();
+            openMenu();
         }
     }
 
-    if (menuToggle) {
-
-        menuToggle.addEventListener(
-            "click",
-            toggleNavigation
-        );
-    }
+    menuToggle?.addEventListener("click", toggleMenu);
 
 
-    /* =====================================================
-       05. CLOSE MOBILE NAVIGATION AFTER LINK CLICK
-    ===================================================== */
+    /* Close menu after clicking a navigation link */
 
-    navigationItems.forEach((link) => {
-
+    $$(SELECTORS.navLinks).forEach((link) => {
         link.addEventListener("click", () => {
-            closeNavigation();
+            closeMenu();
         });
+    });
 
+
+    /* Close menu with Escape */
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeMenu();
+        }
+    });
+
+
+    /* Close menu if viewport becomes desktop */
+
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 720) {
+            closeMenu();
+        }
     });
 
 
     /* =====================================================
-       06. CLOSE NAVIGATION WITH ESCAPE
+       07. ACTIVE NAVIGATION
     ===================================================== */
 
-    document.addEventListener(
-        "keydown",
-        (event) => {
+    const navigationLinks = $$(SELECTORS.navLinks);
+    const sections = $$(SELECTORS.sections);
 
-            if (
-                event.key === "Escape" &&
-                navLinks &&
-                navLinks.classList.contains("open")
-            ) {
-                closeNavigation();
+    const sectionObserver = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
 
-                menuToggle?.focus();
-            }
+                const id = entry.target.id;
 
+                navigationLinks.forEach((link) => {
+                    const target =
+                        link.getAttribute("href");
+
+                    const isActive =
+                        target === `#${id}`;
+
+                    link.classList.toggle(
+                        "active",
+                        isActive
+                    );
+                });
+            });
+        },
+        {
+            rootMargin: "-35% 0px -55% 0px",
+            threshold: 0
         }
     );
 
-
-    /* =====================================================
-       07. CLOSE NAVIGATION WHEN CLICKING OUTSIDE
-    ===================================================== */
-
-    document.addEventListener(
-        "click",
-        (event) => {
-
-            if (!navLinks || !menuToggle) {
-                return;
-            }
-
-            if (
-                !navLinks.classList.contains("open")
-            ) {
-                return;
-            }
-
-            const clickedInsideNavigation =
-                navLinks.contains(event.target);
-
-            const clickedMenuButton =
-                menuToggle.contains(event.target);
-
-            if (
-                !clickedInsideNavigation &&
-                !clickedMenuButton
-            ) {
-                closeNavigation();
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       08. HEADER SCROLL STATE
-    ===================================================== */
-
-    function updateHeader() {
-
-        if (!header) {
-            return;
-        }
-
-        if (window.scrollY > 20) {
-            header.classList.add("scrolled");
-        } else {
-            header.classList.remove("scrolled");
-        }
-    }
-
-    updateHeader();
-
-    window.addEventListener(
-        "scroll",
-        updateHeader,
-        { passive: true }
-    );
-
-
-    /* =====================================================
-       09. ACTIVE NAVIGATION
-    ===================================================== */
-
-    function updateActiveNavigation() {
-
-        if (!sections.length) {
-            return;
-        }
-
-        const scrollPosition =
-            window.scrollY +
-            window.innerHeight * 0.35;
-
-        let currentSection = "";
-
-        sections.forEach((section) => {
-
-            const sectionTop =
-                section.offsetTop;
-
-            const sectionBottom =
-                sectionTop +
-                section.offsetHeight;
-
-            if (
-                scrollPosition >= sectionTop &&
-                scrollPosition < sectionBottom
-            ) {
-                currentSection =
-                    section.getAttribute("id");
-            }
-
-        });
-
-        navigationItems.forEach((link) => {
-
-            const target =
-                link.getAttribute("href");
-
-            const isActive =
-                target === `#${currentSection}`;
-
-            link.classList.toggle(
-                "active",
-                isActive
-            );
-
-        });
-    }
-
-    updateActiveNavigation();
-
-    window.addEventListener(
-        "scroll",
-        updateActiveNavigation,
-        { passive: true }
-    );
-
-
-    /* =====================================================
-       10. SCROLL REVEAL
-       
-       Adds the data-reveal attribute automatically
-       to major content elements.
-    ===================================================== */
-
-    const revealTargets = document.querySelectorAll(
-        ".section-heading, " +
-        ".about-content, " +
-        ".curiosity-item, " +
-        ".project, " +
-        ".technology-group, " +
-        ".interest, " +
-        ".education-content, " +
-        ".contact-content"
-    );
-
-    revealTargets.forEach((element) => {
-        element.setAttribute(
-            "data-reveal",
-            ""
-        );
+    sections.forEach((section) => {
+        sectionObserver.observe(section);
     });
 
 
-    const revealElements =
-        document.querySelectorAll("[data-reveal]");
+    /* =====================================================
+       08. SCROLL REVEAL
+    ===================================================== */
 
-    const prefersReducedMotion =
-        window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches;
+    const revealSelector =
+        SELECTORS.revealTargets.join(",");
 
+    const revealElements = $$(revealSelector);
 
-    if (
-        prefersReducedMotion ||
-        !("IntersectionObserver" in window)
-    ) {
+    revealElements.forEach((element, index) => {
+        element.classList.add("js-reveal");
 
-        revealElements.forEach((element) => {
-            element.classList.add("revealed");
-        });
+        /*
+         * Small stagger without creating excessive animation.
+         */
+        const delay =
+            Math.min(index % 5, 4) * 45;
 
-    } else {
+        element.style.transitionDelay = `${delay}ms`;
+    });
 
-        const revealObserver =
-            new IntersectionObserver(
-                (entries, observer) => {
+    const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
 
-                    entries.forEach((entry) => {
+                entry.target.classList.add("is-visible");
 
-                        if (!entry.isIntersecting) {
-                            return;
-                        }
+                observer.unobserve(entry.target);
+            });
+        },
+        {
+            threshold: 0.08,
+            rootMargin: "0px 0px -40px 0px"
+        }
+    );
 
-                        entry.target.classList.add(
-                            "revealed"
-                        );
-
-                        observer.unobserve(
-                            entry.target
-                        );
-
-                    });
-
-                },
-                {
-                    threshold: 0.12,
-                    rootMargin: "0px 0px -40px 0px"
-                }
-            );
-
-        revealElements.forEach((element) => {
-            revealObserver.observe(element);
-        });
-    }
+    revealElements.forEach((element) => {
+        revealObserver.observe(element);
+    });
 
 
     /* =====================================================
-       11. COPY EMAIL
+       09. COPY EMAIL
     ===================================================== */
 
-    if (copyEmailButton) {
+    const copyButtons = $$(SELECTORS.copyEmail);
 
-        const email =
-            copyEmailButton.dataset.email;
+    copyButtons.forEach((button) => {
 
-        const originalText =
-            copyEmailButton.textContent;
+        button.addEventListener("click", async () => {
 
-        let resetTimer = null;
+            const email =
+                button.dataset.email;
 
-        async function copyEmail() {
+            if (!email) return;
 
-            if (!email) {
-                return;
-            }
+            const originalText =
+                button.textContent;
 
             try {
 
-                await navigator.clipboard.writeText(
-                    email
-                );
+                await navigator.clipboard.writeText(email);
 
-                copyEmailButton.textContent =
-                    "Copied";
+                button.textContent = "Copied";
+                button.classList.add("copied");
 
-                copyEmailButton.setAttribute(
-                    "aria-label",
-                    "Email copied"
-                );
-
-                clearTimeout(resetTimer);
-
-                resetTimer =
-                    setTimeout(() => {
-
-                        copyEmailButton.textContent =
-                            originalText;
-
-                        copyEmailButton.setAttribute(
-                            "aria-label",
-                            "Copy email address"
-                        );
-
-                    }, 1800);
+                window.setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove("copied");
+                }, 1800);
 
             } catch (error) {
 
                 /*
-                 * Fallback for browsers where
-                 * Clipboard API is unavailable.
+                 * Clipboard API may be unavailable
+                 * in some browsers / contexts.
                  */
 
                 const temporaryInput =
                     document.createElement("input");
 
                 temporaryInput.value = email;
-
-                temporaryInput.setAttribute(
-                    "readonly",
-                    ""
-                );
-
-                temporaryInput.style.position =
-                    "fixed";
-
-                temporaryInput.style.opacity =
-                    "0";
 
                 document.body.appendChild(
                     temporaryInput
@@ -468,199 +299,330 @@ document.addEventListener("DOMContentLoaded", () => {
                 try {
                     document.execCommand("copy");
 
-                    copyEmailButton.textContent =
-                        "Copied";
+                    button.textContent = "Copied";
+                    button.classList.add("copied");
 
-                    clearTimeout(resetTimer);
+                    window.setTimeout(() => {
+                        button.textContent = originalText;
+                        button.classList.remove("copied");
+                    }, 1800);
 
-                    resetTimer =
-                        setTimeout(() => {
+                } catch {
+                    button.textContent = "Copy failed";
 
-                            copyEmailButton.textContent =
-                                originalText;
-
-                        }, 1800);
-
-                } finally {
-
-                    temporaryInput.remove();
-
+                    window.setTimeout(() => {
+                        button.textContent = originalText;
+                    }, 1800);
                 }
-            }
-        }
 
-        copyEmailButton.addEventListener(
-            "click",
-            copyEmail
+                temporaryInput.remove();
+            }
+        });
+
+    });
+
+
+    /* =====================================================
+       10. SMOOTH ANCHOR NAVIGATION
+       ===================================================== */
+
+    $$('a[href^="#"]').forEach((link) => {
+
+        link.addEventListener("click", (event) => {
+
+            const targetId =
+                link.getAttribute("href");
+
+            if (
+                !targetId ||
+                targetId === "#"
+            ) {
+                return;
+            }
+
+            const target =
+                document.querySelector(targetId);
+
+            if (!target) return;
+
+            event.preventDefault();
+
+            const header =
+                $(".site-header");
+
+            const headerHeight =
+                header?.offsetHeight || 0;
+
+            const targetPosition =
+                target.getBoundingClientRect().top +
+                window.scrollY -
+                headerHeight -
+                18;
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: "smooth"
+            });
+
+            /*
+             * Update URL without jumping.
+             */
+            history.replaceState(
+                null,
+                "",
+                targetId
+            );
+        });
+
+    });
+
+
+    /* =====================================================
+       11. HERO SYSTEM VISUAL
+       Subtle movement based on pointer position.
+       Disabled for touch / reduced-motion users.
+    ===================================================== */
+
+    const heroSystem = $(".hero-system");
+
+    const supportsHover =
+        window.matchMedia("(hover: hover)").matches;
+
+    const prefersReducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+    if (
+        heroSystem &&
+        supportsHover &&
+        !prefersReducedMotion
+    ) {
+
+        const nodes =
+            $$(".system-node", heroSystem);
+
+        let frame = null;
+
+        heroSystem.addEventListener(
+            "pointermove",
+            (event) => {
+
+                const rect =
+                    heroSystem.getBoundingClientRect();
+
+                const x =
+                    (event.clientX - rect.left) /
+                    rect.width;
+
+                const y =
+                    (event.clientY - rect.top) /
+                    rect.height;
+
+                const moveX =
+                    (x - 0.5) * 10;
+
+                const moveY =
+                    (y - 0.5) * 10;
+
+                if (frame) {
+                    cancelAnimationFrame(frame);
+                }
+
+                frame = requestAnimationFrame(() => {
+
+                    nodes.forEach((node, index) => {
+
+                        const strength =
+                            (index + 1) * 0.35;
+
+                        node.style.transform =
+                            `translate(
+                                ${moveX * strength}px,
+                                ${moveY * strength}px
+                            )`;
+                    });
+
+                });
+            }
+        );
+
+        heroSystem.addEventListener(
+            "pointerleave",
+            () => {
+
+                nodes.forEach((node) => {
+                    node.style.transform = "";
+                });
+
+            }
         );
     }
 
 
     /* =====================================================
-       12. SMOOTH ANCHOR HANDLING
-       
-       Keeps fixed navigation from covering
-       section headings.
+       12. PROJECT ARCHITECTURE HOVER
+       Desktop-only micro interaction.
     ===================================================== */
 
-    document
-        .querySelectorAll('a[href^="#"]')
-        .forEach((link) => {
+    if (supportsHover && !prefersReducedMotion) {
 
-            link.addEventListener(
-                "click",
-                (event) => {
+        $$(".architecture-node").forEach((node) => {
 
-                    const targetId =
-                        link.getAttribute("href");
+            node.addEventListener(
+                "mouseenter",
+                () => {
+                    node.setAttribute(
+                        "data-hovered",
+                        "true"
+                    );
+                }
+            );
 
-                    if (
-                        !targetId ||
-                        targetId === "#"
-                    ) {
-                        return;
-                    }
-
-                    const target =
-                        document.querySelector(
-                            targetId
-                        );
-
-                    if (!target) {
-                        return;
-                    }
-
-                    event.preventDefault();
-
-                    const headerHeight =
-                        header?.offsetHeight || 0;
-
-                    const targetPosition =
-                        target.getBoundingClientRect().top +
-                        window.scrollY -
-                        headerHeight -
-                        20;
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior:
-                            prefersReducedMotion
-                                ? "auto"
-                                : "smooth"
-                    });
-
+            node.addEventListener(
+                "mouseleave",
+                () => {
+                    node.removeAttribute(
+                        "data-hovered"
+                    );
                 }
             );
 
         });
+    }
 
 
     /* =====================================================
-       13. KEYBOARD ACCESSIBILITY
+       13. EXTERNAL LINK SAFETY
+       Ensures target="_blank" links have
+       rel="noopener noreferrer".
     ===================================================== */
 
-    document.addEventListener(
-        "keydown",
-        (event) => {
+    $$('a[target="_blank"]').forEach((link) => {
 
-            /*
-             * Prevent accidental body scrolling when
-             * mobile navigation is open.
-             */
+        const rel =
+            link.getAttribute("rel") || "";
 
-            if (
-                event.key === "Tab" &&
-                navLinks?.classList.contains("open")
-            ) {
-                document.body.classList.add(
-                    "keyboard-navigation"
-                );
+        const values =
+            new Set(
+                rel.split(/\s+/).filter(Boolean)
+            );
+
+        values.add("noopener");
+        values.add("noreferrer");
+
+        link.setAttribute(
+            "rel",
+            [...values].join(" ")
+        );
+    });
+
+
+    /* =====================================================
+       14. DYNAMIC CURRENT PROJECT YEAR
+       ===================================================== */
+
+    function updateYearReferences() {
+
+        const year =
+            new Date().getFullYear();
+
+        $$("[data-current-year]").forEach(
+            (element) => {
+                element.textContent = year;
             }
+        );
+    }
 
+
+    /* =====================================================
+       15. HANDLE HASH ON INITIAL LOAD
+       ===================================================== */
+
+    function handleInitialHash() {
+
+        const hash =
+            window.location.hash;
+
+        if (!hash) return;
+
+        const target =
+            document.querySelector(hash);
+
+        if (!target) return;
+
+        /*
+         * Give the browser time to finish layout
+         * before positioning.
+         */
+        window.requestAnimationFrame(() => {
+
+            const header =
+                $(".site-header");
+
+            const offset =
+                header?.offsetHeight || 0;
+
+            window.scrollTo({
+                top:
+                    target.getBoundingClientRect().top +
+                    window.scrollY -
+                    offset -
+                    18,
+                behavior: "instant"
+            });
+
+        });
+    }
+
+
+    /* =====================================================
+       16. PAGE VISIBILITY
+       Avoid unnecessary animation work when the
+       browser tab is hidden.
+    ===================================================== */
+
+    let pageVisible =
+        !document.hidden;
+
+    document.addEventListener(
+        "visibilitychange",
+        () => {
+            pageVisible = !document.hidden;
         }
     );
 
 
     /* =====================================================
-       14. YEAR / CLASS REFRESH
-       
-       Keeps dynamic information correct if the page
-       stays open across midnight or the academic-year
-       boundary.
-    ===================================================== */
-
-    function scheduleDailyRefresh() {
-
-        const now = new Date();
-
-        const tomorrow =
-            new Date(now);
-
-        tomorrow.setHours(
-            24,
-            0,
-            5,
-            0
-        );
-
-        const millisecondsUntilTomorrow =
-            tomorrow.getTime() -
-            now.getTime();
-
-        setTimeout(() => {
-
-            updateCurrentClass();
-            updateCurrentYear();
-
-            scheduleDailyRefresh();
-
-        }, millisecondsUntilTomorrow);
-    }
-
-    scheduleDailyRefresh();
-
-
-    /* =====================================================
-       15. EXTERNAL LINK SAFETY
-       
-       Ensures links opening new tabs have the expected
-       relationship attributes.
-    ===================================================== */
-
-    document
-        .querySelectorAll(
-            'a[target="_blank"]'
-        )
-        .forEach((link) => {
-
-            const rel =
-                link.getAttribute("rel") || "";
-
-            const values =
-                new Set(
-                    rel
-                        .split(/\s+/)
-                        .filter(Boolean)
-                );
-
-            values.add("noopener");
-            values.add("noreferrer");
-
-            link.setAttribute(
-                "rel",
-                Array.from(values).join(" ")
-            );
-
-        });
-
-
-    /* =====================================================
-       16. INITIAL STATE
+       17. INITIALIZATION
     ===================================================== */
 
     updateCurrentClass();
     updateCurrentYear();
-    updateHeader();
-    updateActiveNavigation();
+    updateYearReferences();
+    updateCurrentDateLabel();
+
+    /*
+     * Run after the first layout frame so that
+     * initial hash navigation doesn't fight
+     * browser rendering.
+     */
+    window.requestAnimationFrame(() => {
+        handleInitialHash();
+    });
+
+
+    /* =====================================================
+       18. DEVELOPMENT CHECK
+    ===================================================== */
+
+    if (
+        typeof window !== "undefined" &&
+        window.location.hostname === "localhost"
+    ) {
+        console.info(
+            "Shreyansh Parganiha — portfolio initialized."
+        );
+    }
 
 });
