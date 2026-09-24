@@ -98,12 +98,779 @@
   </header>
 
   <main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+
+  <meta
+    name="description"
+    content="Shreyansh Parganiha — Student & AI Systems Enthusiast. I build software to understand systems."
+  />
+
+  <meta
+    name="author"
+    content="Shreyansh Parganiha"
+  />
+
+  <meta
+    name="robots"
+    content="index, follow"
+  />
+
+  <meta
+    name="theme-color"
+    content="#08090a"
+  />
+
+  <meta
+    name="color-scheme"
+    content="dark"
+  />
+
+  <!-- =======================================================
+       OPEN GRAPH
+  ======================================================== -->
+
+  <meta
+    property="og:title"
+    content="Shreyansh Parganiha — Student & AI Systems Enthusiast"
+  />
+
+  <meta
+    property="og:description"
+    content="I build software to understand systems."
+  />
+
+  <meta
+    property="og:type"
+    content="website"
+  />
+
+  <meta
+    property="og:url"
+    content="https://argus-website-nu.vercel.app/"
+  />
+
+  <meta
+    property="og:site_name"
+    content="Shreyansh Parganiha"
+  />
+
+  <meta
+    property="og:locale"
+    content="en_IN"
+  />
+
+  <title>
+    Shreyansh Parganiha — Student & AI Systems Enthusiast
+  </title>
+
+  <!-- =======================================================
+       STYLESHEET
+  ======================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  />
+
+  <!-- =======================================================
+       HERO OVERRIDES
+       Keeps the updated hero working without requiring
+       changes to the existing style.css.
+  ======================================================== -->
+
+  <style>
+
+    /* -------------------------------------------------------
+       HERO
+    ------------------------------------------------------- */
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+
+      display: flex;
+      align-items: center;
+
+      padding-top:
+        calc(var(--header-height, 76px) + 70px);
+
+      padding-bottom: 100px;
+
+      overflow: hidden;
+    }
+
+
+    .hero::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent 0,
+          transparent calc(50% - 0.5px),
+          rgba(226, 235, 231, 0.07)
+            calc(50% - 0.5px),
+          rgba(226, 235, 231, 0.07)
+            calc(50% + 0.5px),
+          transparent calc(50% + 0.5px)
+        );
+
+      opacity: 0.45;
+
+      -webkit-mask-image:
+        linear-gradient(
+          to bottom,
+          transparent,
+          black 20%,
+          black 72%,
+          transparent
+        );
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          transparent,
+          black 20%,
+          black 72%,
+          transparent
+        );
+    }
+
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+
+      width: 100%;
+      max-width: 1240px;
+    }
+
+
+    /* -------------------------------------------------------
+       EYEBROW
+    ------------------------------------------------------- */
+
+    .hero .eyebrow {
+      margin: 0 0 30px;
+
+      color: #a9c8bd;
+
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1;
+
+      letter-spacing: 0.19em;
+      text-transform: uppercase;
+    }
+
+
+    /* -------------------------------------------------------
+       NAME
+    ------------------------------------------------------- */
+
+    .hero .hero-name {
+      max-width: 1200px;
+
+      margin: 0;
+
+      color: #f1f3f2;
+
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      font-size: clamp(
+        72px,
+        12vw,
+        180px
+      );
+
+      font-weight: 500;
+
+      line-height: 0.82;
+
+      letter-spacing: -0.075em;
+
+      text-wrap: balance;
+    }
+
+
+    /* -------------------------------------------------------
+       CORE STATEMENT
+    ------------------------------------------------------- */
+
+    .hero .hero-statement {
+      max-width: 680px;
+
+      margin-top: 68px;
+      margin-left: clamp(
+        0px,
+        11vw,
+        165px
+      );
+    }
+
+
+    .hero .hero-statement h2 {
+      margin: 0;
+
+      color: #f1f3f2;
+
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      font-size: clamp(
+        34px,
+        4vw,
+        58px
+      );
+
+      font-weight: 400;
+
+      line-height: 0.98;
+
+      letter-spacing: -0.05em;
+    }
+
+
+    .hero .hero-statement p {
+      max-width: 620px;
+
+      margin: 27px 0 0;
+
+      color: #b2bab7;
+
+      font-size: 17px;
+
+      line-height: 1.65;
+
+      letter-spacing: -0.01em;
+    }
+
+
+    .hero .hero-statement p + p {
+      margin-top: 10px;
+    }
+
+
+    /* -------------------------------------------------------
+       ACTIONS
+    ------------------------------------------------------- */
+
+    .hero .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      margin-top: 38px;
+      margin-left: clamp(
+        0px,
+        11vw,
+        165px
+      );
+    }
+
+
+    .hero .button {
+      min-height: 46px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 0 20px;
+
+      border: 1px solid
+        rgba(226, 235, 231, 0.12);
+
+      font-size: 12px;
+      font-weight: 600;
+
+      transition:
+        transform 220ms
+          cubic-bezier(.22, 1, .36, 1),
+        background-color 220ms ease,
+        border-color 220ms ease,
+        color 220ms ease;
+    }
+
+
+    .hero .button-primary {
+      color: #08090a;
+
+      background: #f1f3f2;
+
+      border-color: #f1f3f2;
+    }
+
+
+    .hero .button-primary:hover {
+      color: #08090a;
+
+      background: #a9c8bd;
+
+      border-color: #a9c8bd;
+    }
+
+
+    .hero .button-secondary {
+      color: #b2bab7;
+
+      background: transparent;
+    }
+
+
+    .hero .button-secondary:hover {
+      color: #f1f3f2;
+
+      border-color:
+        rgba(226, 235, 231, 0.25);
+    }
+
+
+    @media (hover: hover) and (pointer: fine) {
+
+      .hero .button:hover {
+        transform: translateY(-2px);
+      }
+
+    }
+
+
+    /* -------------------------------------------------------
+       HERO METADATA
+    ------------------------------------------------------- */
+
+    .hero .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 42px;
+
+      max-width: 850px;
+
+      margin-top: 82px;
+      margin-left: clamp(
+        0px,
+        11vw,
+        165px
+      );
+
+      padding-top: 18px;
+
+      border-top: 1px solid
+        rgba(226, 235, 231, 0.10);
+    }
+
+
+    .hero .hero-meta div {
+      display: flex;
+      flex-direction: column;
+
+      gap: 5px;
+    }
+
+
+    .hero .meta-label {
+      color: #727b78;
+
+      font-size: 9px;
+      font-weight: 600;
+
+      line-height: 1;
+
+      letter-spacing: 0.17em;
+    }
+
+
+    .hero .meta-value {
+      color: #b2bab7;
+
+      font-size: 12px;
+
+      line-height: 1.4;
+    }
+
+
+    /* =======================================================
+       TABLET
+    ======================================================== */
+
+    @media (max-width: 900px) {
+
+      .hero {
+        padding-top:
+          calc(var(--header-height, 76px) + 55px);
+
+        padding-bottom: 90px;
+      }
+
+
+      .hero .hero-name {
+        font-size: clamp(
+          70px,
+          12vw,
+          120px
+        );
+      }
+
+
+      .hero .hero-statement,
+      .hero .hero-actions,
+      .hero .hero-meta {
+        margin-left: 7vw;
+      }
+
+
+      .hero .hero-statement {
+        margin-top: 55px;
+      }
+
+    }
+
+
+    /* =======================================================
+       MOBILE
+    ======================================================== */
+
+    @media (max-width: 680px) {
+
+      .hero {
+        min-height: auto;
+
+        padding-top: 145px;
+        padding-bottom: 82px;
+      }
+
+
+      .hero::before {
+        display: none;
+      }
+
+
+      .hero .eyebrow {
+        margin-bottom: 24px;
+
+        font-size: 9px;
+
+        letter-spacing: 0.16em;
+      }
+
+
+      .hero .hero-name {
+        max-width: 100%;
+
+        font-size: clamp(
+          62px,
+          18vw,
+          105px
+        );
+
+        line-height: 0.84;
+
+        letter-spacing: -0.075em;
+      }
+
+
+      .hero .hero-statement {
+        max-width: 100%;
+
+        margin-top: 48px;
+        margin-left: 0;
+      }
+
+
+      .hero .hero-statement h2 {
+        font-size: clamp(
+          36px,
+          10vw,
+          46px
+        );
+
+        line-height: 0.98;
+      }
+
+
+      .hero .hero-statement p {
+        margin-top: 22px;
+
+        font-size: 16px;
+
+        line-height: 1.62;
+      }
+
+
+      .hero .hero-actions {
+        width: 100%;
+
+        margin-top: 30px;
+        margin-left: 0;
+
+        gap: 8px;
+      }
+
+
+      .hero .button {
+        min-height: 45px;
+
+        padding-inline: 17px;
+      }
+
+
+      .hero .hero-meta {
+        display: grid;
+
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+
+        gap: 24px 20px;
+
+        max-width: none;
+
+        margin-top: 58px;
+        margin-left: 0;
+      }
+
+    }
+
+
+    /* =======================================================
+       SMALL PHONES
+    ======================================================== */
+
+    @media (max-width: 400px) {
+
+      .hero {
+        padding-top: 132px;
+      }
+
+
+      .hero .hero-name {
+        font-size: 60px;
+      }
+
+
+      .hero .hero-actions {
+        flex-direction: column;
+      }
+
+
+      .hero .button {
+        width: 100%;
+      }
+
+
+      .hero .hero-meta {
+        grid-template-columns: 1fr;
+
+        gap: 19px;
+      }
+
+    }
+
+
+    /* =======================================================
+       LANDSCAPE PHONES / SMALL TABLETS
+    ======================================================== */
+
+    @media (
+      max-height: 600px
+    ) and (
+      orientation: landscape
+    ) and (
+      max-width: 900px
+    ) {
+
+      .hero {
+        min-height: auto;
+
+        padding-top: 110px;
+        padding-bottom: 70px;
+      }
+
+
+      .hero .hero-name {
+        font-size: clamp(
+          58px,
+          12vw,
+          100px
+        );
+      }
+
+
+      .hero .hero-statement {
+        margin-top: 40px;
+      }
+
+
+      .hero .hero-meta {
+        margin-top: 45px;
+      }
+
+    }
+
+
+    /* =======================================================
+       SAFARI / WEBKIT ENHANCEMENT
+    ======================================================== */
+
+    @supports (
+      (-webkit-backdrop-filter: blur(1px))
+      or
+      (backdrop-filter: blur(1px))
+    ) {
+
+      .site-header.scrolled {
+        background:
+          rgba(8, 9, 10, 0.72);
+
+        -webkit-backdrop-filter:
+          blur(18px);
+
+        backdrop-filter:
+          blur(18px);
+      }
+
+    }
+
+
+    /* =======================================================
+       REDUCED MOTION
+    ======================================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .hero .button {
+        transition: none;
+      }
+
+    }
+
+
+    /* =======================================================
+       TOUCH DEVICES
+    ======================================================== */
+
+    @media (hover: none) and (pointer: coarse) {
+
+      .hero .button:hover {
+        transform: none;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <!-- =========================================================
+       HEADER
+  ========================================================== -->
+
+  <header
+    class="site-header"
+    id="site-header"
+  >
+
+    <nav
+      class="navbar"
+      aria-label="Primary navigation"
+    >
+
+      <a
+        href="#home"
+        class="brand"
+        aria-label="Shreyansh Parganiha — Home"
+      >
+        Shreyansh
+      </a>
+
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Open navigation"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+      >
+
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+
+      </button>
+
+
+      <div
+        class="nav-links"
+        id="primary-navigation"
+      >
+
+        <a href="#about">
+          About
+        </a>
+
+        <a href="#questions">
+          Questions
+        </a>
+
+        <a href="#projects">
+          Projects
+        </a>
+
+        <a href="#contact">
+          Contact
+        </a>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <!-- =========================================================
+       MAIN
+  ========================================================== -->
+
+  <main>
 
     <!-- =======================================================
          HERO
     ======================================================== -->
 
-    <section class="hero section" id="home">
+    <section
+      class="hero section"
+      id="home"
+      aria-labelledby="hero-name"
+    >
 
       <div class="hero-content">
 
@@ -111,26 +878,61 @@
           STUDENT · AI SYSTEMS · SOFTWARE
         </p>
 
-        <h1>
-          I build software<br />
-          to understand systems.
+
+        <!-- =================================================
+             PERSONAL IDENTITY
+        ================================================== -->
+
+        <h1
+          class="hero-name"
+          id="hero-name"
+        >
+          Shreyansh<br />
+          Parganiha
         </h1>
 
-        <p class="hero-description">
-          I'm Shreyansh Parganiha, a Class 11 student interested in
-          software systems, AI infrastructure, and the way complex
-          tools work together.
-        </p>
 
-        <p class="hero-description secondary">
-          I build projects to understand those systems by putting them
-          together, breaking them, and improving them.
-        </p>
+        <!-- =================================================
+             CORE STATEMENT
+        ================================================== -->
+
+        <div class="hero-statement">
+
+          <h2>
+            I build software<br />
+            to understand systems.
+          </h2>
+
+          <p>
+            I'm a Class
+            <span data-class-year>11</span>
+            student interested in software systems,
+            AI infrastructure, and the way complex
+            tools work together.
+          </p>
+
+          <p>
+            I build projects to understand those systems
+            by putting them together, breaking them,
+            and improving them.
+          </p>
+
+        </div>
+
+
+        <!-- =================================================
+             ACTIONS
+        ================================================== -->
 
         <div class="hero-actions">
-          <a class="button button-primary" href="#projects">
+
+          <a
+            class="button button-primary"
+            href="#projects"
+          >
             View projects
           </a>
+
 
           <a
             class="button button-secondary"
@@ -140,23 +942,58 @@
           >
             GitHub
           </a>
+
         </div>
 
-        <div class="hero-meta">
+
+        <!-- =================================================
+             HERO METADATA
+        ================================================== -->
+
+        <div
+          class="hero-meta"
+          aria-label="Current information"
+        >
 
           <div>
-            <span class="meta-label">CLASS</span>
-            <span class="meta-value" data-class-year>11</span>
+
+            <span class="meta-label">
+              CLASS
+            </span>
+
+            <span
+              class="meta-value"
+              data-class-year
+            >
+              11
+            </span>
+
           </div>
 
-          <div>
-            <span class="meta-label">FOCUS</span>
-            <span class="meta-value">AI systems & software</span>
-          </div>
 
           <div>
-            <span class="meta-label">CURRENTLY BUILDING</span>
-            <span class="meta-value">Universal</span>
+
+            <span class="meta-label">
+              FOCUS
+            </span>
+
+            <span class="meta-value">
+              AI systems &amp; software
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <span class="meta-label">
+              CURRENTLY BUILDING
+            </span>
+
+            <span class="meta-value">
+              Universal
+            </span>
+
           </div>
 
         </div>
@@ -165,6 +1002,10 @@
 
     </section>
 
+
+    <!-- Continue your existing sections below:
+         Process → About → Questions → Projects → Foundation
+         → Outside Software → Contact → Footer -->
 
     <!-- =======================================================
          PROCESS
