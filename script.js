@@ -1,520 +1,207 @@
 /* =========================================================
    SHREYANSH PARGANIHA — PORTFOLIO
-   Organic interaction layer
+   Browser-optimized interaction layer
+
+   Targets:
+   - Chromium / Chrome / Edge
+   - Firefox
+   - Safari / WebKit
+   - iOS Safari
+
+   Principles:
+   - No frameworks
+   - No dependencies
+   - No continuous scroll calculations
+   - IntersectionObserver where available
+   - Native browser APIs first
+   - Graceful fallbacks
+   - Reduced-motion aware
+   - Touch friendly
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-  "use strict";
-
-  /* =======================================================
-     ELEMENTS
-  ======================================================== */
-
-  const header = document.querySelector("[data-header]");
-  const menuToggle = document.querySelector("[data-menu-toggle]");
-  const navigation = document.querySelector("[data-navigation]");
-  const navLinks = [...document.querySelectorAll(".nav-links a")];
-  const copyButton = document.querySelector("[data-copy-email]");
-  const yearElement = document.querySelector("[data-current-year]");
+"use strict";
 
 
-  /* =======================================================
-     UTILITIES
-  ======================================================== */
+/* =========================================================
+   BROWSER / FEATURE DETECTION
+========================================================= */
 
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
+const root = document.documentElement;
 
+const browser = {
+  chrome:
+    /Chrome|Chromium|Edg\//.test(navigator.userAgent) &&
+    !/OPR\//.test(navigator.userAgent),
 
-  /* =======================================================
-     DYNAMIC YEAR
-  ======================================================== */
+  firefox:
+    /Firefox\//.test(navigator.userAgent),
 
-  const updateYear = () => {
-    if (yearElement) {
-      yearElement.textContent = new Date().getFullYear();
-    }
-  };
+  safari:
+    /Safari\//.test(navigator.userAgent) &&
+    !/Chrome|Chromium|Edg\//.test(navigator.userAgent),
 
-  updateYear();
+  ios:
+    /iPhone|iPad|iPod/.test(navigator.userAgent),
 
+  reducedMotion:
+    window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)"
+    ).matches ?? false,
 
-  /* =======================================================
-     HEADER DEPTH
-     
-     The header becomes slightly more defined after the user
-     begins moving through the page.
-  ======================================================== */
+  intersectionObserver:
+    "IntersectionObserver" in window,
 
-  const updateHeader = () => {
-    if (!header) return;
+  clipboard:
+    !!navigator.clipboard &&
+    window.isSecureContext === true,
 
-    header.classList.toggle(
-      "scrolled",
-      window.scrollY > 24
-    );
-  };
-
-  updateHeader();
-
-  window.addEventListener(
-    "scroll",
-    updateHeader,
-    { passive: true }
-  );
+  smoothScroll:
+    "scrollBehavior" in document.documentElement.style
+};
 
 
-  /* =======================================================
-     MOBILE NAVIGATION
-  ======================================================== */
+/* =========================================================
+   DEVICE CLASS
+========================================================= */
+
+const coarsePointer =
+  window.matchMedia?.(
+    "(pointer: coarse)"
+  ).matches ?? false;
+
+const smallScreen =
+  window.matchMedia?.(
+    "(max-width: 700px)"
+  ).matches ?? false;
+
+root.classList.toggle(
+  "is-touch",
+  coarsePointer
+);
+
+root.classList.toggle(
+  "is-mobile",
+  smallScreen
+);
+
+root.classList.toggle(
+  "reduced-motion",
+  browser.reducedMotion
+);
+
+root.classList.toggle(
+  "browser-safari",
+  browser.safari
+);
+
+root.classList.toggle(
+  "browser-firefox",
+  browser.firefox
+);
+
+root.classList.toggle(
+  "browser-chromium",
+  browser.chrome
+);
+
+
+/* =========================================================
+   DOM REFERENCES
+========================================================= */
+
+const header =
+  document.querySelector(".site-header");
+
+const menuToggle =
+  document.querySelector(".menu-toggle");
+
+const navLinks =
+  document.querySelector(".nav-links");
+
+const emailButton =
+  document.querySelector(".email-copy");
+
+const copyLabel =
+  document.querySelector("[data-copy-label]");
+
+const yearElement =
+  document.querySelector("[data-year]");
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+if (yearElement) {
+  yearElement.textContent =
+    String(new Date().getFullYear());
+}
+
+
+/* =========================================================
+   MOBILE NAVIGATION
+========================================================= */
+
+if (menuToggle && navLinks) {
 
   const closeMenu = () => {
-    if (!menuToggle || !navigation) return;
-
-    menuToggle.classList.remove("is-open");
-    navigation.classList.remove("is-open");
-
-    menuToggle.setAttribute("aria-expanded", "false");
     menuToggle.setAttribute(
-      "aria-label",
-      "Open navigation"
+      "aria-expanded",
+      "false"
     );
 
-    document.body.classList.remove("menu-open");
+    navLinks.classList.remove("open");
   };
 
 
   const openMenu = () => {
-    if (!menuToggle || !navigation) return;
-
-    menuToggle.classList.add("is-open");
-    navigation.classList.add("is-open");
-
-    menuToggle.setAttribute("aria-expanded", "true");
     menuToggle.setAttribute(
-      "aria-label",
-      "Close navigation"
+      "aria-expanded",
+      "true"
     );
 
-    document.body.classList.add("menu-open");
+    navLinks.classList.add("open");
   };
 
 
-  if (menuToggle) {
-    menuToggle.addEventListener("click", () => {
-      const isOpen =
-        menuToggle.getAttribute("aria-expanded") === "true";
+  menuToggle.addEventListener(
+    "click",
+    () => {
 
-      isOpen ? closeMenu() : openMenu();
-    });
-  }
+      const open =
+        menuToggle.getAttribute(
+          "aria-expanded"
+        ) === "true";
 
-
-  /* =======================================================
-     ORGANIC INTERNAL NAVIGATION
-     
-     Uses native smooth scrolling instead of hijacking the
-     browser's scrolling behaviour.
-  ======================================================== */
-
-  const scrollToTarget = (target) => {
-    if (!target) return;
-
-    const headerHeight =
-      header?.getBoundingClientRect().height || 0;
-
-    const targetTop =
-      target.getBoundingClientRect().top +
-      window.scrollY -
-      headerHeight -
-      18;
-
-    window.scrollTo({
-      top: Math.max(0, targetTop),
-      behavior: prefersReducedMotion
-        ? "auto"
-        : "smooth"
-    });
-  };
-
-
-  navLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const href = link.getAttribute("href");
-
-      if (!href || !href.startsWith("#")) return;
-
-      const target = document.querySelector(href);
-
-      if (!target) return;
-
-      event.preventDefault();
-
-      closeMenu();
-
-      scrollToTarget(target);
-
-      /*
-       * Update the URL without causing a browser jump.
-       */
-      if (history.replaceState) {
-        history.replaceState(
-          null,
-          "",
-          href
-        );
+      if (open) {
+        closeMenu();
+      } else {
+        openMenu();
       }
-    });
-  });
+
+    }
+  );
 
 
-  /* =======================================================
-     HERO / PROJECT / INTERNAL LINKS
-  ======================================================== */
+  /*
+   * Navigation links.
+   */
 
-  document
-    .querySelectorAll('a[href^="#"]')
+  navLinks
+    .querySelectorAll("a")
     .forEach((link) => {
 
-      /*
-       * Navigation links are already handled above.
-       */
-      if (link.closest(".nav-links")) return;
-
-      link.addEventListener("click", (event) => {
-        const href = link.getAttribute("href");
-
-        if (!href || href === "#") return;
-
-        const target = document.querySelector(href);
-
-        if (!target) return;
-
-        event.preventDefault();
-
-        scrollToTarget(target);
-
-        if (history.replaceState) {
-          history.replaceState(
-            null,
-            "",
-            href
-          );
-        }
-      });
-    });
-
-
-  /* =======================================================
-     SECTION AWARE NAVIGATION
-     
-     The navigation quietly follows the section currently
-     occupying the reading area.
-  ======================================================== */
-
-  const sections = [
-    ...document.querySelectorAll(
-      "#about, #questions, #projects, #contact"
-    )
-  ];
-
-  if (sections.length && navLinks.length) {
-
-    const sectionObserver = new IntersectionObserver(
-      (entries) => {
-
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          const id = entry.target.id;
-
-          navLinks.forEach((link) => {
-            const active =
-              link.getAttribute("href") === `#${id}`;
-
-            link.classList.toggle(
-              "is-active",
-              active
-            );
-          });
-        });
-
-      },
-      {
-        root: null,
-
-        /*
-         * The active state changes when a section enters
-         * roughly the middle of the viewport.
-         */
-        rootMargin: "-38% 0px -52% 0px",
-
-        threshold: 0
-      }
-    );
-
-    sections.forEach((section) => {
-      sectionObserver.observe(section);
-    });
-  }
-
-
-  /* =======================================================
-     ORGANIC CONTENT REVEALS
-     
-     Small reveals only. No giant slide-ins, no dramatic
-     animation. Content should feel like it is settling into
-     place rather than performing.
-  ======================================================== */
-
-  const revealGroups = [
-    ".learning-step",
-    ".question-item",
-    ".project",
-    ".foundation-item",
-    ".outside-item",
-    ".exploring-list p",
-    ".contact-link"
-  ];
-
-  if (!prefersReducedMotion) {
-
-    const revealItems = document.querySelectorAll(
-      revealGroups.join(", ")
-    );
-
-    revealItems.forEach((element, index) => {
-      element.style.opacity = "0";
-      element.style.transform =
-        "translate3d(0, 18px, 0)";
-      element.style.transition =
-        "opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), " +
-        "transform 700ms cubic-bezier(0.22, 1, 0.36, 1)";
-      element.style.transitionDelay =
-        `${Math.min(index % 5, 4) * 45}ms`;
-      element.style.willChange =
-        "opacity, transform";
-    });
-
-
-    const revealObserver =
-      new IntersectionObserver(
-        (entries, observer) => {
-
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-
-            const element = entry.target;
-
-            requestAnimationFrame(() => {
-              element.style.opacity = "1";
-              element.style.transform =
-                "translate3d(0, 0, 0)";
-            });
-
-            element.addEventListener(
-              "transitionend",
-              () => {
-                element.style.willChange = "auto";
-              },
-              { once: true }
-            );
-
-            observer.unobserve(element);
-          });
-
-        },
-        {
-          rootMargin: "0px 0px -8% 0px",
-          threshold: 0.08
-        }
+      link.addEventListener(
+        "click",
+        closeMenu
       );
 
-
-    revealItems.forEach((element) => {
-      revealObserver.observe(element);
-    });
-  }
-
-
-  /* =======================================================
-     PROJECT MICRO-INTERACTION
-     
-     Very subtle horizontal movement on larger screens.
-     Disabled on touch/reduced-motion environments.
-  ======================================================== */
-
-  const canHover =
-    window.matchMedia("(hover: hover) and (pointer: fine)")
-      .matches;
-
-  if (canHover && !prefersReducedMotion) {
-
-    document
-      .querySelectorAll(".project")
-      .forEach((project) => {
-
-        const story =
-          project.querySelector(".project-story");
-
-        if (!story) return;
-
-        project.addEventListener(
-          "pointermove",
-          (event) => {
-
-            const rect =
-              project.getBoundingClientRect();
-
-            const relativeX =
-              (event.clientX - rect.left) /
-              rect.width;
-
-            /*
-             * Extremely restrained movement.
-             * Maximum ~2px.
-             */
-            const offset =
-              (relativeX - 0.5) * 4;
-
-            story.style.transform =
-              `translate3d(${offset}px, 0, 0)`;
-          }
-        );
-
-        project.addEventListener(
-          "pointerleave",
-          () => {
-            story.style.transform =
-              "translate3d(0, 0, 0)";
-          }
-        );
-      });
-  }
-
-
-  /* =======================================================
-     COPY EMAIL
-  ======================================================== */
-
-  if (copyButton) {
-
-    const email =
-      copyButton.dataset.copyEmail;
-
-    const originalText =
-      copyButton.textContent;
-
-    const setCopiedState = () => {
-
-      copyButton.textContent =
-        "Copied";
-
-      copyButton.classList.add("is-copied");
-
-      window.setTimeout(() => {
-
-        copyButton.textContent =
-          originalText;
-
-        copyButton.classList.remove(
-          "is-copied"
-        );
-
-      }, 1800);
-    };
-
-
-    copyButton.addEventListener(
-      "click",
-      async () => {
-
-        if (!email) return;
-
-        try {
-
-          if (
-            navigator.clipboard &&
-            window.isSecureContext
-          ) {
-            await navigator.clipboard.writeText(
-              email
-            );
-          } else {
-
-            const textarea =
-              document.createElement("textarea");
-
-            textarea.value = email;
-
-            textarea.setAttribute(
-              "readonly",
-              ""
-            );
-
-            textarea.style.position =
-              "fixed";
-
-            textarea.style.opacity = "0";
-
-            document.body.appendChild(
-              textarea
-            );
-
-            textarea.select();
-
-            document.execCommand(
-              "copy"
-            );
-
-            textarea.remove();
-          }
-
-          setCopiedState();
-
-        } catch {
-          copyButton.textContent =
-            "Select email manually";
-
-          window.setTimeout(() => {
-            copyButton.textContent =
-              originalText;
-          }, 1800);
-        }
-      }
-    );
-  }
-
-
-  /* =======================================================
-     EXTERNAL LINK SAFETY
-  ======================================================== */
-
-  document
-    .querySelectorAll('a[target="_blank"]')
-    .forEach((link) => {
-
-      const rel =
-        new Set(
-          (link.getAttribute("rel") || "")
-            .split(/\s+/)
-            .filter(Boolean)
-        );
-
-      rel.add("noopener");
-      rel.add("noreferrer");
-
-      link.setAttribute(
-        "rel",
-        [...rel].join(" ")
-      );
     });
 
 
-  /* =======================================================
-     KEYBOARD ESCAPE
-  ======================================================== */
+  /*
+   * Escape closes the mobile menu.
+   */
 
   document.addEventListener(
     "keydown",
@@ -522,58 +209,717 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (
         event.key === "Escape" &&
-        navigation?.classList.contains("is-open")
+        menuToggle.getAttribute(
+          "aria-expanded"
+        ) === "true"
       ) {
         closeMenu();
-        menuToggle?.focus();
+        menuToggle.focus();
       }
+
     }
   );
 
 
-  /* =======================================================
-     CLOSE MOBILE MENU WHEN RESIZING
-  ======================================================== */
+  /*
+   * Close menu if viewport becomes desktop-sized.
+   *
+   * This matters when rotating an iPad/iPhone.
+   */
 
-  window.addEventListener(
-    "resize",
-    () => {
+  const navigationMedia =
+    window.matchMedia(
+      "(min-width: 701px)"
+    );
 
-      if (
-        window.innerWidth > 640 &&
-        navigation?.classList.contains("is-open")
-      ) {
+  const handleNavigationResize =
+    (event) => {
+
+      if (event.matches) {
         closeMenu();
       }
 
-    },
-    { passive: true }
-  );
+    };
 
 
-  /* =======================================================
-     PAGE LOAD STATE
-     
-     Prevents a flash of unfinished interaction while keeping
-     the actual hero immediately visible.
-  ======================================================== */
-
-  requestAnimationFrame(() => {
-    document.documentElement.classList.add(
-      "page-ready"
+  if (navigationMedia.addEventListener) {
+    navigationMedia.addEventListener(
+      "change",
+      handleNavigationResize
     );
+  } else {
+    /* Firefox ESR / older Safari fallback */
+    navigationMedia.addListener(
+      handleNavigationResize
+    );
+  }
+}
+
+
+/* =========================================================
+   HEADER STATE
+========================================================= */
+
+/*
+ * IMPORTANT:
+ *
+ * We deliberately do NOT run:
+ *
+ * window.addEventListener("scroll", ...)
+ *
+ * on every frame.
+ *
+ * IntersectionObserver lets the browser handle this efficiently.
+ */
+
+if (header) {
+
+  if (browser.intersectionObserver) {
+
+    const sentinel =
+      document.createElement("div");
+
+    sentinel.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    sentinel.style.cssText = `
+      position:absolute;
+      top:0;
+      left:0;
+      width:1px;
+      height:1px;
+      pointer-events:none;
+    `;
+
+    document.body.prepend(sentinel);
+
+
+    const headerObserver =
+      new IntersectionObserver(
+        ([entry]) => {
+
+          header.classList.toggle(
+            "scrolled",
+            !entry.isIntersecting
+          );
+
+        },
+        {
+          threshold: 0
+        }
+      );
+
+
+    headerObserver.observe(sentinel);
+
+  } else {
+
+    /*
+     * Extremely old-browser fallback.
+     *
+     * Passive listener prevents blocking the
+     * browser's scrolling pipeline.
+     */
+
+    let ticking = false;
+
+    window.addEventListener(
+      "scroll",
+      () => {
+
+        if (ticking) return;
+
+        ticking = true;
+
+        requestAnimationFrame(() => {
+
+          header.classList.toggle(
+            "scrolled",
+            window.scrollY > 8
+          );
+
+          ticking = false;
+
+        });
+
+      },
+      {
+        passive: true
+      }
+    );
+  }
+}
+
+
+/* =========================================================
+   INTERNAL NAVIGATION
+========================================================= */
+
+document.addEventListener(
+  "click",
+  (event) => {
+
+    /*
+     * Only handle normal left-click navigation.
+     */
+
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+
+    const link =
+      event.target.closest(
+        'a[href^="#"]'
+      );
+
+    if (!link) return;
+
+
+    const selector =
+      link.getAttribute("href");
+
+    if (
+      !selector ||
+      selector === "#" ||
+      selector.length < 2
+    ) {
+      return;
+    }
+
+
+    let target;
+
+    try {
+      target =
+        document.querySelector(selector);
+    } catch {
+      return;
+    }
+
+
+    if (!target) return;
+
+
+    event.preventDefault();
+
+
+    /*
+     * Native scrolling is preferred.
+     */
+
+    if (
+      browser.smoothScroll &&
+      !browser.reducedMotion
+    ) {
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+    } else {
+
+      /*
+       * Safari / reduced-motion fallback.
+       */
+
+      target.scrollIntoView({
+        block: "start"
+      });
+
+    }
+
+
+    /*
+     * Update URL without triggering
+     * another navigation.
+     */
+
+    try {
+      history.pushState(
+        null,
+        "",
+        selector
+      );
+    } catch {
+      /* Ignore restricted environments. */
+    }
+
+  }
+);
+
+
+/* =========================================================
+   EMAIL COPY
+========================================================= */
+
+if (emailButton) {
+
+  let copyTimer = null;
+
+
+  const setCopyLabel = (text) => {
+
+    if (!copyLabel) return;
+
+    copyLabel.textContent = text;
+
+    clearTimeout(copyTimer);
+
+    copyTimer = setTimeout(
+      () => {
+        copyLabel.textContent = "Copy";
+      },
+      1800
+    );
+
+  };
+
+
+  const legacyCopy = (value) => {
+
+    const textarea =
+      document.createElement("textarea");
+
+    textarea.value = value;
+
+    textarea.setAttribute(
+      "readonly",
+      ""
+    );
+
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    textarea.style.top = "0";
+    textarea.style.opacity = "0";
+
+    document.body.appendChild(
+      textarea
+    );
+
+
+    /*
+     * iOS Safari requires selection in
+     * a slightly different way.
+     */
+
+    textarea.focus();
+    textarea.select();
+
+    if (textarea.setSelectionRange) {
+      textarea.setSelectionRange(
+        0,
+        textarea.value.length
+      );
+    }
+
+
+    let successful = false;
+
+    try {
+      successful =
+        document.execCommand(
+          "copy"
+        );
+    } catch {
+      successful = false;
+    }
+
+
+    textarea.remove();
+
+    return successful;
+  };
+
+
+  emailButton.addEventListener(
+    "click",
+    async () => {
+
+      const email =
+        emailButton.dataset.copyEmail;
+
+      if (!email) return;
+
+
+      /*
+       * Chromium / Firefox / modern Safari.
+       */
+
+      if (browser.clipboard) {
+
+        try {
+
+          await navigator.clipboard.writeText(
+            email
+          );
+
+          setCopyLabel("Copied");
+
+          return;
+
+        } catch {
+          /*
+           * Safari can reject clipboard writes
+           * depending on context.
+           *
+           * Fall through to legacy method.
+           */
+        }
+      }
+
+
+      /*
+       * Firefox / Safari / restricted contexts.
+       */
+
+      if (legacyCopy(email)) {
+        setCopyLabel("Copied");
+      } else {
+        setCopyLabel("Select email");
+      }
+
+    }
+  );
+}
+
+
+/* =========================================================
+   EXTERNAL LINKS
+========================================================= */
+
+document
+  .querySelectorAll(
+    'a[target="_blank"]'
+  )
+  .forEach((link) => {
+
+    link.setAttribute(
+      "rel",
+      "noopener noreferrer"
+    );
+
   });
 
 
-  /* =======================================================
-     PERIODIC DATE UPDATE
-     
-     Handles a page left open across midnight/year changes.
-  ======================================================== */
+/* =========================================================
+   REVEAL SYSTEM
+========================================================= */
 
-  window.setInterval(
-    updateYear,
-    60 * 60 * 1000
+/*
+ * No animation framework.
+ *
+ * No continuous scroll calculations.
+ *
+ * Elements are observed once and then removed
+ * from observation.
+ */
+
+const revealElements =
+  document.querySelectorAll(
+    [
+      ".process-item",
+      ".question",
+      ".project",
+      ".foundation-grid article",
+      ".outside-grid article"
+    ].join(",")
   );
 
-});
+
+if (
+  revealElements.length &&
+  !browser.reducedMotion
+) {
+
+  const style =
+    document.createElement("style");
+
+  style.textContent = `
+    html.js-enabled .js-reveal {
+      opacity: 0;
+      transform: translate3d(0, 18px, 0);
+    }
+
+    html.js-enabled .js-reveal.is-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+
+      transition:
+        opacity .7s cubic-bezier(.22,1,.36,1),
+        transform .7s cubic-bezier(.22,1,.36,1);
+
+      will-change: opacity, transform;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html.js-enabled .js-reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+
+
+  revealElements.forEach(
+    (element) => {
+      element.classList.add(
+        "js-reveal"
+      );
+    }
+  );
+
+
+  if (browser.intersectionObserver) {
+
+    const revealObserver =
+      new IntersectionObserver(
+        (entries, observer) => {
+
+          entries.forEach(
+            (entry) => {
+
+              if (
+                !entry.isIntersecting
+              ) {
+                return;
+              }
+
+
+              entry.target.classList.add(
+                "is-visible"
+              );
+
+
+              /*
+               * Once visible, stop observing.
+               *
+               * This is important for long pages.
+               */
+
+              observer.unobserve(
+                entry.target
+              );
+
+            }
+          );
+
+        },
+        {
+          threshold: 0.06,
+          rootMargin:
+            "0px 0px -35px 0px"
+        }
+      );
+
+
+    revealElements.forEach(
+      (element) => {
+        revealObserver.observe(
+          element
+        );
+      }
+    );
+
+  } else {
+
+    /*
+     * If IntersectionObserver is unavailable,
+     * show everything rather than running an
+     * expensive scroll animation system.
+     */
+
+    revealElements.forEach(
+      (element) => {
+        element.classList.add(
+          "is-visible"
+        );
+      }
+    );
+
+  }
+
+} else {
+
+  /*
+   * Reduced-motion users should never get
+   * invisible content waiting for animation.
+   */
+
+  revealElements.forEach(
+    (element) => {
+      element.classList.add(
+        "is-visible"
+      );
+  });
+
+}
+
+
+/* =========================================================
+   HORIZONTAL SYSTEM DIAGRAMS
+========================================================= */
+
+const horizontalFlows =
+  document.querySelectorAll(
+    ".architecture-flow, .content-flow"
+  );
+
+
+/*
+ * Desktop trackpad / mouse wheel support.
+ *
+ * IMPORTANT:
+ * Do not install this behavior on touch devices.
+ *
+ * Native horizontal scrolling is significantly better
+ * on iOS Safari and Android browsers.
+ */
+
+if (!coarsePointer) {
+
+  horizontalFlows.forEach(
+    (container) => {
+
+      container.addEventListener(
+        "wheel",
+        (event) => {
+
+          if (
+            container.scrollWidth <=
+            container.clientWidth
+          ) {
+            return;
+          }
+
+
+          /*
+           * If the user is already using horizontal
+           * scrolling, don't interfere.
+           */
+
+          if (
+            Math.abs(event.deltaX) >
+            Math.abs(event.deltaY)
+          ) {
+            return;
+          }
+
+
+          event.preventDefault();
+
+
+          container.scrollLeft +=
+            event.deltaY;
+
+        },
+        {
+          passive: false
+        }
+      );
+
+    }
+  );
+}
+
+
+/* =========================================================
+   PREVENT DRAGGING OF UI NODES
+========================================================= */
+
+document
+  .querySelectorAll(
+    ".architecture-node, .content-flow-item"
+  )
+  .forEach(
+    (element) => {
+
+      element.setAttribute(
+        "draggable",
+        "false"
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   IMAGE / MEDIA OPTIMIZATION
+========================================================= */
+
+/*
+ * Your current HTML does not contain images,
+ * but this makes future additions safer.
+ */
+
+document
+  .querySelectorAll("img")
+  .forEach((image, index) => {
+
+    /*
+     * Never lazy-load the first visual.
+     */
+
+    if (index === 0) {
+      image.loading = "eager";
+      image.fetchPriority = "high";
+    } else {
+      image.loading = "lazy";
+      image.decoding = "async";
+    }
+
+
+    /*
+     * Safari / Chromium / Firefox all understand
+     * async image decoding.
+     */
+
+    image.decoding = "async";
+
+  });
+
+
+/* =========================================================
+   PAGE VISIBILITY
+========================================================= */
+
+/*
+ * Don't run unnecessary visual work when the
+ * browser has put the tab in the background.
+ *
+ * This is mainly useful for future extensions.
+ */
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+
+    root.classList.toggle(
+      "page-hidden",
+      document.hidden
+    );
+
+  }
+);
+
+
+/* =========================================================
+   BROWSER READY
+========================================================= */
+
+root.classList.add(
+  "js-enabled"
+);
