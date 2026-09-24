@@ -1,763 +1,579 @@
 /* =========================================================
-   SHREYANSH PARGANIHA
-   Personal Website — Main JavaScript
-   ========================================================= */
+   SHREYANSH PARGANIHA — PORTFOLIO
+   Organic interaction layer
+========================================================= */
 
-(() => {
+document.addEventListener("DOMContentLoaded", () => {
   "use strict";
 
   /* =======================================================
-     01. DOM READY
-  ======================================================= */
+     ELEMENTS
+  ======================================================== */
 
-  document.addEventListener("DOMContentLoaded", init);
-
-
-  function init() {
-
-    /* =====================================================
-       02. ELEMENTS
-    ===================================================== */
-
-    const html = document.documentElement;
-    const header = document.querySelector(".site-header");
-
-    const menuToggle =
-      document.querySelector(".menu-toggle");
-
-    const navLinks =
-      document.querySelector(".nav-links");
-
-    const currentClassElements =
-      document.querySelectorAll(
-        "[data-current-class]"
-      );
-
-    const currentYearElements =
-      document.querySelectorAll(
-        "[data-current-year]"
-      );
-
-    const navItems =
-      document.querySelectorAll(
-        '.nav-links a[href^="#"]'
-      );
-
-    const sections =
-      document.querySelectorAll(
-        "main section[id]"
-      );
-
-    const copyButtons =
-      document.querySelectorAll(
-        "[data-copy-email]"
-      );
+  const header = document.querySelector("[data-header]");
+  const menuToggle = document.querySelector("[data-menu-toggle]");
+  const navigation = document.querySelector("[data-navigation]");
+  const navLinks = [...document.querySelectorAll(".nav-links a")];
+  const copyButton = document.querySelector("[data-copy-email]");
+  const yearElement = document.querySelector("[data-current-year]");
 
 
-    /* =====================================================
-       03. DYNAMIC CLASS
-       
-       Class 11 until:
-       April 1, 2027
+  /* =======================================================
+     UTILITIES
+  ======================================================== */
 
-       Then automatically:
-       Class 12
-    ===================================================== */
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
-    function updateCurrentClass() {
-      const now = new Date();
 
-      const class12Start =
-        new Date("2027-04-01T00:00:00");
+  /* =======================================================
+     DYNAMIC YEAR
+  ======================================================== */
 
-      const currentClass =
-        now >= class12Start ? "12" : "11";
-
-      currentClassElements.forEach(
-        (element) => {
-          element.textContent =
-            currentClass;
-        }
-      );
+  const updateYear = () => {
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
     }
+  };
+
+  updateYear();
 
 
-    /* =====================================================
-       04. DYNAMIC YEAR
-    ===================================================== */
+  /* =======================================================
+     HEADER DEPTH
+     
+     The header becomes slightly more defined after the user
+     begins moving through the page.
+  ======================================================== */
 
-    function updateYear() {
-      const year =
-        new Date().getFullYear();
+  const updateHeader = () => {
+    if (!header) return;
 
-      currentYearElements.forEach(
-        (element) => {
-          element.textContent = year;
-        }
-      );
-    }
+    header.classList.toggle(
+      "scrolled",
+      window.scrollY > 24
+    );
+  };
+
+  updateHeader();
+
+  window.addEventListener(
+    "scroll",
+    updateHeader,
+    { passive: true }
+  );
 
 
-    /* =====================================================
-       05. HEADER SCROLL STATE
-    ===================================================== */
+  /* =======================================================
+     MOBILE NAVIGATION
+  ======================================================== */
 
-    function updateHeader() {
-      if (!header) return;
+  const closeMenu = () => {
+    if (!menuToggle || !navigation) return;
 
-      header.classList.toggle(
-        "scrolled",
-        window.scrollY > 20
-      );
-    }
+    menuToggle.classList.remove("is-open");
+    navigation.classList.remove("is-open");
 
-    updateHeader();
-
-    window.addEventListener(
-      "scroll",
-      updateHeader,
-      { passive: true }
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute(
+      "aria-label",
+      "Open navigation"
     );
 
-
-    /* =====================================================
-       06. MOBILE NAVIGATION
-    ===================================================== */
-
-    function closeMenu() {
-      if (!menuToggle || !navLinks) {
-        return;
-      }
-
-      navLinks.classList.remove(
-        "is-open"
-      );
-
-      menuToggle.classList.remove(
-        "is-open"
-      );
-
-      menuToggle.setAttribute(
-        "aria-expanded",
-        "false"
-      );
-
-      menuToggle.setAttribute(
-        "aria-label",
-        "Open navigation"
-      );
-
-      html.classList.remove(
-        "menu-open"
-      );
-    }
+    document.body.classList.remove("menu-open");
+  };
 
 
-    function openMenu() {
-      if (!menuToggle || !navLinks) {
-        return;
-      }
+  const openMenu = () => {
+    if (!menuToggle || !navigation) return;
 
-      navLinks.classList.add(
-        "is-open"
-      );
+    menuToggle.classList.add("is-open");
+    navigation.classList.add("is-open");
 
-      menuToggle.classList.add(
-        "is-open"
-      );
-
-      menuToggle.setAttribute(
-        "aria-expanded",
-        "true"
-      );
-
-      menuToggle.setAttribute(
-        "aria-label",
-        "Close navigation"
-      );
-
-      html.classList.add(
-        "menu-open"
-      );
-    }
-
-
-    if (menuToggle && navLinks) {
-
-      menuToggle.addEventListener(
-        "click",
-        (event) => {
-
-          event.stopPropagation();
-
-          const isOpen =
-            navLinks.classList.contains(
-              "is-open"
-            );
-
-          if (isOpen) {
-            closeMenu();
-          } else {
-            openMenu();
-          }
-        }
-      );
-
-
-      navLinks.addEventListener(
-        "click",
-        (event) => {
-
-          const link =
-            event.target.closest("a");
-
-          if (link) {
-            closeMenu();
-          }
-        }
-      );
-
-
-      document.addEventListener(
-        "click",
-        (event) => {
-
-          if (
-            !navLinks.classList.contains(
-              "is-open"
-            )
-          ) {
-            return;
-          }
-
-          if (
-            !navLinks.contains(
-              event.target
-            ) &&
-            !menuToggle.contains(
-              event.target
-            )
-          ) {
-            closeMenu();
-          }
-        }
-      );
-
-
-      document.addEventListener(
-        "keydown",
-        (event) => {
-
-          if (
-            event.key === "Escape"
-          ) {
-            closeMenu();
-          }
-        }
-      );
-
-
-      window.addEventListener(
-        "resize",
-        () => {
-
-          if (
-            window.innerWidth > 700
-          ) {
-            closeMenu();
-          }
-        }
-      );
-    }
-
-
-    /* =====================================================
-       07. ACTIVE NAVIGATION
-    ===================================================== */
-
-    function updateActiveNavigation() {
-
-      if (
-        !sections.length ||
-        !navItems.length
-      ) {
-        return;
-      }
-
-      const position =
-        window.scrollY + 180;
-
-      let activeSection = "";
-
-      sections.forEach(
-        (section) => {
-
-          const top =
-            section.offsetTop;
-
-          const bottom =
-            top + section.offsetHeight;
-
-          if (
-            position >= top &&
-            position < bottom
-          ) {
-            activeSection =
-              section.id;
-          }
-        }
-      );
-
-
-      navItems.forEach(
-        (link) => {
-
-          const target =
-            link.getAttribute("href");
-
-          link.classList.toggle(
-            "active",
-            target ===
-              `#${activeSection}`
-          );
-        }
-      );
-    }
-
-    updateActiveNavigation();
-
-    window.addEventListener(
-      "scroll",
-      updateActiveNavigation,
-      { passive: true }
+    menuToggle.setAttribute("aria-expanded", "true");
+    menuToggle.setAttribute(
+      "aria-label",
+      "Close navigation"
     );
 
+    document.body.classList.add("menu-open");
+  };
 
-    /* =====================================================
-       08. SMOOTH NAVIGATION
-    ===================================================== */
 
-    navItems.forEach(
-      (link) => {
+  if (menuToggle) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen =
+        menuToggle.getAttribute("aria-expanded") === "true";
 
-        link.addEventListener(
-          "click",
-          (event) => {
-
-            const targetId =
-              link.getAttribute("href");
-
-            if (
-              !targetId ||
-              targetId === "#" ||
-              !targetId.startsWith("#")
-            ) {
-              return;
-            }
-
-            const target =
-              document.querySelector(
-                targetId
-              );
-
-            if (!target) {
-              return;
-            }
-
-            event.preventDefault();
-
-            const headerHeight =
-              header
-                ? header.offsetHeight
-                : 0;
-
-            const targetPosition =
-              target.getBoundingClientRect()
-                .top +
-              window.scrollY -
-              headerHeight -
-              18;
-
-            window.scrollTo({
-              top: Math.max(
-                0,
-                targetPosition
-              ),
-              behavior: "smooth"
-            });
-
-
-            /*
-             * Update URL without causing
-             * a second browser jump.
-             */
-
-            try {
-              history.pushState(
-                null,
-                "",
-                targetId
-              );
-            } catch {
-              /* Ignore unsupported history API */
-            }
-          }
-        );
-      }
-    );
-
-
-    /* =====================================================
-       09. COPY EMAIL
-    ===================================================== */
-
-    copyButtons.forEach(
-      (button) => {
-
-        button.addEventListener(
-          "click",
-          async () => {
-
-            const email =
-              button.getAttribute(
-                "data-copy-email"
-              );
-
-            if (!email) {
-              return;
-            }
-
-            const originalText =
-              button.querySelector(
-                "span:last-child"
-              );
-
-            if (!originalText) {
-              return;
-            }
-
-            const previousText =
-              originalText.textContent;
-
-
-            try {
-
-              if (
-                navigator.clipboard &&
-                window.isSecureContext
-              ) {
-
-                await navigator.clipboard
-                  .writeText(email);
-
-              } else {
-
-                /*
-                 * Legacy fallback.
-                 */
-
-                const textarea =
-                  document.createElement(
-                    "textarea"
-                  );
-
-                textarea.value = email;
-
-                textarea.setAttribute(
-                  "readonly",
-                  ""
-                );
-
-                textarea.style.position =
-                  "fixed";
-
-                textarea.style.opacity =
-                  "0";
-
-                document.body.appendChild(
-                  textarea
-                );
-
-                textarea.select();
-
-                document.execCommand(
-                  "copy"
-                );
-
-                textarea.remove();
-              }
-
-
-              button.classList.add(
-                "copied"
-              );
-
-              originalText.textContent =
-                "Email copied";
-
-
-              window.setTimeout(
-                () => {
-
-                  button.classList.remove(
-                    "copied"
-                  );
-
-                  originalText.textContent =
-                    previousText;
-
-                },
-                1800
-              );
-
-            } catch {
-
-              originalText.textContent =
-                "Copy failed";
-
-              window.setTimeout(
-                () => {
-                  originalText.textContent =
-                    previousText;
-                },
-                1800
-              );
-            }
-          }
-        );
-      }
-    );
-
-
-    /* =====================================================
-       10. EXTERNAL LINK SECURITY
-    ===================================================== */
-
-    document
-      .querySelectorAll(
-        'a[target="_blank"]'
-      )
-      .forEach(
-        (link) => {
-
-          const rel =
-            new Set(
-              (
-                link.getAttribute(
-                  "rel"
-                ) || ""
-              )
-                .split(/\s+/)
-                .filter(Boolean)
-            );
-
-          rel.add("noopener");
-          rel.add("noreferrer");
-
-          link.setAttribute(
-            "rel",
-            [...rel].join(" ")
-          );
-        }
-      );
-
-
-    /* =====================================================
-       11. HERO SYSTEM INTERACTION
-       
-       Extremely subtle.
-       No cursor-following effects.
-       No expensive animation.
-    ===================================================== */
-
-    const heroSystem =
-      document.querySelector(
-        ".hero-system"
-      );
-
-    if (heroSystem) {
-
-      const nodes =
-        heroSystem.querySelectorAll(
-          ".system-node"
-        );
-
-      nodes.forEach(
-        (node) => {
-
-          node.addEventListener(
-            "mouseenter",
-            () => {
-              node.style.transform =
-                "scale(1.45)";
-            }
-          );
-
-
-          node.addEventListener(
-            "mouseleave",
-            () => {
-              node.style.transform =
-                "";
-            }
-          );
-        }
-      );
-    }
-
-
-    /* =====================================================
-       12. NO SCROLL-REVEAL SYSTEM
-       
-       IMPORTANT:
-       
-       We deliberately do NOT add:
-       
-       .reveal-ready
-       .reveal-target
-       .is-visible
-       
-       The website must remain visible even if
-       JavaScript loads late or fails.
-    ===================================================== */
-
-
-    /* =====================================================
-       13. INITIALIZE
-    ===================================================== */
-
-    updateCurrentClass();
-    updateYear();
-    updateHeader();
-    updateActiveNavigation();
-
-
-    /* =====================================================
-       14. HANDLE BACK/FORWARD NAVIGATION
-    ===================================================== */
-
-    window.addEventListener(
-      "popstate",
-      () => {
-
-        const hash =
-          window.location.hash;
-
-        if (!hash) {
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-          });
-
-          return;
-        }
-
-        const target =
-          document.querySelector(hash);
-
-        if (!target) {
-          return;
-        }
-
-        const headerHeight =
-          header
-            ? header.offsetHeight
-            : 0;
-
-        window.scrollTo({
-          top:
-            target.offsetTop -
-            headerHeight -
-            18,
-
-          behavior: "smooth"
-        });
-
-      }
-    );
-
-
-    /* =====================================================
-       15. REFRESH CLASS/YEAR PERIODICALLY
-    ===================================================== */
-
-    window.setInterval(
-      () => {
-        updateCurrentClass();
-        updateYear();
-      },
-      60 * 60 * 1000
-    );
-
+      isOpen ? closeMenu() : openMenu();
+    });
   }
 
 
   /* =======================================================
-     16. CACHE / SERVICE WORKER CLEANUP
+     ORGANIC INTERNAL NAVIGATION
      
-     This does NOT control the browser's normal HTTP cache.
-     
-     It does:
-       - remove existing service workers
-       - delete CacheStorage entries
-     
-     This prevents an old service worker/cache from
-     unexpectedly serving an old version of the site.
-  ======================================================= */
+     Uses native smooth scrolling instead of hijacking the
+     browser's scrolling behaviour.
+  ======================================================== */
 
-  async function cleanRuntimeCaches() {
+  const scrollToTarget = (target) => {
+    if (!target) return;
 
-    try {
+    const headerHeight =
+      header?.getBoundingClientRect().height || 0;
 
-      if (
-        "serviceWorker" in navigator
-      ) {
+    const targetTop =
+      target.getBoundingClientRect().top +
+      window.scrollY -
+      headerHeight -
+      18;
 
-        const registrations =
-          await navigator.serviceWorker
-            .getRegistrations();
-
-        for (
-          const registration
-          of registrations
-        ) {
-
-          await registration.unregister();
-        }
-      }
+    window.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: prefersReducedMotion
+        ? "auto"
+        : "smooth"
+    });
+  };
 
 
-      if (
-        "caches" in window
-      ) {
+  navLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href");
 
-        const cacheNames =
-          await caches.keys();
+      if (!href || !href.startsWith("#")) return;
 
-        await Promise.all(
-          cacheNames.map(
-            (cacheName) =>
-              caches.delete(
-                cacheName
-              )
-          )
+      const target = document.querySelector(href);
+
+      if (!target) return;
+
+      event.preventDefault();
+
+      closeMenu();
+
+      scrollToTarget(target);
+
+      /*
+       * Update the URL without causing a browser jump.
+       */
+      if (history.replaceState) {
+        history.replaceState(
+          null,
+          "",
+          href
         );
       }
+    });
+  });
 
-    } catch {
+
+  /* =======================================================
+     HERO / PROJECT / INTERNAL LINKS
+  ======================================================== */
+
+  document
+    .querySelectorAll('a[href^="#"]')
+    .forEach((link) => {
+
       /*
-       * Cache cleanup is best-effort.
-       * Never allow it to break the website.
+       * Navigation links are already handled above.
        */
-    }
+      if (link.closest(".nav-links")) return;
+
+      link.addEventListener("click", (event) => {
+        const href = link.getAttribute("href");
+
+        if (!href || href === "#") return;
+
+        const target = document.querySelector(href);
+
+        if (!target) return;
+
+        event.preventDefault();
+
+        scrollToTarget(target);
+
+        if (history.replaceState) {
+          history.replaceState(
+            null,
+            "",
+            href
+          );
+        }
+      });
+    });
+
+
+  /* =======================================================
+     SECTION AWARE NAVIGATION
+     
+     The navigation quietly follows the section currently
+     occupying the reading area.
+  ======================================================== */
+
+  const sections = [
+    ...document.querySelectorAll(
+      "#about, #questions, #projects, #contact"
+    )
+  ];
+
+  if (sections.length && navLinks.length) {
+
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const id = entry.target.id;
+
+          navLinks.forEach((link) => {
+            const active =
+              link.getAttribute("href") === `#${id}`;
+
+            link.classList.toggle(
+              "is-active",
+              active
+            );
+          });
+        });
+
+      },
+      {
+        root: null,
+
+        /*
+         * The active state changes when a section enters
+         * roughly the middle of the viewport.
+         */
+        rootMargin: "-38% 0px -52% 0px",
+
+        threshold: 0
+      }
+    );
+
+    sections.forEach((section) => {
+      sectionObserver.observe(section);
+    });
   }
 
 
-  /*
-   * Run cleanup independently.
-   * It does not block page rendering.
-   */
+  /* =======================================================
+     ORGANIC CONTENT REVEALS
+     
+     Small reveals only. No giant slide-ins, no dramatic
+     animation. Content should feel like it is settling into
+     place rather than performing.
+  ======================================================== */
 
-  cleanRuntimeCaches();
+  const revealGroups = [
+    ".learning-step",
+    ".question-item",
+    ".project",
+    ".foundation-item",
+    ".outside-item",
+    ".exploring-list p",
+    ".contact-link"
+  ];
 
-})();
+  if (!prefersReducedMotion) {
+
+    const revealItems = document.querySelectorAll(
+      revealGroups.join(", ")
+    );
+
+    revealItems.forEach((element, index) => {
+      element.style.opacity = "0";
+      element.style.transform =
+        "translate3d(0, 18px, 0)";
+      element.style.transition =
+        "opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), " +
+        "transform 700ms cubic-bezier(0.22, 1, 0.36, 1)";
+      element.style.transitionDelay =
+        `${Math.min(index % 5, 4) * 45}ms`;
+      element.style.willChange =
+        "opacity, transform";
+    });
+
+
+    const revealObserver =
+      new IntersectionObserver(
+        (entries, observer) => {
+
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            const element = entry.target;
+
+            requestAnimationFrame(() => {
+              element.style.opacity = "1";
+              element.style.transform =
+                "translate3d(0, 0, 0)";
+            });
+
+            element.addEventListener(
+              "transitionend",
+              () => {
+                element.style.willChange = "auto";
+              },
+              { once: true }
+            );
+
+            observer.unobserve(element);
+          });
+
+        },
+        {
+          rootMargin: "0px 0px -8% 0px",
+          threshold: 0.08
+        }
+      );
+
+
+    revealItems.forEach((element) => {
+      revealObserver.observe(element);
+    });
+  }
+
+
+  /* =======================================================
+     PROJECT MICRO-INTERACTION
+     
+     Very subtle horizontal movement on larger screens.
+     Disabled on touch/reduced-motion environments.
+  ======================================================== */
+
+  const canHover =
+    window.matchMedia("(hover: hover) and (pointer: fine)")
+      .matches;
+
+  if (canHover && !prefersReducedMotion) {
+
+    document
+      .querySelectorAll(".project")
+      .forEach((project) => {
+
+        const story =
+          project.querySelector(".project-story");
+
+        if (!story) return;
+
+        project.addEventListener(
+          "pointermove",
+          (event) => {
+
+            const rect =
+              project.getBoundingClientRect();
+
+            const relativeX =
+              (event.clientX - rect.left) /
+              rect.width;
+
+            /*
+             * Extremely restrained movement.
+             * Maximum ~2px.
+             */
+            const offset =
+              (relativeX - 0.5) * 4;
+
+            story.style.transform =
+              `translate3d(${offset}px, 0, 0)`;
+          }
+        );
+
+        project.addEventListener(
+          "pointerleave",
+          () => {
+            story.style.transform =
+              "translate3d(0, 0, 0)";
+          }
+        );
+      });
+  }
+
+
+  /* =======================================================
+     COPY EMAIL
+  ======================================================== */
+
+  if (copyButton) {
+
+    const email =
+      copyButton.dataset.copyEmail;
+
+    const originalText =
+      copyButton.textContent;
+
+    const setCopiedState = () => {
+
+      copyButton.textContent =
+        "Copied";
+
+      copyButton.classList.add("is-copied");
+
+      window.setTimeout(() => {
+
+        copyButton.textContent =
+          originalText;
+
+        copyButton.classList.remove(
+          "is-copied"
+        );
+
+      }, 1800);
+    };
+
+
+    copyButton.addEventListener(
+      "click",
+      async () => {
+
+        if (!email) return;
+
+        try {
+
+          if (
+            navigator.clipboard &&
+            window.isSecureContext
+          ) {
+            await navigator.clipboard.writeText(
+              email
+            );
+          } else {
+
+            const textarea =
+              document.createElement("textarea");
+
+            textarea.value = email;
+
+            textarea.setAttribute(
+              "readonly",
+              ""
+            );
+
+            textarea.style.position =
+              "fixed";
+
+            textarea.style.opacity = "0";
+
+            document.body.appendChild(
+              textarea
+            );
+
+            textarea.select();
+
+            document.execCommand(
+              "copy"
+            );
+
+            textarea.remove();
+          }
+
+          setCopiedState();
+
+        } catch {
+          copyButton.textContent =
+            "Select email manually";
+
+          window.setTimeout(() => {
+            copyButton.textContent =
+              originalText;
+          }, 1800);
+        }
+      }
+    );
+  }
+
+
+  /* =======================================================
+     EXTERNAL LINK SAFETY
+  ======================================================== */
+
+  document
+    .querySelectorAll('a[target="_blank"]')
+    .forEach((link) => {
+
+      const rel =
+        new Set(
+          (link.getAttribute("rel") || "")
+            .split(/\s+/)
+            .filter(Boolean)
+        );
+
+      rel.add("noopener");
+      rel.add("noreferrer");
+
+      link.setAttribute(
+        "rel",
+        [...rel].join(" ")
+      );
+    });
+
+
+  /* =======================================================
+     KEYBOARD ESCAPE
+  ======================================================== */
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
+
+      if (
+        event.key === "Escape" &&
+        navigation?.classList.contains("is-open")
+      ) {
+        closeMenu();
+        menuToggle?.focus();
+      }
+    }
+  );
+
+
+  /* =======================================================
+     CLOSE MOBILE MENU WHEN RESIZING
+  ======================================================== */
+
+  window.addEventListener(
+    "resize",
+    () => {
+
+      if (
+        window.innerWidth > 640 &&
+        navigation?.classList.contains("is-open")
+      ) {
+        closeMenu();
+      }
+
+    },
+    { passive: true }
+  );
+
+
+  /* =======================================================
+     PAGE LOAD STATE
+     
+     Prevents a flash of unfinished interaction while keeping
+     the actual hero immediately visible.
+  ======================================================== */
+
+  requestAnimationFrame(() => {
+    document.documentElement.classList.add(
+      "page-ready"
+    );
+  });
+
+
+  /* =======================================================
+     PERIODIC DATE UPDATE
+     
+     Handles a page left open across midnight/year changes.
+  ======================================================== */
+
+  window.setInterval(
+    updateYear,
+    60 * 60 * 1000
+  );
+
+});
