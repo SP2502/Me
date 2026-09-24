@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -10,7 +11,7 @@
 
     <meta
         name="description"
-        content="Shreyansh Parganiha — Class 11 student and AI systems enthusiast building software to understand how systems work."
+        content="Shreyansh Parganiha — student building software systems, AI infrastructure and autonomous systems."
     >
 
     <meta
@@ -19,59 +20,1638 @@
     >
 
     <title>
-        Shreyansh Parganiha — Student & AI Systems Enthusiast
+        Shreyansh Parganiha — Student & Systems Builder
     </title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    <!-- =========================================================
-         ACCESSIBILITY
-    ========================================================== -->
 
-    <a
-        class="skip-link"
-        href="#main-content"
+<!-- =========================================================
+     ACCESSIBILITY
+========================================================= -->
+
+<a
+    class="skip-link"
+    href="#main-content"
+>
+    Skip to content
+</a>
+
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header
+    class="site-header"
+    id="site-header"
+>
+
+    <div class="container header-inner">
+
+        <div
+            class="header-left"
+            aria-hidden="true"
+        ></div>
+
+
+        <nav
+            class="desktop-nav"
+            aria-label="Primary navigation"
+        >
+
+            <a
+                href="#work"
+                data-nav-link
+            >
+                Work
+            </a>
+
+            <a
+                href="#engineering"
+                data-nav-link
+            >
+                Engineering
+            </a>
+
+            <a
+                href="#about"
+                data-nav-link
+            >
+                About
+            </a>
+
+            <a
+                href="#contact"
+                data-nav-link
+            >
+                Contact
+            </a>
+
+        </nav>
+
+
+        <div class="header-actions">
+
+            <a
+                class="github-link"
+                href="https://github.com/SP2502"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                GitHub
+
+                <svg
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                >
+                    <path
+                        d="M5.5 3.5 10 8l-4.5 4.5"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+
+            </a>
+
+
+            <button
+                class="mobile-menu-toggle"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+                aria-controls="mobile-navigation"
+            >
+
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Mobile navigation -->
+
+    <nav
+        class="mobile-navigation"
+        id="mobile-navigation"
+        aria-label="Mobile navigation"
+        hidden
     >
-        Skip to content
-    </a>
+
+        <div class="mobile-navigation-inner">
+
+            <a href="#work">
+                <span>01</span>
+                Work
+            </a>
+
+            <a href="#engineering">
+                <span>02</span>
+                Engineering
+            </a>
+
+            <a href="#about">
+                <span>03</span>
+                About
+            </a>
+
+            <a href="#contact">
+                <span>04</span>
+                Contact
+            </a>
+
+            <div class="mobile-navigation-divider"></div>
+
+            <a
+                href="https://github.com/SP2502"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <span>↗</span>
+                GitHub
+            </a>
+
+            <a
+                href="https://sp2502.github.io/Me/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <span>↗</span>
+                Website
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
 
 
-    <!-- =========================================================
-         HEADER
-    ========================================================== -->
 
-    <header
-        class="site-header"
-        id="site-header"
-    >
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
-        <div class="container header-inner">
-
-            <!-- Intentionally minimal left side -->
-            <div
-                class="header-left"
-                aria-hidden="true"
-            ></div>
+<main id="main-content">
 
 
-            <!-- Desktop navigation -->
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section
+    class="hero"
+    aria-labelledby="hero-title"
+>
+
+    <div class="container">
+
+        <div class="hero-grid">
+
+
+            <!-- LEFT -->
+
+            <div class="hero-copy">
+
+                <p class="eyebrow">
+                    STUDENT · SYSTEMS · SOFTWARE
+                </p>
+
+
+                <h1 id="hero-title">
+
+                    I build software
+                    <span>to understand systems.</span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    I turn questions and ideas into working
+                    systems, break them, understand what went
+                    wrong, and rebuild them better.
+
+                </p>
+
+
+                <div class="hero-actions">
+
+                    <a
+                        class="button button-primary"
+                        href="#work"
+                    >
+
+                        Explore work
+
+                        <svg
+                            viewBox="0 0 20 20"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M4 10h11M11 5l5 5-5 5"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+
+                    </a>
+
+
+                    <a
+                        class="button button-secondary"
+                        href="https://github.com/SP2502"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        GitHub
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RIGHT: TECHNICAL PREVIEW -->
+
+            <aside
+                class="hero-terminal"
+                aria-label="Universal API preview"
+            >
+
+                <div class="terminal-bar">
+
+                    <div class="terminal-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <span>
+                        universal / request
+                    </span>
+
+                    <span>
+                        API
+                    </span>
+
+                </div>
+
+
+                <div class="terminal-body">
+
+                    <div class="terminal-line">
+
+                        <span class="terminal-prompt">
+                            $
+                        </span>
+
+                        <span>
+                            curl /weather?lat=21.25&amp;lon=81.63
+                        </span>
+
+                    </div>
+
+
+                    <div class="terminal-response">
+
+                        <span class="json-brace">{</span>
+
+                        <span>
+                            &nbsp;&nbsp;"provider":
+                            <b>"selected"</b>,
+                        </span>
+
+                        <span>
+                            &nbsp;&nbsp;"fallback":
+                            <b>false</b>,
+                        </span>
+
+                        <span>
+                            &nbsp;&nbsp;"normalized":
+                            <b>true</b>,
+                        </span>
+
+                        <span>
+                            &nbsp;&nbsp;"status":
+                            <b>200</b>
+                        </span>
+
+                        <span class="json-brace">}</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="terminal-footer">
+
+                    <span>
+                        UNIVERSAL
+                    </span>
+
+                    <span class="live-indicator">
+                        <i></i>
+                        EARLY DEVELOPMENT
+                    </span>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+
+        <div class="hero-bottom">
+
+            <span>
+                SCROLL TO EXPLORE
+            </span>
+
+            <span class="hero-line"></span>
+
+            <span>
+                <time datetime="2026">
+                    2026
+                </time>
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     WORK
+========================================================= -->
+
+<section
+    class="section work-section"
+    id="work"
+    aria-labelledby="work-title"
+>
+
+    <div class="container">
+
+
+        <header class="section-header">
+
+            <div>
+
+                <p class="section-index">
+                    01 / WORK
+                </p>
+
+                <h2 id="work-title">
+                    Systems I'm building.
+                </h2>
+
+            </div>
+
+
+            <p class="section-intro">
+
+                These aren't just projects to display.
+                They're systems I use to learn how software,
+                infrastructure and autonomous behaviour work.
+
+            </p>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             UNIVERSAL FEATURED
+        ====================================================== -->
+
+        <article
+            class="universal-featured"
+            data-project="universal"
+        >
+
+            <div class="universal-copy">
+
+
+                <div class="project-heading">
+
+                    <span class="project-index">
+                        01
+                    </span>
+
+                    <div>
+
+                        <p class="project-label">
+                            FLAGSHIP · WEATHER INFRASTRUCTURE
+                        </p>
+
+                        <h3>
+                            Universal
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <p class="project-lead">
+
+                    One consistent interface for weather
+                    data across multiple providers.
+
+                </p>
+
+
+                <p class="project-description">
+
+                    Universal accepts coordinates, resolves
+                    the location, selects an appropriate
+                    weather provider, handles provider
+                    failure through fallback logic, and
+                    normalizes the resulting data into a
+                    consistent API response.
+
+                </p>
+
+
+                <div class="project-status-row">
+
+                    <span class="status-pill active">
+                        Active development
+                    </span>
+
+                    <span class="status-pill">
+                        Multi-provider
+                    </span>
+
+                    <span class="status-pill">
+                        API infrastructure
+                    </span>
+
+                </div>
+
+
+                <div class="project-actions">
+
+                    <a
+                        class="project-button"
+                        href="projects/universal.html"
+                    >
+                        Architecture
+                        <span>↗</span>
+                    </a>
+
+                    <a
+                        class="project-button secondary"
+                        href="https://github.com/SP2502"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        GitHub
+                        <span>↗</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- REAL SVG ARCHITECTURE -->
+
+            <div class="universal-architecture">
+
+                <div class="architecture-top">
+
+                    <span>
+                        REQUEST ROUTING
+                    </span>
+
+                    <span>
+                        v0.1
+                    </span>
+
+                </div>
+
+
+                <svg
+                    class="architecture-svg"
+                    viewBox="0 0 620 470"
+                    role="img"
+                    aria-labelledby="universal-diagram-title universal-diagram-description"
+                >
+
+                    <title id="universal-diagram-title">
+                        Universal weather request routing architecture
+                    </title>
+
+                    <desc id="universal-diagram-description">
+                        Coordinates are resolved into a location,
+                        passed to a provider selection layer,
+                        routed to a provider, retried or sent to
+                        a fallback provider when required, and
+                        normalized into the Universal API.
+                    </desc>
+
+
+                    <!-- CONNECTOR PATHS -->
+
+                    <path
+                        d="M310 70 V108"
+                        class="diagram-line"
+                    />
+
+                    <path
+                        d="M310 178 V216"
+                        class="diagram-line"
+                    />
+
+                    <path
+                        d="M310 286 V315 H150 V345"
+                        class="diagram-line"
+                    />
+
+                    <path
+                        d="M310 315 H470 V345"
+                        class="diagram-line"
+                    />
+
+                    <path
+                        d="M150 415 V438 H310 V454"
+                        class="diagram-line"
+                    />
+
+                    <path
+                        d="M470 415 V438 H310"
+                        class="diagram-line"
+                    />
+
+
+                    <!-- REQUEST -->
+
+                    <g class="diagram-node">
+
+                        <rect
+                            x="190"
+                            y="22"
+                            width="240"
+                            height="48"
+                            rx="6"
+                        />
+
+                        <text
+                            x="310"
+                            y="51"
+                            text-anchor="middle"
+                        >
+                            COORDINATES
+                        </text>
+
+                    </g>
+
+
+                    <!-- LOCATION -->
+
+                    <g class="diagram-node">
+
+                        <rect
+                            x="190"
+                            y="108"
+                            width="240"
+                            height="70"
+                            rx="6"
+                        />
+
+                        <text
+                            x="310"
+                            y="137"
+                            text-anchor="middle"
+                        >
+                            LOCATION RESOLUTION
+                        </text>
+
+                        <text
+                            x="310"
+                            y="158"
+                            text-anchor="middle"
+                            class="diagram-subtext"
+                        >
+                            coordinates → location
+                        </text>
+
+                    </g>
+
+
+                    <!-- ROUTER -->
+
+                    <g class="diagram-node active">
+
+                        <rect
+                            x="190"
+                            y="216"
+                            width="240"
+                            height="70"
+                            rx="6"
+                        />
+
+                        <text
+                            x="310"
+                            y="245"
+                            text-anchor="middle"
+                        >
+                            PROVIDER ROUTER
+                        </text>
+
+                        <text
+                            x="310"
+                            y="266"
+                            text-anchor="middle"
+                            class="diagram-subtext"
+                        >
+                            select → request → evaluate
+                        </text>
+
+                    </g>
+
+
+                    <!-- PROVIDER A -->
+
+                    <g class="diagram-node">
+
+                        <rect
+                            x="45"
+                            y="345"
+                            width="210"
+                            height="70"
+                            rx="6"
+                        />
+
+                        <text
+                            x="150"
+                            y="374"
+                            text-anchor="middle"
+                        >
+                            PRIMARY PROVIDER
+                        </text>
+
+                        <text
+                            x="150"
+                            y="395"
+                            text-anchor="middle"
+                            class="diagram-subtext"
+                        >
+                            response / retry
+                        </text>
+
+                    </g>
+
+
+                    <!-- PROVIDER B -->
+
+                    <g class="diagram-node">
+
+                        <rect
+                            x="365"
+                            y="345"
+                            width="210"
+                            height="70"
+                            rx="6"
+                        />
+
+                        <text
+                            x="470"
+                            y="374"
+                            text-anchor="middle"
+                        >
+                            FALLBACK PROVIDER
+                        </text>
+
+                        <text
+                            x="470"
+                            y="395"
+                            text-anchor="middle"
+                            class="diagram-subtext"
+                        >
+                            failure path
+                        </text>
+
+                    </g>
+
+
+                    <!-- API -->
+
+                    <g class="diagram-node final">
+
+                        <rect
+                            x="190"
+                            y="438"
+                            width="240"
+                            height="30"
+                            rx="5"
+                        />
+
+                        <text
+                            x="310"
+                            y="458"
+                            text-anchor="middle"
+                        >
+                            NORMALIZED UNIVERSAL API
+                        </text>
+
+                    </g>
+
+                </svg>
+
+
+                <div class="architecture-legend">
+
+                    <span>
+                        <i></i>
+                        Request
+                    </span>
+
+                    <span>
+                        <i></i>
+                        Routing
+                    </span>
+
+                    <span>
+                        <i></i>
+                        Fallback
+                    </span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =====================================================
+             SECONDARY PROJECTS
+        ====================================================== -->
+
+        <div class="secondary-projects">
+
+
+            <!-- CORTEX -->
+
+            <article
+                class="project-card"
+                data-project="cortex"
+            >
+
+                <div class="project-card-top">
+
+                    <span class="project-index">
+                        02
+                    </span>
+
+                    <span class="status-pill active">
+                        Active development
+                    </span>
+
+                </div>
+
+
+                <div class="project-card-content">
+
+                    <p class="project-label">
+                        AI · DEEP RESEARCH
+                    </p>
+
+                    <h3>
+                        Cortex
+                    </h3>
+
+
+                    <p>
+
+                        An open-source research system designed
+                        to decompose complex questions, plan
+                        research, search multiple sources,
+                        compare evidence and synthesize results.
+
+                    </p>
+
+                </div>
+
+
+                <div class="technical-meta">
+
+                    <div>
+
+                        <span>
+                            SYSTEM
+                        </span>
+
+                        <strong>
+                            Research orchestration
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            FOCUS
+                        </span>
+
+                        <strong>
+                            AI / tools / evidence
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="project-card-actions">
+
+                    <a
+                        href="projects/cortex.html"
+                        class="project-button"
+                    >
+                        Architecture
+                        <span>↗</span>
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- AEGIS -->
+
+            <article
+                class="project-card"
+                data-project="aegis"
+            >
+
+                <div class="project-card-top">
+
+                    <span class="project-index">
+                        03
+                    </span>
+
+                    <span class="status-pill building">
+                        Building
+                    </span>
+
+                </div>
+
+
+                <div class="project-card-content">
+
+                    <p class="project-label">
+                        DESKTOP · CONTENT CONTROL
+                    </p>
+
+                    <h3>
+                        AEGIS
+                    </h3>
+
+
+                    <p>
+
+                        A Windows content blocker focused on
+                        controlling unwanted and adult content,
+                        with Android deployment planned later.
+
+                    </p>
+
+                </div>
+
+
+                <div class="technical-meta">
+
+                    <div>
+
+                        <span>
+                            PLATFORM
+                        </span>
+
+                        <strong>
+                            Windows
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            FOCUS
+                        </span>
+
+                        <strong>
+                            Content control
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="project-card-actions">
+
+                    <a
+                        href="projects/aegis.html"
+                        class="project-button"
+                    >
+                        Project
+                        <span>↗</span>
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- ARGUS -->
+
+            <article
+                class="project-card"
+                data-project="argus"
+            >
+
+                <div class="project-card-top">
+
+                    <span class="project-index">
+                        04
+                    </span>
+
+                    <span class="status-pill live">
+                        Live / Hosted
+                    </span>
+
+                </div>
+
+
+                <div class="project-card-content">
+
+                    <p class="project-label">
+                        AUTONOMOUS AGENT
+                    </p>
+
+                    <h3>
+                        ARGUS
+                    </h3>
+
+
+                    <p>
+
+                        A Minecraft bot that started as an
+                        experiment and evolved into a hosted,
+                        continuously running autonomous system.
+
+                    </p>
+
+                </div>
+
+
+                <div class="technical-meta">
+
+                    <div>
+
+                        <span>
+                            SYSTEM
+                        </span>
+
+                        <strong>
+                            Autonomous agent
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            LOOP
+                        </span>
+
+                        <strong>
+                            Observe → Decide → Act
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="project-card-actions">
+
+                    <a
+                        href="projects/argus.html"
+                        class="project-button"
+                    >
+                        Architecture
+                        <span>↗</span>
+                    </a>
+
+                    <a
+                        href="https://argus-website-nu.vercel.app/"
+                        class="project-button secondary"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Live
+                        <span>↗</span>
+                    </a>
+
+                    <a
+                        href="https://github.com/SP2502/argus-minecraft-bot"
+                        class="project-button secondary"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        GitHub
+                        <span>↗</span>
+                    </a>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ENGINEERING
+========================================================= -->
+
+<section
+    class="section engineering-section"
+    id="engineering"
+    aria-labelledby="engineering-title"
+>
+
+    <div class="container">
+
+
+        <header class="section-header compact">
+
+            <div>
+
+                <p class="section-index">
+                    02 / ENGINEERING
+                </p>
+
+                <h2 id="engineering-title">
+                    What I build with.
+                </h2>
+
+            </div>
+
+        </header>
+
+
+
+        <div class="engineering-grid">
+
+
+            <!-- LANGUAGES -->
+
+            <article class="engineering-group">
+
+                <span class="engineering-number">
+                    01
+                </span>
+
+                <h3>
+                    Languages
+                </h3>
+
+                <ul>
+
+                    <li>
+                        Python
+                    </li>
+
+                    <li>
+                        Go
+                    </li>
+
+                    <li>
+                        Java
+                    </li>
+
+                    <li>
+                        JavaScript / TypeScript
+                    </li>
+
+                </ul>
+
+            </article>
+
+
+
+            <!-- FRAMEWORKS -->
+
+            <article class="engineering-group">
+
+                <span class="engineering-number">
+                    02
+                </span>
+
+                <h3>
+                    Frameworks &amp; Runtimes
+                </h3>
+
+                <ul>
+
+                    <li>
+                        Node.js
+                    </li>
+
+                    <li>
+                        React
+                    </li>
+
+                    <li>
+                        Express
+                    </li>
+
+                    <li>
+                        FastAPI
+                    </li>
+
+                </ul>
+
+            </article>
+
+
+
+            <!-- ARCHITECTURE -->
+
+            <article class="engineering-group">
+
+                <span class="engineering-number">
+                    03
+                </span>
+
+                <h3>
+                    Architecture &amp; Infrastructure
+                </h3>
+
+                <ul>
+
+                    <li>
+                        Distributed systems
+                    </li>
+
+                    <li>
+                        REST APIs
+                    </li>
+
+                    <li>
+                        System design
+                    </li>
+
+                    <li>
+                        Docker / Linux
+                    </li>
+
+                </ul>
+
+            </article>
+
+
+
+            <!-- CURRENT LEARNING -->
+
+            <article class="engineering-group">
+
+                <span class="engineering-number">
+                    04
+                </span>
+
+                <h3>
+                    Exploring
+                </h3>
+
+                <ul>
+
+                    <li>
+                        AI systems
+                    </li>
+
+                    <li>
+                        LLM tooling
+                    </li>
+
+                    <li>
+                        Research agents
+                    </li>
+
+                    <li>
+                        System reliability
+                    </li>
+
+                </ul>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PHILOSOPHY DIVIDER
+========================================================= -->
+
+<section
+    class="philosophy-section"
+    aria-label="Building philosophy"
+>
+
+    <div class="container">
+
+        <div class="philosophy-inner">
+
+            <p class="section-index">
+                BUILDING PHILOSOPHY
+            </p>
+
+            <h2>
+
+                Build.
+                <span>Break.</span>
+                Understand.
+                <span>Improve.</span>
+
+            </h2>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ABOUT
+========================================================= -->
+
+<section
+    class="section about-section"
+    id="about"
+    aria-labelledby="about-title"
+>
+
+    <div class="container">
+
+        <div class="about-grid">
+
+
+            <div class="about-heading">
+
+                <p class="section-index">
+                    03 / ABOUT
+                </p>
+
+                <h2 id="about-title">
+                    Learning through
+                    real systems.
+                </h2>
+
+            </div>
+
+
+            <div class="about-copy">
+
+                <p class="about-lead">
+
+                    I'm currently in
+
+                    <strong>
+                        Class
+                        <span data-class>11</span>
+                    </strong>
+
+                    and interested in understanding how
+                    software and AI systems actually work.
+
+                </p>
+
+
+                <p>
+
+                    I started making projects because I wanted
+                    to grow with a world that keeps changing.
+                    Curiosity usually gives me the starting
+                    question; building gives me a way to
+                    investigate it.
+
+                </p>
+
+
+                <p>
+
+                    I don't expect the first version to be
+                    perfect. The useful part is discovering
+                    what breaks, why it breaks, and what the
+                    next version teaches me.
+
+                </p>
+
+
+                <!-- PERSONAL NOTE -->
+
+                <div class="personal-note">
+
+                    <span>
+                        OUTSIDE SOFTWARE
+                    </span>
+
+                    <p>
+
+                        I fly drones, follow drone technology
+                        closely, and play badminton. I'm also
+                        interested in eventually turning my
+                        interest in drones into real products.
+
+                    </p>
+
+                </div>
+
+
+                <!-- ACADEMIC TIMELINE -->
+
+                <div class="academic-status">
+
+                    <div>
+
+                        <span>
+                            CURRENT
+                        </span>
+
+                        <strong>
+                            Class
+                            <span data-class>11</span>
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            NEXT CHANGE
+                        </span>
+
+                        <strong>
+
+                            Class 12 ·
+
+                            <time datetime="2027-04-01">
+                                April 2027
+                            </time>
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
+<section
+    class="contact-section"
+    id="contact"
+    aria-labelledby="contact-title"
+>
+
+    <div class="container">
+
+        <div class="contact-inner">
+
+
+            <div class="contact-copy">
+
+                <p class="section-index">
+                    04 / CONTACT
+                </p>
+
+                <h2 id="contact-title">
+                    Follow the work.
+                </h2>
+
+                <p>
+
+                    Projects, experiments and whatever
+                    I'm currently trying to understand
+                    live on GitHub.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="contact-links">
+
+
+                <!-- GITHUB -->
+
+                <a
+                    href="https://github.com/SP2502"
+                    class="contact-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <span>
+
+                        <small>
+                            GITHUB
+                        </small>
+
+                        <strong>
+                            github.com/SP2502
+                        </strong>
+
+                    </span>
+
+                    <span class="contact-arrow">
+                        ↗
+                    </span>
+
+                </a>
+
+
+
+                <!-- WEBSITE -->
+
+                <a
+                    href="https://sp2502.github.io/Me/"
+                    class="contact-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <span>
+
+                        <small>
+                            WEBSITE
+                        </small>
+
+                        <strong>
+                            sp2502.github.io/Me
+                        </strong>
+
+                    </span>
+
+                    <span class="contact-arrow">
+                        ↗
+                    </span>
+
+                </a>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="contact-link email-contact">
+
+                    <span>
+
+                        <small>
+                            EMAIL
+                        </small>
+
+                        <strong>
+                            shreyansh2502@outlook.com
+                        </strong>
+
+                    </span>
+
+
+                    <div class="email-actions">
+
+                        <button
+                            type="button"
+                            class="copy-email"
+                            data-copy-email="shreyansh2502@outlook.com"
+                            aria-label="Copy email address"
+                        >
+                            Copy
+                        </button>
+
+                        <a
+                            href="mailto:shreyansh2502@outlook.com"
+                            class="contact-arrow"
+                            aria-label="Send email"
+                        >
+                            ↗
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <p
+                    class="copy-feedback"
+                    id="copy-feedback"
+                    aria-live="polite"
+                ></p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="site-footer">
+
+    <div class="container">
+
+
+        <div class="footer-top">
+
+
+            <div class="footer-identity">
+
+                <strong>
+                    Shreyansh Parganiha
+                </strong>
+
+                <span>
+                    Student &amp; Systems Builder
+                </span>
+
+            </div>
+
 
             <nav
-                class="desktop-nav"
-                aria-label="Primary navigation"
+                class="footer-links"
+                aria-label="Footer navigation"
             >
 
                 <a href="#work">
                     Work
                 </a>
 
-                <a href="#now">
-                    Now
-                </a>
-
                 <a href="#engineering">
                     Engineering
                 </a>
@@ -82,1611 +1662,291 @@
 
                 <a href="#contact">
                     Contact
+                </a>
+
+                <a
+                    href="https://github.com/SP2502"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    GitHub ↗
                 </a>
 
             </nav>
 
-
-            <!-- Header actions -->
-
-            <div class="header-actions">
-
-                <a
-                    class="github-link"
-                    href="https://github.com/SP2502"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Open Shreyansh's GitHub profile"
-                >
-                    GitHub
-
-                    <svg
-                        viewBox="0 0 16 16"
-                        aria-hidden="true"
-                        focusable="false"
-                    >
-                        <path
-                            d="M5.5 3.5 10 8l-4.5 4.5"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        />
-                    </svg>
-                </a>
-
-
-                <button
-                    class="mobile-menu-toggle"
-                    type="button"
-                    aria-label="Open navigation"
-                    aria-expanded="false"
-                    aria-controls="mobile-navigation"
-                >
-
-                    <span></span>
-                    <span></span>
-
-                </button>
-
-            </div>
-
         </div>
 
 
-        <!-- Mobile navigation -->
+        <div class="footer-bottom">
 
-        <nav
-            class="mobile-navigation"
-            id="mobile-navigation"
-            aria-label="Mobile navigation"
-            hidden
-        >
+            <span>
 
-            <div class="mobile-navigation-inner">
-
-                <a href="#work">
-                    <span>01</span>
-                    Work
-                </a>
-
-                <a href="#now">
-                    <span>02</span>
-                    Now
-                </a>
-
-                <a href="#engineering">
-                    <span>03</span>
-                    Engineering
-                </a>
-
-                <a href="#about">
-                    <span>04</span>
-                    About
-                </a>
-
-                <a href="#contact">
-                    <span>05</span>
-                    Contact
-                </a>
-
-                <div class="mobile-navigation-divider"></div>
-
-                <a
-                    href="https://github.com/SP2502"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <span>↗</span>
-                    GitHub
-                </a>
-
-                <a
-                    href="https://sp2502.github.io/Me/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <span>↗</span>
-                    Website
-                </a>
-
-            </div>
-
-        </nav>
-
-    </header>
-
-
-
-    <!-- =========================================================
-         MAIN
-    ========================================================== -->
-
-    <main id="main-content">
-
-
-        <!-- =====================================================
-             HERO
-        ====================================================== -->
-
-        <section
-            class="hero"
-            aria-labelledby="hero-title"
-        >
-
-            <div class="container">
-
-                <div class="hero-grid">
-
-
-                    <!-- Hero copy -->
-
-                    <div class="hero-copy">
-
-                        <p class="eyebrow">
-                            Student / AI Systems / Software
-                        </p>
-
-                        <h1 id="hero-title">
-
-                            I build software
-                            <span>to understand</span>
-                            how systems work.
-
-                        </h1>
-
-
-                        <p class="hero-description">
-
-                            I'm Shreyansh Parganiha, a Class 11 student
-                            interested in AI systems, infrastructure and
-                            software engineering.
-
-                            I learn by taking questions and ideas,
-                            turning them into working systems, breaking
-                            them, and rebuilding them better.
-
-                        </p>
-
-
-                        <div class="hero-actions">
-
-                            <a
-                                class="button button-primary"
-                                href="#work"
-                            >
-                                Explore work
-
-                                <svg
-                                    viewBox="0 0 20 20"
-                                    aria-hidden="true"
-                                >
-                                    <path
-                                        d="M4 10h11M11 5l5 5-5 5"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    />
-                                </svg>
-
-                            </a>
-
-
-                            <a
-                                class="button button-secondary"
-                                href="https://github.com/SP2502"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                GitHub
-                            </a>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- Hero information panel -->
-
-                    <aside
-                        class="hero-panel"
-                        aria-label="Current information"
-                    >
-
-                        <div class="panel-top">
-
-                            <span>
-                                CURRENT FOCUS
-                            </span>
-
-                            <span class="status-dot">
-                                ACTIVE
-                            </span>
-
-                        </div>
-
-
-                        <div class="focus-project">
-
-                            <span class="project-number">
-                                01
-                            </span>
-
-                            <div>
-
-                                <h2>
-                                    Universal
-                                </h2>
-
-                                <p>
-                                    Weather data infrastructure
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="panel-divider"></div>
-
-
-                        <dl class="hero-meta">
-
-                            <div>
-                                <dt>
-                                    Education
-                                </dt>
-
-                                <dd>
-                                    Class 11
-                                </dd>
-                            </div>
-
-                            <div>
-                                <dt>
-                                    Learning
-                                </dt>
-
-                                <dd>
-                                    AI systems
-                                </dd>
-                            </div>
-
-                            <div>
-                                <dt>
-                                    Building
-                                </dt>
-
-                                <dd>
-                                    Software systems
-                                </dd>
-                            </div>
-
-                        </dl>
-
-                    </aside>
-
-                </div>
-
-
-                <!-- Hero bottom signal -->
-
-                <div class="hero-bottom">
-
-                    <span>
-                        SCROLL TO EXPLORE
-                    </span>
-
-                    <span class="hero-line"></span>
-
-                    <span>
-                        2026
-                    </span>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             SELECTED WORK
-        ====================================================== -->
-
-        <section
-            class="section work-section"
-            id="work"
-            aria-labelledby="work-title"
-        >
-
-            <div class="container">
-
-
-                <header class="section-header">
-
-                    <div>
-
-                        <p class="section-index">
-                            01 / SELECTED WORK
-                        </p>
-
-                        <h2 id="work-title">
-                            Things I'm building.
-                        </h2>
-
-                    </div>
-
-                    <p class="section-intro">
-
-                        Projects are how I learn.
-                        Each one starts with a question
-                        and becomes an experiment in building
-                        something real.
-
-                    </p>
-
-                </header>
-
-
-
-                <!-- =================================================
-                     UNIVERSAL
-                ================================================== -->
-
-                <article
-                    class="project-featured"
-                    data-project="universal"
-                >
-
-                    <div class="project-featured-main">
-
-
-                        <div class="project-heading">
-
-                            <div class="project-index">
-                                01
-                            </div>
-
-                            <div>
-
-                                <p class="project-label">
-                                    FLAGSHIP PROJECT
-                                </p>
-
-                                <h3>
-                                    Universal
-                                </h3>
-
-                            </div>
-
-                        </div>
-
-
-                        <p class="project-lead">
-
-                            Weather-data infrastructure designed
-                            to provide one consistent API across
-                            multiple weather providers.
-
-                        </p>
-
-
-                        <p class="project-description">
-
-                            Universal takes coordinates, resolves
-                            the location, determines which provider
-                            can serve the request, falls back when
-                            necessary, and normalizes the resulting
-                            weather data into a consistent interface.
-
-                        </p>
-
-
-                        <div class="project-tags">
-
-                            <span>
-                                Weather
-                            </span>
-
-                            <span>
-                                Infrastructure
-                            </span>
-
-                            <span>
-                                API
-                            </span>
-
-                            <span>
-                                Multi-provider
-                            </span>
-
-                        </div>
-
-
-                        <a
-                            class="project-link"
-                            href="projects/universal.html"
-                        >
-
-                            Explore Universal
-
-                            <svg
-                                viewBox="0 0 20 20"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    d="M4 10h11M11 5l5 5-5 5"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="1.5"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                />
-                            </svg>
-
-                        </a>
-
-                    </div>
-
-
-
-                    <div class="project-architecture">
-
-                        <div class="architecture-header">
-
-                            <span>
-                                SYSTEM FLOW
-                            </span>
-
-                            <span>
-                                v0.1
-                            </span>
-
-                        </div>
-
-
-                        <div class="architecture-flow">
-
-                            <div class="architecture-node">
-                                <strong>
-                                    01
-                                </strong>
-                                <span>
-                                    Coordinates
-                                </span>
-                            </div>
-
-                            <div class="architecture-connector"></div>
-
-                            <div class="architecture-node">
-                                <strong>
-                                    02
-                                </strong>
-                                <span>
-                                    Location
-                                </span>
-                            </div>
-
-                            <div class="architecture-connector"></div>
-
-                            <div class="architecture-node active">
-                                <strong>
-                                    03
-                                </strong>
-                                <span>
-                                    Provider
-                                </span>
-                            </div>
-
-                            <div class="architecture-connector"></div>
-
-                            <div class="architecture-node">
-                                <strong>
-                                    04
-                                </strong>
-                                <span>
-                                    Fallback
-                                </span>
-                            </div>
-
-                            <div class="architecture-connector"></div>
-
-                            <div class="architecture-node">
-                                <strong>
-                                    05
-                                </strong>
-                                <span>
-                                    Universal API
-                                </span>
-                            </div>
-
-                        </div>
-
-
-                        <div class="architecture-status">
-
-                            <span class="status-dot"></span>
-
-                            Early development
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- =================================================
-                     SECONDARY PROJECTS
-                ================================================== -->
-
-                <div class="project-grid">
-
-
-                    <!-- CORTEX -->
-
-                    <article
-                        class="project-card project-card-large"
-                    >
-
-                        <div class="project-card-top">
-
-                            <span class="project-index">
-                                02
-                            </span>
-
-                            <span class="project-status">
-                                ACTIVE DEVELOPMENT
-                            </span>
-
-                        </div>
-
-
-                        <div class="project-card-content">
-
-                            <p class="project-label">
-                                DEEP RESEARCH
-                            </p>
-
-                            <h3>
-                                Cortex
-                            </h3>
-
-                            <p>
-
-                                An open-source deep-research
-                                system designed to break complex
-                                questions into research tasks,
-                                gather evidence, compare sources,
-                                reason over results, and produce
-                                structured research.
-
-                            </p>
-
-                        </div>
-
-
-                        <div class="mini-flow">
-
-                            <span>
-                                Question
-                            </span>
-
-                            <i></i>
-
-                            <span>
-                                Research
-                            </span>
-
-                            <i></i>
-
-                            <span>
-                                Synthesis
-                            </span>
-
-                        </div>
-
-
-                        <a
-                            href="projects/cortex.html"
-                            class="card-link"
-                        >
-                            View project
-                            <span>↗</span>
-                        </a>
-
-                    </article>
-
-
-
-                    <!-- AEGIS -->
-
-                    <article
-                        class="project-card"
-                    >
-
-                        <div class="project-card-top">
-
-                            <span class="project-index">
-                                03
-                            </span>
-
-                            <span class="project-status">
-                                BUILDING
-                            </span>
-
-                        </div>
-
-
-                        <div class="project-card-content">
-
-                            <p class="project-label">
-                                DESKTOP SOFTWARE
-                            </p>
-
-                            <h3>
-                                AEGIS
-                            </h3>
-
-                            <p>
-
-                                A free Windows content blocker
-                                focused on controlling unwanted
-                                and adult content.
-
-                            </p>
-
-                        </div>
-
-
-                        <div class="project-card-meta">
-
-                            <span>
-                                Windows
-                            </span>
-
-                            <span>
-                                Privacy
-                            </span>
-
-                            <span>
-                                Security
-                            </span>
-
-                        </div>
-
-
-                        <a
-                            href="projects/aegis.html"
-                            class="card-link"
-                        >
-                            View project
-                            <span>↗</span>
-                        </a>
-
-                    </article>
-
-
-
-                    <!-- ARGUS -->
-
-                    <article
-                        class="project-card"
-                    >
-
-                        <div class="project-card-top">
-
-                            <span class="project-index">
-                                04
-                            </span>
-
-                            <span class="project-status">
-                                HOSTED
-                            </span>
-
-                        </div>
-
-
-                        <div class="project-card-content">
-
-                            <p class="project-label">
-                                AUTONOMOUS AGENT
-                            </p>
-
-                            <h3>
-                                ARGUS
-                            </h3>
-
-                            <p>
-
-                                A Minecraft bot that started as
-                                an experiment and became a hosted,
-                                continuously running autonomous
-                                system.
-
-                            </p>
-
-                        </div>
-
-
-                        <div class="mini-flow">
-
-                            <span>
-                                Observe
-                            </span>
-
-                            <i></i>
-
-                            <span>
-                                Decide
-                            </span>
-
-                            <i></i>
-
-                            <span>
-                                Act
-                            </span>
-
-                        </div>
-
-
-                        <a
-                            href="projects/argus.html"
-                            class="card-link"
-                        >
-                            View project
-                            <span>↗</span>
-                        </a>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             NOW
-        ====================================================== -->
-
-        <section
-            class="section now-section"
-            id="now"
-            aria-labelledby="now-title"
-        >
-
-            <div class="container">
-
-                <div class="now-layout">
-
-
-                    <div class="now-heading">
-
-                        <p class="section-index">
-                            02 / NOW
-                        </p>
-
-                        <h2 id="now-title">
-                            What I'm focused on.
-                        </h2>
-
-                    </div>
-
-
-                    <div class="now-content">
-
-                        <div class="now-primary">
-
-                            <span class="now-marker">
-                                01
-                            </span>
-
-                            <div>
-
-                                <p class="project-label">
-                                    PRIMARY FOCUS
-                                </p>
-
-                                <h3>
-                                    Refining Universal
-                                </h3>
-
-                                <p>
-
-                                    Improving the architecture,
-                                    provider selection, fallback
-                                    behaviour, normalization and
-                                    overall reliability of the
-                                    weather-data system.
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="now-list">
-
-                            <div class="now-item">
-
-                                <span>
-                                    02
-                                </span>
-
-                                <div>
-
-                                    <h3>
-                                        Learning AI systems
-                                    </h3>
-
-                                    <p>
-                                        Understanding how modern
-                                        AI systems are designed,
-                                        evaluated and connected
-                                        to tools.
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="now-item">
-
-                                <span>
-                                    03
-                                </span>
-
-                                <div>
-
-                                    <h3>
-                                        Building Cortex
-                                    </h3>
-
-                                    <p>
-                                        Exploring autonomous
-                                        research workflows,
-                                        evidence handling and
-                                        multi-model systems.
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="now-item">
-
-                                <span>
-                                    04
-                                </span>
-
-                                <div>
-
-                                    <h3>
-                                        Building AEGIS
-                                    </h3>
-
-                                    <p>
-                                        Developing the Windows
-                                        version before exploring
-                                        future Android deployment.
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             ENGINEERING
-        ====================================================== -->
-
-        <section
-            class="section engineering-section"
-            id="engineering"
-            aria-labelledby="engineering-title"
-        >
-
-            <div class="container">
-
-                <header class="section-header compact">
-
-                    <div>
-
-                        <p class="section-index">
-                            03 / ENGINEERING
-                        </p>
-
-                        <h2 id="engineering-title">
-                            The things I work with.
-                        </h2>
-
-                    </div>
-
-                </header>
-
-
-                <div class="engineering-grid">
-
-
-                    <article class="engineering-group">
-
-                        <span class="engineering-number">
-                            01
-                        </span>
-
-                        <h3>
-                            Languages
-                        </h3>
-
-                        <ul>
-                            <li>Python</li>
-                            <li>Go</li>
-                            <li>Java</li>
-                            <li>HTML / CSS</li>
-                        </ul>
-
-                    </article>
-
-
-                    <article class="engineering-group">
-
-                        <span class="engineering-number">
-                            02
-                        </span>
-
-                        <h3>
-                            Application
-                        </h3>
-
-                        <ul>
-                            <li>Node.js</li>
-                            <li>React</li>
-                            <li>APIs</li>
-                            <li>Backend systems</li>
-                        </ul>
-
-                    </article>
-
-
-                    <article class="engineering-group">
-
-                        <span class="engineering-number">
-                            03
-                        </span>
-
-                        <h3>
-                            Systems
-                        </h3>
-
-                        <ul>
-                            <li>AI / LLM systems</li>
-                            <li>Automation</li>
-                            <li>Infrastructure</li>
-                            <li>System architecture</li>
-                        </ul>
-
-                    </article>
-
-
-                    <article class="engineering-group">
-
-                        <span class="engineering-number">
-                            04
-                        </span>
-
-                        <h3>
-                            Currently learning
-                        </h3>
-
-                        <ul>
-                            <li>AI advancements</li>
-                            <li>Research systems</li>
-                            <li>System design</li>
-                            <li>Better engineering practices</li>
-                        </ul>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             PHILOSOPHY
-        ====================================================== -->
-
-        <section
-            class="philosophy-section"
-            aria-labelledby="philosophy-title"
-        >
-
-            <div class="container">
-
-                <div class="philosophy-inner">
-
-                    <p class="section-index">
-                        BUILDING PHILOSOPHY
-                    </p>
-
-                    <h2 id="philosophy-title">
-
-                        Build.
-                        <span>Break.</span>
-                        Understand.
-                        <span>Improve.</span>
-
-                    </h2>
-
-                    <p>
-
-                        I don't want projects to only prove that
-                        I can code. I want them to teach me how
-                        systems actually behave.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             ABOUT
-        ====================================================== -->
-
-        <section
-            class="section about-section"
-            id="about"
-            aria-labelledby="about-title"
-        >
-
-            <div class="container">
-
-                <div class="about-grid">
-
-
-                    <div class="about-heading">
-
-                        <p class="section-index">
-                            04 / ABOUT
-                        </p>
-
-                        <h2 id="about-title">
-                            A student
-                            learning by building.
-                        </h2>
-
-                    </div>
-
-
-                    <div class="about-copy">
-
-                        <p class="about-lead">
-
-                            I'm currently in Class 11 and
-                            interested in software, AI systems
-                            and engineering.
-
-                        </p>
-
-
-                        <p>
-
-                            I started making projects because
-                            I wanted to understand the things
-                            I was curious about instead of only
-                            reading about them.
-
-                        </p>
-
-
-                        <p>
-
-                            That usually means starting with a
-                            question, building a rough version,
-                            discovering what doesn't work,
-                            understanding why, and improving it.
-
-                        </p>
-
-
-                        <p>
-
-                            The projects on this site are a
-                            record of that process.
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             BEYOND CODE
-        ====================================================== -->
-
-        <section
-            class="section beyond-section"
-            aria-labelledby="beyond-title"
-        >
-
-            <div class="container">
-
-
-                <header class="section-header compact">
-
-                    <div>
-
-                        <p class="section-index">
-                            05 / BEYOND CODE
-                        </p>
-
-                        <h2 id="beyond-title">
-                            Not everything is software.
-                        </h2>
-
-                    </div>
-
-                </header>
-
-
-                <div class="beyond-grid">
-
-
-                    <article class="beyond-card">
-
-                        <span>
-                            01
-                        </span>
-
-                        <div>
-
-                            <h3>
-                                Drones
-                            </h3>
-
-                            <p>
-
-                                I fly drones and have a strong
-                                interest in how they are built,
-                                controlled and eventually turned
-                                into real products.
-
-                            </p>
-
-                        </div>
-
-                    </article>
-
-
-                    <article class="beyond-card">
-
-                        <span>
-                            02
-                        </span>
-
-                        <div>
-
-                            <h3>
-                                Badminton
-                            </h3>
-
-                            <p>
-
-                                A completely different kind of
-                                problem solving: movement,
-                                timing and reaction.
-
-                            </p>
-
-                        </div>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             LEARNING LOOP
-        ====================================================== -->
-
-        <section
-            class="section process-section"
-            aria-labelledby="process-title"
-        >
-
-            <div class="container">
-
-                <header class="section-header">
-
-                    <div>
-
-                        <p class="section-index">
-                            06 / PROCESS
-                        </p>
-
-                        <h2 id="process-title">
-                            How projects become learning.
-                        </h2>
-
-                    </div>
-
-                    <p class="section-intro">
-
-                        The important part isn't just shipping
-                        the final version. It's understanding
-                        everything that happened before it.
-
-                    </p>
-
-                </header>
-
-
-                <ol class="process-list">
-
-
-                    <li>
-
-                        <span class="process-number">
-                            01
-                        </span>
-
-                        <div>
-
-                            <h3>
-                                Question
-                            </h3>
-
-                            <p>
-                                Find something I genuinely want
-                                to understand.
-                            </p>
-
-                        </div>
-
-                    </li>
-
-
-                    <li>
-
-                        <span class="process-number">
-                            02
-                        </span>
-
-                        <div>
-
-                            <h3>
-                                Build
-                            </h3>
-
-                            <p>
-                                Turn the idea into a working
-                                system.
-                            </p>
-
-                        </div>
-
-                    </li>
-
-
-                    <li>
-
-                        <span class="process-number">
-                            03
-                        </span>
-
-                        <div>
-
-                            <h3>
-                                Break
-                            </h3>
-
-                            <p>
-                                Find where assumptions and
-                                architecture fail.
-                            </p>
-
-                        </div>
-
-                    </li>
-
-
-                    <li>
-
-                        <span class="process-number">
-                            04
-                        </span>
-
-                        <div>
-
-                            <h3>
-                                Understand
-                            </h3>
-
-                            <p>
-                                Investigate why the system
-                                behaved that way.
-                            </p>
-
-                        </div>
-
-                    </li>
-
-
-                    <li>
-
-                        <span class="process-number">
-                            05
-                        </span>
-
-                        <div>
-
-                            <h3>
-                                Improve
-                            </h3>
-
-                            <p>
-                                Rebuild the weak parts and
-                                keep learning.
-                            </p>
-
-                        </div>
-
-                    </li>
-
-                </ol>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             CONTACT
-        ====================================================== -->
-
-        <section
-            class="contact-section"
-            id="contact"
-            aria-labelledby="contact-title"
-        >
-
-            <div class="container">
-
-                <div class="contact-inner">
-
-
-                    <div>
-
-                        <p class="section-index">
-                            CONTACT
-                        </p>
-
-                        <h2 id="contact-title">
-                            Follow the work.
-                        </h2>
-
-                        <p>
-
-                            The best place to see what I'm
-                            building is GitHub.
-
-                        </p>
-
-                    </div>
-
-
-                    <div class="contact-links">
-
-
-                        <a
-                            href="https://github.com/SP2502"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="contact-link"
-                        >
-
-                            <span>
-
-                                <small>
-                                    GITHUB
-                                </small>
-
-                                <strong>
-                                    github.com/SP2502
-                                </strong>
-
-                            </span>
-
-                            <span>
-                                ↗
-                            </span>
-
-                        </a>
-
-
-                        <a
-                            href="https://sp2502.github.io/Me/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="contact-link"
-                        >
-
-                            <span>
-
-                                <small>
-                                    WEBSITE
-                                </small>
-
-                                <strong>
-                                    sp2502.github.io/Me
-                                </strong>
-
-                            </span>
-
-                            <span>
-                                ↗
-                            </span>
-
-                        </a>
-
-
-                        <a
-                            href="mailto:shreyansh2502@outlook.com"
-                            class="contact-link"
-                        >
-
-                            <span>
-
-                                <small>
-                                    EMAIL
-                                </small>
-
-                                <strong>
-                                    shreyansh2502@outlook.com
-                                </strong>
-
-                            </span>
-
-                            <span>
-                                ↗
-                            </span>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-
-    <!-- =========================================================
-         FOOTER
-    ========================================================== -->
-
-    <footer class="site-footer">
-
-        <div class="container">
-
-            <div class="footer-top">
-
-
-                <div class="footer-identity">
-
-                    <strong>
-                        Shreyansh Parganiha
-                    </strong>
-
-                    <span>
-                        Student &amp; AI Systems Enthusiast
-                    </span>
-
-                </div>
-
-
-                <nav
-                    class="footer-links"
-                    aria-label="Footer navigation"
-                >
-
-                    <a href="#work">
-                        Work
-                    </a>
-
-                    <a href="#about">
-                        About
-                    </a>
-
-                    <a href="#contact">
-                        Contact
-                    </a>
-
-                    <a
-                        href="https://github.com/SP2502"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        GitHub ↗
-                    </a>
-
-                </nav>
-
-            </div>
-
-
-            <div class="footer-bottom">
-
-                <span>
-                    © <span id="current-year"></span>
-                    Shreyansh Parganiha
+                ©
+                <span id="current-year">
+                    2026
                 </span>
 
-                <span>
-                    Build. Break. Understand. Improve.
-                </span>
+                Shreyansh Parganiha
 
-            </div>
+            </span>
+
+
+            <span>
+                Build. Break. Understand. Improve.
+            </span>
 
         </div>
 
-    </footer>
+    </div>
+
+</footer>
 
 
 
-    <!-- =========================================================
-         SCRIPT
-    ========================================================== -->
+<!-- =========================================================
+     CLASS / YEAR / COPY LOGIC
+     
+     Class 11 → Class 12 automatically on 1 April 2027.
+========================================================= -->
 
-    <script src="script.js" defer></script>
+<script>
+
+(() => {
+
+    "use strict";
+
+
+    /* ---------------------------------------------
+       Academic class
+    --------------------------------------------- */
+
+    const classElements =
+        document.querySelectorAll(
+            "[data-class]"
+        );
+
+
+    const now =
+        new Date();
+
+
+    /*
+     * Before 1 April 2027:
+     *     Class 11
+     *
+     * From 1 April 2027:
+     *     Class 12
+     */
+
+    const promotionDate =
+        new Date(
+            2027,
+            3,
+            1
+        );
+
+
+    const currentClass =
+        now >= promotionDate
+            ? "12"
+            : "11";
+
+
+    classElements.forEach(
+        element => {
+
+            element.textContent =
+                currentClass;
+
+        }
+    );
+
+
+
+    /* ---------------------------------------------
+       Current year
+    --------------------------------------------- */
+
+    const yearElement =
+        document.getElementById(
+            "current-year"
+        );
+
+
+    if (yearElement) {
+
+        yearElement.textContent =
+            now.getFullYear();
+
+    }
+
+
+
+    /* ---------------------------------------------
+       Copy email
+    --------------------------------------------- */
+
+    const copyButton =
+        document.querySelector(
+            "[data-copy-email]"
+        );
+
+
+    const copyFeedback =
+        document.getElementById(
+            "copy-feedback"
+        );
+
+
+    if (copyButton) {
+
+        copyButton.addEventListener(
+            "click",
+            async () => {
+
+                const email =
+                    copyButton.dataset.copyEmail;
+
+
+                try {
+
+                    await navigator.clipboard.writeText(
+                        email
+                    );
+
+
+                    copyButton.textContent =
+                        "Copied";
+
+
+                    if (copyFeedback) {
+
+                        copyFeedback.textContent =
+                            "Email copied to clipboard.";
+
+                    }
+
+
+                    setTimeout(
+                        () => {
+
+                            copyButton.textContent =
+                                "Copy";
+
+
+                            if (copyFeedback) {
+
+                                copyFeedback.textContent =
+                                    "";
+
+                            }
+
+                        },
+                        1800
+                    );
+
+                } catch (error) {
+
+                    /*
+                     * Fallback for browsers where
+                     * Clipboard API isn't available.
+                     */
+
+                    const temporaryInput =
+                        document.createElement(
+                            "textarea"
+                        );
+
+
+                    temporaryInput.value =
+                        email;
+
+
+                    temporaryInput.style.position =
+                        "fixed";
+
+                    temporaryInput.style.opacity =
+                        "0";
+
+
+                    document.body.appendChild(
+                        temporaryInput
+                    );
+
+
+                    temporaryInput.select();
+
+
+                    try {
+
+                        document.execCommand(
+                            "copy"
+                        );
+
+
+                        copyButton.textContent =
+                            "Copied";
+
+
+                        if (copyFeedback) {
+
+                            copyFeedback.textContent =
+                                "Email copied to clipboard.";
+
+                        }
+
+                    } catch (fallbackError) {
+
+                        if (copyFeedback) {
+
+                            copyFeedback.textContent =
+                                "Copy failed. Please copy the address manually.";
+
+                        }
+
+                    }
+
+
+                    temporaryInput.remove();
+
+
+                    setTimeout(
+                        () => {
+
+                            copyButton.textContent =
+                                "Copy";
+
+
+                            if (copyFeedback) {
+
+                                copyFeedback.textContent =
+                                    "";
+
+                            }
+
+                        },
+                        1800
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+})();
+
+</script>
+
+
+
+<!-- =========================================================
+     MAIN INTERACTION SCRIPT
+========================================================= -->
+
+<script src="script.js" defer></script>
+
 
 </body>
 </html>
