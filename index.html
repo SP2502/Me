@@ -20,7 +20,7 @@
 
     <meta
         name="theme-color"
-        content="#0a0a0a"
+        content="#08090A"
     >
 
     <meta
@@ -38,22 +38,29 @@
         content="website"
     >
 
-    <title>Shreyansh Parganiha — Student & AI Systems Enthusiast</title>
+    <title>
+        Shreyansh Parganiha — Student & AI Systems Enthusiast
+    </title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- =========================
-         Navigation
-    ========================== -->
+    <!-- =====================================================
+         SITE HEADER
+    ====================================================== -->
 
     <header class="site-header">
-        <nav class="navbar" aria-label="Main navigation">
 
-            <a href="#home" class="brand" aria-label="Shreyansh Parganiha home">
-                <span class="brand-name">SP</span>
+        <nav class="navbar" aria-label="Primary navigation">
+
+            <a
+                href="#home"
+                class="brand"
+                aria-label="Shreyansh Parganiha — Home"
+            >
+                <span class="brand-mark">SP</span>
             </a>
 
             <button
@@ -68,131 +75,182 @@
                 <span></span>
             </button>
 
-            <div class="nav-links" id="main-navigation">
+            <div
+                class="nav-links"
+                id="main-navigation"
+            >
                 <a href="#about">About</a>
-                <a href="#curiosity">Curiosity</a>
+                <a href="#questions">Questions</a>
                 <a href="#projects">Projects</a>
-                <a href="#interests">Interests</a>
+                <a href="#now">Now</a>
                 <a href="#contact">Contact</a>
             </div>
 
         </nav>
+
     </header>
 
 
     <main>
 
-        <!-- =========================
-             Hero
-        ========================== -->
+        <!-- =================================================
+             01. HERO
+        ================================================== -->
 
-        <section class="hero section" id="home">
+        <section
+            class="hero section"
+            id="home"
+            aria-labelledby="hero-title"
+        >
 
-            <div class="hero-content">
+            <div class="hero-grid">
 
-                <p class="eyebrow">
-                    Student &amp; AI Systems Enthusiast
-                </p>
+                <div class="hero-content">
 
-                <h1>
-                    Shreyansh<br>
-                    Parganiha
-                </h1>
+                    <div class="eyebrow-row">
+                        <span class="eyebrow">
+                            Student &amp; AI Systems Enthusiast
+                        </span>
 
-                <p class="hero-statement">
-                    I build software to understand systems.
-                </p>
+                        <span class="status-indicator">
+                            <span
+                                class="status-dot"
+                                aria-hidden="true"
+                            ></span>
 
-                <p class="hero-description">
-                    I'm a Class <span data-current-class>11</span> student
-                    exploring software, AI, and the systems underneath them
-                    by building real projects.
-                </p>
+                            Currently building
+                        </span>
+                    </div>
 
-                <div class="hero-actions">
-                    <a href="#projects" class="button button-primary">
-                        Explore Projects
+                    <h1 id="hero-title">
+                        Shreyansh
+                        <span>Parganiha</span>
+                    </h1>
+
+                    <p class="hero-statement">
+                        I build software to understand systems.
+                    </p>
+
+                    <p class="hero-description">
+                        I'm a Class
+                        <span data-current-class>11</span>
+                        student exploring software, AI, and the systems
+                        underneath them by building real projects.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a
+                            href="#projects"
+                            class="button button-primary"
+                        >
+                            Explore projects
+                            <span aria-hidden="true">↓</span>
+                        </a>
+
+                        <a
+                            href="https://github.com/SP2502"
+                            class="button button-secondary"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            GitHub
+                            <span aria-hidden="true">↗</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- System visual -->
+
+                <div
+                    class="hero-system"
+                    aria-label="Abstract system diagram"
+                    role="img"
+                >
+
+                    <div class="system-orbit orbit-one"></div>
+                    <div class="system-orbit orbit-two"></div>
+
+                    <div class="system-node node-center">
+                        <span>SYS</span>
+                    </div>
+
+                    <div class="system-node node-one">
+                        <span>01</span>
+                    </div>
+
+                    <div class="system-node node-two">
+                        <span>02</span>
+                    </div>
+
+                    <div class="system-node node-three">
+                        <span>03</span>
+                    </div>
+
+                    <div class="system-node node-four">
+                        <span>04</span>
+                    </div>
+
+                    <div class="system-connection connection-one"></div>
+                    <div class="system-connection connection-two"></div>
+                    <div class="system-connection connection-three"></div>
+                    <div class="system-connection connection-four"></div>
+
+                    <div class="hero-system-label">
+                        Curiosity → Systems
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-current">
+
+                <div class="current-label">
+                    What I'm working on
+                </div>
+
+                <div class="current-projects">
+
+                    <a
+                        href="#universal"
+                        class="current-project"
+                    >
+                        <span class="project-number">01</span>
+                        <span class="project-name">Universal</span>
+                        <span class="project-type">
+                            Weather infrastructure
+                        </span>
+                        <span aria-hidden="true">↘</span>
                     </a>
 
                     <a
-                        href="https://github.com/SP2502"
-                        class="button button-secondary"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href="#cortex"
+                        class="current-project"
                     >
-                        GitHub
+                        <span class="project-number">02</span>
+                        <span class="project-name">Cortex</span>
+                        <span class="project-type">
+                            AI research systems
+                        </span>
+                        <span aria-hidden="true">↘</span>
                     </a>
-                </div>
 
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             Philosophy
-        ========================== -->
-
-        <section class="philosophy section" id="philosophy">
-
-            <div class="section-heading">
-                <p class="eyebrow">How I learn</p>
-
-                <h2>
-                    Build. Break.<br>
-                    Understand. Improve.
-                </h2>
-            </div>
-
-            <div class="philosophy-content">
-
-                <p class="large-text">
-                    I learn by building things, encountering problems,
-                    investigating why they happen, understanding the
-                    underlying system, and improving what I built.
-                </p>
-
-                <div class="learning-loop" aria-label="Learning process">
-
-                    <div class="loop-step">
-                        <span class="step-number">01</span>
-                        <span class="step-title">Curiosity</span>
-                    </div>
-
-                    <div class="loop-arrow" aria-hidden="true">→</div>
-
-                    <div class="loop-step">
-                        <span class="step-number">02</span>
-                        <span class="step-title">Build</span>
-                    </div>
-
-                    <div class="loop-arrow" aria-hidden="true">→</div>
-
-                    <div class="loop-step">
-                        <span class="step-number">03</span>
-                        <span class="step-title">Break</span>
-                    </div>
-
-                    <div class="loop-arrow" aria-hidden="true">→</div>
-
-                    <div class="loop-step">
-                        <span class="step-number">04</span>
-                        <span class="step-title">Investigate</span>
-                    </div>
-
-                    <div class="loop-arrow" aria-hidden="true">→</div>
-
-                    <div class="loop-step">
-                        <span class="step-number">05</span>
-                        <span class="step-title">Understand</span>
-                    </div>
-
-                    <div class="loop-arrow" aria-hidden="true">→</div>
-
-                    <div class="loop-step">
-                        <span class="step-number">06</span>
-                        <span class="step-title">Improve</span>
-                    </div>
+                    <a
+                        href="#aegis"
+                        class="current-project"
+                    >
+                        <span class="project-number">03</span>
+                        <span class="project-name">AEGIS</span>
+                        <span class="project-type">
+                            Content blocking
+                        </span>
+                        <span aria-hidden="true">↘</span>
+                    </a>
 
                 </div>
 
@@ -201,47 +259,140 @@
         </section>
 
 
-        <!-- =========================
-             About
-        ========================== -->
+        <!-- =================================================
+             02. HOW I THINK
+        ================================================== -->
 
-        <section class="about section" id="about">
+        <section
+            class="thinking section"
+            id="thinking"
+            aria-labelledby="thinking-title"
+        >
 
-            <div class="section-heading">
-                <p class="eyebrow">About</p>
+            <div class="section-intro">
 
-                <h2>
-                    Curiosity turned<br>
-                    into systems.
+                <span class="eyebrow">
+                    How I learn
+                </span>
+
+                <h2 id="thinking-title">
+                    Build. Break.
+                    <span>Understand. Improve.</span>
                 </h2>
+
             </div>
 
-            <div class="about-content">
 
-                <div class="about-intro">
+            <div class="thinking-layout">
+
+                <div class="thinking-description">
 
                     <p class="large-text">
-                        I'm a Class <span data-current-class>11</span> student
-                        interested in understanding how software and AI systems
-                        actually work.
+                        I don't always understand a system before
+                        building it. Often, building is how I begin
+                        understanding it.
                     </p>
 
                     <p>
-                        I don't want to only use software. I'm interested in
-                        what happens underneath it — how APIs communicate,
-                        how services interact, how systems handle failures,
-                        how AI systems coordinate multiple steps, and how
-                        rough experiments can become usable systems.
+                        I make something, find where it breaks, investigate
+                        what actually happened, and then use that understanding
+                        to improve the system.
                     </p>
 
                 </div>
 
-                <div class="about-story">
+
+                <ol class="learning-process">
+
+                    <li>
+                        <span class="process-number">01</span>
+                        <strong>Curiosity</strong>
+                        <span>Start with a question.</span>
+                    </li>
+
+                    <li>
+                        <span class="process-number">02</span>
+                        <strong>Build</strong>
+                        <span>Turn the question into something real.</span>
+                    </li>
+
+                    <li>
+                        <span class="process-number">03</span>
+                        <strong>Break</strong>
+                        <span>Find what the system doesn't handle.</span>
+                    </li>
+
+                    <li>
+                        <span class="process-number">04</span>
+                        <strong>Understand</strong>
+                        <span>Investigate the underlying mechanism.</span>
+                    </li>
+
+                    <li>
+                        <span class="process-number">05</span>
+                        <strong>Improve</strong>
+                        <span>Build again with what I learned.</span>
+                    </li>
+
+                </ol>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             03. ABOUT
+        ================================================== -->
+
+        <section
+            class="about section"
+            id="about"
+            aria-labelledby="about-title"
+        >
+
+            <div class="section-intro">
+
+                <span class="eyebrow">
+                    About
+                </span>
+
+                <h2 id="about-title">
+                    Curiosity turned
+                    <span>into systems.</span>
+                </h2>
+
+            </div>
+
+
+            <div class="about-grid">
+
+                <article class="about-block">
+
+                    <span class="about-label">
+                        Who I am
+                    </span>
+
+                    <p class="large-text">
+                        I'm a Class
+                        <span data-current-class>11</span>
+                        student interested in understanding how software
+                        and AI systems actually work.
+                    </p>
+
+                </article>
+
+
+                <article class="about-block">
+
+                    <span class="about-label">
+                        Why I build
+                    </span>
 
                     <p>
                         I started making projects because I wanted to grow
-                        with the world as the world is growing. Because I am
-                        curious.
+                        with the world as the world is growing. Because I
+                        am curious.
                     </p>
 
                     <p>
@@ -250,80 +401,23 @@
                         that change rather than only watching it happen.
                     </p>
 
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             Curiosity
-        ========================== -->
-
-        <section class="curiosity section" id="curiosity">
-
-            <div class="section-heading">
-                <p class="eyebrow">What I'm curious about</p>
-
-                <h2>
-                    Systems beneath<br>
-                    the surface.
-                </h2>
-            </div>
-
-            <div class="curiosity-grid">
-
-                <article class="curiosity-item">
-                    <span class="curiosity-number">01</span>
-                    <h3>APIs</h3>
-                    <p>
-                        How different applications and services communicate.
-                    </p>
                 </article>
 
-                <article class="curiosity-item">
-                    <span class="curiosity-number">02</span>
-                    <h3>Distributed Systems</h3>
-                    <p>
-                        How multiple services work together as one system.
-                    </p>
-                </article>
 
-                <article class="curiosity-item">
-                    <span class="curiosity-number">03</span>
-                    <h3>AI Systems</h3>
-                    <p>
-                        How models, tools, agents, and workflows can be
-                        composed into larger systems.
-                    </p>
-                </article>
+                <article class="about-block about-wide">
 
-                <article class="curiosity-item">
-                    <span class="curiosity-number">04</span>
-                    <h3>Research Agents</h3>
-                    <p>
-                        How AI can plan, research, compare evidence, and
-                        synthesize information.
-                    </p>
-                </article>
+                    <span class="about-label">
+                        What I'm interested in
+                    </span>
 
-                <article class="curiosity-item">
-                    <span class="curiosity-number">05</span>
-                    <h3>Reliability</h3>
                     <p>
-                        What happens when a component fails and how a system
-                        can recover.
+                        I'm interested in what happens underneath software:
+                        how APIs communicate, how services interact, how
+                        systems handle failures, how AI systems coordinate
+                        multiple steps, and how a rough experiment can
+                        become a usable system.
                     </p>
-                </article>
 
-                <article class="curiosity-item">
-                    <span class="curiosity-number">06</span>
-                    <h3>Integration</h3>
-                    <p>
-                        How different services, models, and tools can work
-                        together.
-                    </p>
                 </article>
 
             </div>
@@ -331,125 +425,306 @@
         </section>
 
 
-        <!-- =========================
-             Projects
-        ========================== -->
+        <!-- =================================================
+             04. QUESTIONS
+        ================================================== -->
 
-        <section class="projects section" id="projects">
+        <section
+            class="questions section"
+            id="questions"
+            aria-labelledby="questions-title"
+        >
 
-            <div class="section-heading">
+            <div class="section-intro">
 
-                <p class="eyebrow">Selected projects</p>
+                <span class="eyebrow">
+                    Currently thinking about
+                </span>
 
-                <h2>
-                    Things I'm<br>
-                    building.
+                <h2 id="questions-title">
+                    Questions I'm
+                    <span>exploring.</span>
                 </h2>
 
-                <p class="section-description">
-                    Projects are where my curiosity becomes something I can
-                    actually test, break, and improve.
+                <p class="section-lead">
+                    I don't have all the answers. These are some of the
+                    questions that currently make me want to build.
                 </p>
 
             </div>
 
 
-            <div class="projects-list">
+            <div class="question-list">
 
-                <!-- Universal -->
+                <article class="question-item">
 
-                <article class="project project-featured">
+                    <span class="question-number">
+                        01
+                    </span>
 
-                    <div class="project-header">
+                    <p>
+                        How should an application choose between multiple
+                        external providers?
+                    </p>
 
-                        <span class="project-index">01</span>
+                </article>
 
-                        <div class="project-meta">
-                            <span>Flagship</span>
-                            <span>Weather Infrastructure</span>
+
+                <article class="question-item">
+
+                    <span class="question-number">
+                        02
+                    </span>
+
+                    <p>
+                        What should a system do when one of its components
+                        fails?
+                    </p>
+
+                </article>
+
+
+                <article class="question-item">
+
+                    <span class="question-number">
+                        03
+                    </span>
+
+                    <p>
+                        How can an AI research system know when it has
+                        gathered enough evidence?
+                    </p>
+
+                </article>
+
+
+                <article class="question-item">
+
+                    <span class="question-number">
+                        04
+                    </span>
+
+                    <p>
+                        When does an abstraction actually make a system
+                        simpler?
+                    </p>
+
+                </article>
+
+
+                <article class="question-item">
+
+                    <span class="question-number">
+                        05
+                    </span>
+
+                    <p>
+                        How can an experiment evolve into a system that
+                        can actually keep running?
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             05. PROJECTS
+        ================================================== -->
+
+        <section
+            class="projects section"
+            id="projects"
+            aria-labelledby="projects-title"
+        >
+
+            <div class="section-intro">
+
+                <span class="eyebrow">
+                    Selected projects
+                </span>
+
+                <h2 id="projects-title">
+                    Things I'm
+                    <span>building.</span>
+                </h2>
+
+                <p class="section-lead">
+                    Projects are where my questions become things I can
+                    actually test, break, understand, and improve.
+                </p>
+
+            </div>
+
+
+            <div class="project-list">
+
+
+                <!-- =========================================
+                     UNIVERSAL
+                ========================================== -->
+
+                <article
+                    class="project project-featured"
+                    id="universal"
+                >
+
+                    <div class="project-topline">
+
+                        <span class="project-number">
+                            01
+                        </span>
+
+                        <div class="project-status">
+
+                            <span class="status-pill">
+                                Flagship
+                            </span>
+
+                            <span class="status-pill">
+                                Early development
+                            </span>
+
                         </div>
 
                     </div>
 
-                    <div class="project-content">
 
-                        <div class="project-title-area">
+                    <div class="project-heading">
 
-                            <h3>Universal</h3>
+                        <div>
 
-                            <p class="project-tagline">
-                                Weather-data infrastructure through provider
-                                abstraction.
+                            <span class="project-category">
+                                Weather-data infrastructure
+                            </span>
+
+                            <h3>
+                                Universal
+                            </h3>
+
+                        </div>
+
+                        <p class="project-short">
+                            A weather-data abstraction layer exploring
+                            provider selection, fallback, and normalized data.
+                        </p>
+
+                    </div>
+
+
+                    <div class="project-details">
+
+                        <div class="project-detail">
+
+                            <span class="detail-label">
+                                Why I started it
+                            </span>
+
+                            <p>
+                                Weather applications often depend directly
+                                on individual providers. I wanted to explore
+                                what happens when the provider becomes an
+                                implementation detail instead.
                             </p>
 
                         </div>
 
-                        <div class="project-description">
+
+                        <div class="project-detail">
+
+                            <span class="detail-label">
+                                What I'm exploring
+                            </span>
 
                             <p>
-                                Universal explores how applications can access
-                                weather data without needing to understand
-                                every individual weather provider.
-                            </p>
-
-                            <p>
-                                It acts as an abstraction layer that can resolve
-                                coordinates, select a provider, handle failures,
-                                fall back to another provider, normalize
-                                responses, and expose a consistent interface.
+                                Provider abstraction, location resolution,
+                                failure handling, fallback behavior, and
+                                normalization across different data sources.
                             </p>
 
                         </div>
 
                     </div>
 
-                    <div class="system-diagram" aria-label="Universal system flow">
 
-                        <div class="diagram-node">
-                            <span>01</span>
-                            <strong>Coordinates</strong>
+                    <div class="architecture">
+
+                        <div class="architecture-heading">
+                            <span>System flow</span>
+                            <span>Universal</span>
                         </div>
 
-                        <div class="diagram-line"></div>
 
-                        <div class="diagram-node">
-                            <span>02</span>
-                            <strong>Location</strong>
+                        <div class="architecture-flow">
+
+                            <div class="architecture-node">
+                                <span>01</span>
+                                <strong>Coordinates</strong>
+                            </div>
+
+                            <div class="architecture-arrow">→</div>
+
+                            <div class="architecture-node">
+                                <span>02</span>
+                                <strong>Location</strong>
+                            </div>
+
+                            <div class="architecture-arrow">→</div>
+
+                            <div class="architecture-node">
+                                <span>03</span>
+                                <strong>Provider</strong>
+                            </div>
+
+                            <div class="architecture-arrow">→</div>
+
+                            <div class="architecture-node">
+                                <span>04</span>
+                                <strong>Weather</strong>
+                            </div>
+
+                            <div class="architecture-arrow">→</div>
+
+                            <div class="architecture-node">
+                                <span>05</span>
+                                <strong>Fallback</strong>
+                            </div>
+
+                            <div class="architecture-arrow">→</div>
+
+                            <div class="architecture-node">
+                                <span>06</span>
+                                <strong>Normalize</strong>
+                            </div>
+
+                            <div class="architecture-arrow">→</div>
+
+                            <div class="architecture-node">
+                                <span>07</span>
+                                <strong>API</strong>
+                            </div>
+
                         </div>
 
-                        <div class="diagram-line"></div>
+                    </div>
 
-                        <div class="diagram-node">
-                            <span>03</span>
-                            <strong>Provider Selection</strong>
-                        </div>
 
-                        <div class="diagram-line"></div>
+                    <div class="project-bottom">
 
-                        <div class="diagram-node">
-                            <span>04</span>
-                            <strong>Weather Provider</strong>
-                        </div>
+                        <div class="project-note">
 
-                        <div class="diagram-line"></div>
+                            <span class="detail-label">
+                                A question I'm still figuring out
+                            </span>
 
-                        <div class="diagram-node">
-                            <span>05</span>
-                            <strong>Fallback</strong>
-                        </div>
+                            <p>
+                                How should a system decide which provider
+                                to trust when several can answer the same
+                                request?
+                            </p>
 
-                        <div class="diagram-line"></div>
-
-                        <div class="diagram-node">
-                            <span>06</span>
-                            <strong>Normalized Data</strong>
-                        </div>
-
-                        <div class="diagram-line"></div>
-
-                        <div class="diagram-node">
-                            <span>07</span>
-                            <strong>API</strong>
                         </div>
 
                     </div>
@@ -457,99 +732,164 @@
                 </article>
 
 
-                <!-- Cortex -->
+                <!-- =========================================
+                     CORTEX
+                ========================================== -->
 
-                <article class="project">
+                <article
+                    class="project"
+                    id="cortex"
+                >
 
-                    <div class="project-header">
+                    <div class="project-topline">
 
-                        <span class="project-index">02</span>
+                        <span class="project-number">
+                            02
+                        </span>
 
-                        <div class="project-meta">
-                            <span>AI Systems</span>
-                            <span>Open Source</span>
-                        </div>
+                        <div class="project-status">
 
-                    </div>
+                            <span class="status-pill">
+                                AI systems
+                            </span>
 
-                    <div class="project-content">
-
-                        <div class="project-title-area">
-
-                            <h3>Cortex</h3>
-
-                            <p class="project-tagline">
-                                An autonomous deep-research system.
-                            </p>
-
-                        </div>
-
-                        <div class="project-description">
-
-                            <p>
-                                Cortex explores how an AI system can move beyond
-                                a single model call and coordinate a longer
-                                research workflow.
-                            </p>
-
-                            <p>
-                                The system is designed around planning,
-                                task decomposition, research, evidence
-                                collection, comparison, reasoning, and
-                                structured synthesis.
-                            </p>
+                            <span class="status-pill">
+                                Active development
+                            </span>
 
                         </div>
 
                     </div>
 
-                    <div class="system-diagram compact" aria-label="Cortex system flow">
 
-                        <div class="diagram-node">
+                    <div class="project-heading">
+
+                        <div>
+
+                            <span class="project-category">
+                                Open-source deep research
+                            </span>
+
+                            <h3>
+                                Cortex
+                            </h3>
+
+                        </div>
+
+                        <p class="project-short">
+                            An autonomous research system exploring planning,
+                            evidence gathering, reasoning, and synthesis.
+                        </p>
+
+                    </div>
+
+
+                    <div class="project-details">
+
+                        <div class="project-detail">
+
+                            <span class="detail-label">
+                                Why I started it
+                            </span>
+
+                            <p>
+                                I wanted to understand what happens between
+                                asking an AI a difficult question and getting
+                                a useful research answer.
+                            </p>
+
+                        </div>
+
+
+                        <div class="project-detail">
+
+                            <span class="detail-label">
+                                What I'm exploring
+                            </span>
+
+                            <p>
+                                Research planning, task decomposition,
+                                search, evidence collection, tool use,
+                                comparison, reasoning, and structured output.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="research-flow">
+
+                        <div class="research-stage stage-main">
                             <span>01</span>
                             <strong>Question</strong>
                         </div>
 
-                        <div class="diagram-line"></div>
+                        <div class="research-connector"></div>
 
-                        <div class="diagram-node">
+                        <div class="research-stage">
                             <span>02</span>
-                            <strong>Planning</strong>
+                            <strong>Plan</strong>
                         </div>
 
-                        <div class="diagram-line"></div>
+                        <div class="research-connector"></div>
 
-                        <div class="diagram-node">
+                        <div class="research-stage">
                             <span>03</span>
-                            <strong>Research</strong>
+                            <strong>Decompose</strong>
                         </div>
 
-                        <div class="diagram-line"></div>
+                        <div class="research-connector"></div>
 
-                        <div class="diagram-node">
-                            <span>04</span>
-                            <strong>Evidence</strong>
+                        <div class="research-branch">
+
+                            <div class="research-stage">
+                                <span>04A</span>
+                                <strong>Search</strong>
+                            </div>
+
+                            <div class="research-stage">
+                                <span>04B</span>
+                                <strong>Evidence</strong>
+                            </div>
+
+                            <div class="research-stage">
+                                <span>04C</span>
+                                <strong>Tools</strong>
+                            </div>
+
                         </div>
 
-                        <div class="diagram-line"></div>
+                        <div class="research-connector"></div>
 
-                        <div class="diagram-node">
+                        <div class="research-stage">
                             <span>05</span>
-                            <strong>Comparison</strong>
+                            <strong>Reason</strong>
                         </div>
 
-                        <div class="diagram-line"></div>
+                        <div class="research-connector"></div>
 
-                        <div class="diagram-node">
+                        <div class="research-stage">
                             <span>06</span>
-                            <strong>Reasoning</strong>
+                            <strong>Synthesize</strong>
                         </div>
 
-                        <div class="diagram-line"></div>
+                    </div>
 
-                        <div class="diagram-node">
-                            <span>07</span>
-                            <strong>Synthesis</strong>
+
+                    <div class="project-bottom">
+
+                        <div class="project-note">
+
+                            <span class="detail-label">
+                                A question I'm still figuring out
+                            </span>
+
+                            <p>
+                                How should a research system know when it
+                                has enough evidence to stop?
+                            </p>
+
                         </div>
 
                     </div>
@@ -557,105 +897,266 @@
                 </article>
 
 
-                <!-- AEGIS -->
+                <!-- =========================================
+                     AEGIS
+                ========================================== -->
 
-                <article class="project">
+                <article
+                    class="project"
+                    id="aegis"
+                >
 
-                    <div class="project-header">
+                    <div class="project-topline">
 
-                        <span class="project-index">03</span>
+                        <span class="project-number">
+                            03
+                        </span>
 
-                        <div class="project-meta">
-                            <span>Systems / Software</span>
-                            <span>Building</span>
-                        </div>
+                        <div class="project-status">
 
-                    </div>
+                            <span class="status-pill">
+                                Systems / Software
+                            </span>
 
-                    <div class="project-content">
-
-                        <div class="project-title-area">
-
-                            <h3>AEGIS</h3>
-
-                            <p class="project-tagline">
-                                A free Windows content blocker.
-                            </p>
-
-                        </div>
-
-                        <div class="project-description">
-
-                            <p>
-                                AEGIS is focused on blocking unwanted and adult
-                                content on Windows.
-                            </p>
-
-                            <p>
-                                It is a content blocker, not an ad blocker.
-                                Android is planned as a future expansion.
-                            </p>
+                            <span class="status-pill">
+                                Building
+                            </span>
 
                         </div>
 
                     </div>
+
+
+                    <div class="project-heading">
+
+                        <div>
+
+                            <span class="project-category">
+                                Windows content blocker
+                            </span>
+
+                            <h3>
+                                AEGIS
+                            </h3>
+
+                        </div>
+
+                        <p class="project-short">
+                            A free Windows content blocker focused on
+                            unwanted and adult content.
+                        </p>
+
+                    </div>
+
+
+                    <div class="project-details">
+
+                        <div class="project-detail">
+
+                            <span class="detail-label">
+                                What it is
+                            </span>
+
+                            <p>
+                                AEGIS is designed to block unwanted and
+                                adult content on Windows.
+                            </p>
+
+                        </div>
+
+
+                        <div class="project-detail">
+
+                            <span class="detail-label">
+                                What it is not
+                            </span>
+
+                            <p>
+                                AEGIS is a content blocker, not an
+                                advertising blocker.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="aegis-flow">
+
+                        <div class="aegis-endpoint">
+                            <span>INPUT</span>
+                            <strong>Content</strong>
+                        </div>
+
+                        <div class="architecture-arrow">
+                            →
+                        </div>
+
+                        <div class="aegis-core">
+                            <span>AEGIS</span>
+                            <strong>Evaluate</strong>
+                        </div>
+
+                        <div class="architecture-arrow">
+                            →
+                        </div>
+
+                        <div class="aegis-outcomes">
+
+                            <div>
+                                <span>01</span>
+                                <strong>Allow</strong>
+                            </div>
+
+                            <div>
+                                <span>02</span>
+                                <strong>Block</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
 
                     <div class="project-direction">
-                        <span>Current</span>
-                        <strong>Windows</strong>
-                        <span class="direction-arrow">→</span>
-                        <span>Future</span>
-                        <strong>Android</strong>
+
+                        <div>
+                            <span>Current</span>
+                            <strong>Windows</strong>
+                        </div>
+
+                        <span
+                            class="direction-arrow"
+                            aria-hidden="true"
+                        >
+                            →
+                        </span>
+
+                        <div>
+                            <span>Planned</span>
+                            <strong>Android</strong>
+                        </div>
+
                     </div>
 
                 </article>
 
 
-                <!-- ARGUS -->
+                <!-- =========================================
+                     ARGUS
+                ========================================== -->
 
-                <article class="project">
+                <article
+                    class="project"
+                    id="argus"
+                >
 
-                    <div class="project-header">
+                    <div class="project-topline">
 
-                        <span class="project-index">04</span>
+                        <span class="project-number">
+                            04
+                        </span>
 
-                        <div class="project-meta">
-                            <span>AI Agent</span>
-                            <span>Hosted</span>
-                        </div>
+                        <div class="project-status">
 
-                    </div>
+                            <span class="status-pill">
+                                Minecraft AI agent
+                            </span>
 
-                    <div class="project-content">
-
-                        <div class="project-title-area">
-
-                            <h3>ARGUS</h3>
-
-                            <p class="project-tagline">
-                                A Minecraft bot that evolved into a hosted
-                                autonomous system.
-                            </p>
-
-                        </div>
-
-                        <div class="project-description">
-
-                            <p>
-                                ARGUS started as an experiment in building a
-                                Minecraft bot and developed into a continuously
-                                running hosted system.
-                            </p>
-
-                            <p>
-                                It represents the progression from curiosity
-                                and experimentation toward building something
-                                that operates as an actual system.
-                            </p>
+                            <span class="status-pill">
+                                Hosted
+                            </span>
 
                         </div>
 
                     </div>
+
+
+                    <div class="project-heading">
+
+                        <div>
+
+                            <span class="project-category">
+                                Autonomous Minecraft system
+                            </span>
+
+                            <h3>
+                                ARGUS
+                            </h3>
+
+                        </div>
+
+                        <p class="project-short">
+                            A Minecraft experiment that evolved into a
+                            continuously running hosted system.
+                        </p>
+
+                    </div>
+
+
+                    <div class="project-details">
+
+                        <div class="project-detail">
+
+                            <span class="detail-label">
+                                Where it started
+                            </span>
+
+                            <p>
+                                ARGUS began as an experiment in building
+                                a Minecraft bot.
+                            </p>
+
+                        </div>
+
+
+                        <div class="project-detail">
+
+                            <span class="detail-label">
+                                What happened next
+                            </span>
+
+                            <p>
+                                The experiment grew into a more complete
+                                system that could continue running beyond
+                                the initial experiment.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="argus-evolution">
+
+                        <div class="evolution-step">
+                            <span>01</span>
+                            <strong>Experiment</strong>
+                        </div>
+
+                        <div class="evolution-line"></div>
+
+                        <div class="evolution-step">
+                            <span>02</span>
+                            <strong>Bot</strong>
+                        </div>
+
+                        <div class="evolution-line"></div>
+
+                        <div class="evolution-step">
+                            <span>03</span>
+                            <strong>System</strong>
+                        </div>
+
+                        <div class="evolution-line"></div>
+
+                        <div class="evolution-step">
+                            <span>04</span>
+                            <strong>Hosted</strong>
+                        </div>
+
+                    </div>
+
 
                     <div class="project-actions">
 
@@ -665,7 +1166,8 @@
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            ARGUS Website
+                            ARGUS website
+                            <span aria-hidden="true">↗</span>
                         </a>
 
                         <a
@@ -675,6 +1177,7 @@
                             rel="noopener noreferrer"
                         >
                             GitHub
+                            <span aria-hidden="true">↗</span>
                         </a>
 
                     </div>
@@ -686,63 +1189,69 @@
         </section>
 
 
-        <!-- =========================
-             Technologies
-        ========================== -->
+        <!-- =================================================
+             06. TECHNICAL FOUNDATION
+        ================================================== -->
 
-        <section class="technology section" id="technology">
+        <section
+            class="technical section"
+            id="technical"
+            aria-labelledby="technical-title"
+        >
 
-            <div class="section-heading">
+            <div class="section-intro">
 
-                <p class="eyebrow">Technical foundation</p>
+                <span class="eyebrow">
+                    Technical foundation
+                </span>
 
-                <h2>
-                    Tools support<br>
-                    the curiosity.
+                <h2 id="technical-title">
+                    Tools are useful.
+                    <span>Understanding is the goal.</span>
                 </h2>
 
             </div>
 
-            <div class="technology-groups">
 
-                <div class="technology-group">
+            <div class="technical-list">
 
-                    <h3>Languages</h3>
+                <div class="technical-row">
 
-                    <p>
-                        Python · Go · Java · JavaScript / TypeScript · HTML
-                    </p>
-
-                </div>
-
-                <div class="technology-group">
-
-                    <h3>Web &amp; Runtime</h3>
+                    <span class="technical-label">
+                        Build
+                    </span>
 
                     <p>
+                        Python · Go · Java · JavaScript / TypeScript ·
                         React · Node.js · Express · FastAPI
                     </p>
 
                 </div>
 
-                <div class="technology-group">
 
-                    <h3>Systems</h3>
+                <div class="technical-row">
+
+                    <span class="technical-label">
+                        Systems
+                    </span>
 
                     <p>
-                        REST APIs · System Design · Docker · Linux ·
-                        Backend Architecture · Service Integration
+                        REST APIs · Backend architecture · System design ·
+                        Docker · Linux · Service integration
                     </p>
 
                 </div>
 
-                <div class="technology-group">
 
-                    <h3>Exploring</h3>
+                <div class="technical-row">
+
+                    <span class="technical-label">
+                        Explore
+                    </span>
 
                     <p>
-                        AI Systems · LLM Tooling · Research Agents ·
-                        Multi-Model Systems · AI Infrastructure · Reliability
+                        AI systems · Research agents · LLM tooling ·
+                        Multi-model workflows · Reliability
                     </p>
 
                 </div>
@@ -752,107 +1261,203 @@
         </section>
 
 
-        <!-- =========================
-             Interests
-        ========================== -->
+        <!-- =================================================
+             07. RIGHT NOW
+        ================================================== -->
 
-        <section class="interests section" id="interests">
+        <section
+            class="now section"
+            id="now"
+            aria-labelledby="now-title"
+        >
 
-            <div class="section-heading">
+            <div class="section-intro">
 
-                <p class="eyebrow">Outside software</p>
+                <span class="eyebrow">
+                    September 2026
+                </span>
 
-                <h2>
-                    More than<br>
-                    programming.
+                <h2 id="now-title">
+                    Right
+                    <span>now.</span>
                 </h2>
 
             </div>
 
-            <div class="interests-grid">
 
-                <article class="interest">
+            <div class="now-grid">
 
-                    <span class="interest-label">01</span>
+                <div class="now-item">
 
-                    <h3>Drones</h3>
+                    <span class="now-label">
+                        Class
+                    </span>
 
-                    <p>
-                        I fly drones and I'm interested in the technology
-                        around them — from products and companion software
-                        to hardware and long-term possibilities in the space.
-                    </p>
-
-                    <p>
-                        It's also a direction I may explore more seriously
-                        in the future.
-                    </p>
-
-                </article>
-
-                <article class="interest">
-
-                    <span class="interest-label">02</span>
-
-                    <h3>Badminton</h3>
+                    <strong class="now-value">
+                        <span data-current-class>11</span>
+                    </strong>
 
                     <p>
-                        Outside screens and systems, I play badminton.
+                        Currently studying and building alongside school.
                     </p>
 
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             Education
-        ========================== -->
-
-        <section class="education section" id="education">
-
-            <div class="education-content">
-
-                <p class="eyebrow">Currently</p>
-
-                <div class="education-class">
-                    Class <span data-current-class>11</span>
                 </div>
 
-                <p>
-                    Learning through school, JEE preparation, and projects
-                    that turn curiosity into something tangible.
-                </p>
+
+                <div class="now-item">
+
+                    <span class="now-label">
+                        Building
+                    </span>
+
+                    <ul class="now-list">
+                        <li>Universal</li>
+                        <li>Cortex</li>
+                        <li>AEGIS</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="now-item">
+
+                    <span class="now-label">
+                        Learning
+                    </span>
+
+                    <ul class="now-list">
+                        <li>Systems</li>
+                        <li>AI architecture</li>
+                        <li>Backend engineering</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="now-item">
+
+                    <span class="now-label">
+                        Outside software
+                    </span>
+
+                    <ul class="now-list">
+                        <li>Drones</li>
+                        <li>Badminton</li>
+                    </ul>
+
+                </div>
 
             </div>
 
         </section>
 
 
-        <!-- =========================
-             Contact
-        ========================== -->
+        <!-- =================================================
+             08. OUTSIDE SOFTWARE
+        ================================================== -->
 
-        <section class="contact section" id="contact">
+        <section
+            class="outside section"
+            id="outside"
+            aria-labelledby="outside-title"
+        >
 
-            <div class="section-heading">
+            <div class="outside-heading">
 
-                <p class="eyebrow">Contact</p>
+                <span class="eyebrow">
+                    Outside software
+                </span>
 
-                <h2>
-                    Let's connect.
+                <h2 id="outside-title">
+                    More than
+                    <span>programming.</span>
                 </h2>
 
             </div>
+
+
+            <div class="outside-list">
+
+                <article class="outside-item">
+
+                    <span class="outside-number">
+                        01
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Drones
+                        </h3>
+
+                        <p>
+                            I fly drones and I'm interested in the technology
+                            around them — from products and companion software
+                            to hardware and the possibilities of eventually
+                            building in the space.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <article class="outside-item">
+
+                    <span class="outside-number">
+                        02
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Badminton
+                        </h3>
+
+                        <p>
+                            Something I do away from screens and systems.
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             09. CONTACT
+        ================================================== -->
+
+        <section
+            class="contact section"
+            id="contact"
+            aria-labelledby="contact-title"
+        >
+
+            <div class="section-intro">
+
+                <span class="eyebrow">
+                    Contact
+                </span>
+
+                <h2 id="contact-title">
+                    Let's
+                    <span>connect.</span>
+                </h2>
+
+            </div>
+
 
             <div class="contact-content">
 
                 <p class="large-text">
                     If you want to explore a project, look at the code,
-                    or just talk about systems and ideas:
+                    or talk about systems and ideas.
                 </p>
+
 
                 <div class="contact-links">
 
@@ -862,9 +1467,15 @@
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <span>GitHub</span>
-                        <span aria-hidden="true">↗</span>
+                        <span>
+                            GitHub
+                        </span>
+
+                        <span aria-hidden="true">
+                            ↗
+                        </span>
                     </a>
+
 
                     <a
                         href="https://argus-website-nu.vercel.app/"
@@ -872,14 +1483,20 @@
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <span>ARGUS</span>
-                        <span aria-hidden="true">↗</span>
+                        <span>
+                            ARGUS website
+                        </span>
+
+                        <span aria-hidden="true">
+                            ↗
+                        </span>
                     </a>
 
-                    <div class="contact-link email-link">
+
+                    <div class="contact-link email-row">
 
                         <a href="mailto:shreyansh2502@outlook.com">
-                            <span>shreyansh2502@outlook.com</span>
+                            shreyansh2502@outlook.com
                         </a>
 
                         <button
@@ -888,7 +1505,7 @@
                             data-email="shreyansh2502@outlook.com"
                             aria-label="Copy email address"
                         >
-                            Copy Email
+                            Copy email
                         </button>
 
                     </div>
@@ -902,31 +1519,53 @@
     </main>
 
 
-    <!-- =========================
-         Footer
-    ========================== -->
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
 
     <footer class="site-footer">
 
-        <div class="footer-content">
+        <div class="footer-main">
 
-            <p>
-                Shreyansh Parganiha
-            </p>
+            <div class="footer-identity">
 
-            <p>
-                Student &amp; AI Systems Enthusiast
-            </p>
+                <strong>
+                    Shreyansh Parganiha
+                </strong>
 
-            <p>
-                © <span data-current-year>2026</span>
-            </p>
+                <span>
+                    Student &amp; AI Systems Enthusiast
+                </span>
+
+            </div>
+
+
+            <div class="footer-meta">
+
+                <span>
+                    © <span data-current-year>2026</span>
+                </span>
+
+                <span>
+                    AI-assisted frontend development
+                </span>
+
+            </div>
 
         </div>
 
-        <p class="footer-philosophy">
-            Build. Break. Understand. Improve.
-        </p>
+
+        <div class="footer-bottom">
+
+            <p>
+                Built while learning.
+            </p>
+
+            <p>
+                Build. Break. Understand. Improve.
+            </p>
+
+        </div>
 
     </footer>
 
