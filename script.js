@@ -1,521 +1,666 @@
+// =========================================================
+// SHREYANSH PARGANIHA
+// Personal Website
+// script.js
+// =========================================================
+
 "use strict";
 
-/* =========================================================
-   SITE CONFIG
-   ========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
 
-const SITE = {
-  email: "shreyansh2502@outlook.com",
-  github: "https://github.com/SP2502",
-  argus: "https://argus-website-nu.vercel.app/"
-};
+    /* =====================================================
+       01. ELEMENT REFERENCES
+    ===================================================== */
 
+    const header = document.querySelector(".site-header");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    const navigationItems = document.querySelectorAll(".nav-links a");
 
-/* =========================================================
-   HELPERS
-   ========================================================= */
+    const currentClassElements =
+        document.querySelectorAll("[data-current-class]");
 
-const $ = (selector, parent = document) =>
-  parent.querySelector(selector);
+    const currentYearElements =
+        document.querySelectorAll("[data-current-year]");
 
-const $$ = (selector, parent = document) =>
-  [...parent.querySelectorAll(selector)];
+    const copyEmailButton =
+        document.querySelector(".copy-email");
 
-
-/* =========================================================
-   CURRENT YEAR
-   ========================================================= */
-
-const yearElement = $("[data-year]");
-
-if (yearElement) {
-  yearElement.textContent = new Date().getFullYear();
-}
+    const sections =
+        document.querySelectorAll("main section[id]");
 
 
-/* =========================================================
-   CLASS AUTO-UPDATE
-   Class 11 → Class 12 on April 1, 2027
-   ========================================================= */
+    /* =====================================================
+       02. CURRENT ACADEMIC CLASS
+       
+       Class 11 before:
+       April 1, 2027
 
-const classElements = $$("[data-class]");
+       Class 12 from:
+       April 1, 2027
+    ===================================================== */
 
-if (classElements.length) {
-  const promotionDate = new Date(2027, 3, 1);
-  const currentClass =
-    new Date() >= promotionDate ? "12" : "11";
+    function getCurrentClass() {
 
-  classElements.forEach((element) => {
-    element.textContent = currentClass;
-  });
-}
+        const now = new Date();
 
+        const classChangeDate =
+            new Date(2027, 3, 1, 0, 0, 0);
 
-/* =========================================================
-   HEADER SCROLL STATE
-   ========================================================= */
-
-const header = $(".site-header");
-
-const updateHeader = () => {
-  if (!header) return;
-
-  header.classList.toggle(
-    "scrolled",
-    window.scrollY > 16
-  );
-};
-
-updateHeader();
-
-window.addEventListener(
-  "scroll",
-  updateHeader,
-  { passive: true }
-);
-
-
-/* =========================================================
-   MOBILE NAVIGATION
-   ========================================================= */
-
-const menuButton = $(".menu-toggle");
-const mobileNavigation = $(".mobile-navigation");
-
-const openMenu = () => {
-  if (!menuButton || !mobileNavigation) return;
-
-  mobileNavigation.hidden = false;
-  menuButton.setAttribute("aria-expanded", "true");
-  document.body.classList.add("menu-open");
-};
-
-const closeMenu = () => {
-  if (!menuButton || !mobileNavigation) return;
-
-  mobileNavigation.hidden = true;
-  menuButton.setAttribute("aria-expanded", "false");
-  document.body.classList.remove("menu-open");
-};
-
-const toggleMenu = () => {
-  if (!mobileNavigation) return;
-
-  if (mobileNavigation.hidden) {
-    openMenu();
-  } else {
-    closeMenu();
-  }
-};
-
-menuButton?.addEventListener(
-  "click",
-  toggleMenu
-);
-
-
-/* Close mobile menu after navigation */
-
-$$('a[href^="#"]').forEach((link) => {
-  link.addEventListener("click", () => {
-    closeMenu();
-  });
-});
-
-
-/* Close with Escape */
-
-document.addEventListener(
-  "keydown",
-  (event) => {
-    if (event.key === "Escape") {
-      closeMenu();
-    }
-  }
-);
-
-
-/* Close when clicking outside */
-
-document.addEventListener(
-  "click",
-  (event) => {
-    if (
-      !mobileNavigation ||
-      mobileNavigation.hidden ||
-      !menuButton
-    ) {
-      return;
+        return now >= classChangeDate ? "12" : "11";
     }
 
-    const clickedInsideMenu =
-      mobileNavigation.contains(event.target);
+    function updateCurrentClass() {
 
-    const clickedButton =
-      menuButton.contains(event.target);
+        const currentClass = getCurrentClass();
 
-    if (!clickedInsideMenu && !clickedButton) {
-      closeMenu();
-    }
-  }
-);
-
-
-/* =========================================================
-   SMOOTH INTERNAL NAVIGATION
-   ========================================================= */
-
-$$('a[href^="#"]').forEach((link) => {
-  link.addEventListener("click", (event) => {
-    const targetId =
-      link.getAttribute("href");
-
-    if (
-      !targetId ||
-      targetId === "#"
-    ) {
-      return;
+        currentClassElements.forEach((element) => {
+            element.textContent = currentClass;
+        });
     }
 
-    const target =
-      document.querySelector(targetId);
+    updateCurrentClass();
 
-    if (!target) return;
 
-    event.preventDefault();
+    /* =====================================================
+       03. CURRENT YEAR
+    ===================================================== */
 
-    const headerOffset =
-      header?.offsetHeight || 0;
+    function updateCurrentYear() {
 
-    const targetPosition =
-      target.getBoundingClientRect().top +
-      window.scrollY -
-      headerOffset -
-      12;
+        const currentYear =
+            new Date().getFullYear();
 
-    window.scrollTo({
-      top: targetPosition,
-      behavior: "smooth"
+        currentYearElements.forEach((element) => {
+            element.textContent = currentYear;
+        });
+    }
+
+    updateCurrentYear();
+
+
+    /* =====================================================
+       04. MOBILE NAVIGATION
+    ===================================================== */
+
+    function openNavigation() {
+
+        if (!menuToggle || !navLinks) {
+            return;
+        }
+
+        navLinks.classList.add("open");
+        menuToggle.classList.add("active");
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+        menuToggle.setAttribute(
+            "aria-label",
+            "Close navigation menu"
+        );
+
+        document.body.classList.add("menu-open");
+    }
+
+    function closeNavigation() {
+
+        if (!menuToggle || !navLinks) {
+            return;
+        }
+
+        navLinks.classList.remove("open");
+        menuToggle.classList.remove("active");
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        menuToggle.setAttribute(
+            "aria-label",
+            "Open navigation menu"
+        );
+
+        document.body.classList.remove("menu-open");
+    }
+
+    function toggleNavigation() {
+
+        if (!navLinks) {
+            return;
+        }
+
+        const isOpen =
+            navLinks.classList.contains("open");
+
+        if (isOpen) {
+            closeNavigation();
+        } else {
+            openNavigation();
+        }
+    }
+
+    if (menuToggle) {
+
+        menuToggle.addEventListener(
+            "click",
+            toggleNavigation
+        );
+    }
+
+
+    /* =====================================================
+       05. CLOSE MOBILE NAVIGATION AFTER LINK CLICK
+    ===================================================== */
+
+    navigationItems.forEach((link) => {
+
+        link.addEventListener("click", () => {
+            closeNavigation();
+        });
+
     });
 
-    history.replaceState(
-      null,
-      "",
-      targetId
-    );
-  });
-});
 
+    /* =====================================================
+       06. CLOSE NAVIGATION WITH ESCAPE
+    ===================================================== */
 
-/* =========================================================
-   ACTIVE NAVIGATION / SCROLLSPY
-   ========================================================= */
+    document.addEventListener(
+        "keydown",
+        (event) => {
 
-const sections = $$(
-  "main section[id]"
-);
+            if (
+                event.key === "Escape" &&
+                navLinks &&
+                navLinks.classList.contains("open")
+            ) {
+                closeNavigation();
 
-const navigationLinks = $$(
-  '.desktop-navigation a[href^="#"], .mobile-navigation a[href^="#"]'
-);
+                menuToggle?.focus();
+            }
 
-const setActiveNavigation = (id) => {
-  navigationLinks.forEach((link) => {
-    const linkTarget =
-      link.getAttribute("href");
-
-    const active =
-      linkTarget === `#${id}`;
-
-    link.classList.toggle(
-      "active",
-      active
+        }
     );
 
-    if (active) {
-      link.setAttribute(
-        "aria-current",
-        "page"
-      );
-    } else {
-      link.removeAttribute(
-        "aria-current"
-      );
+
+    /* =====================================================
+       07. CLOSE NAVIGATION WHEN CLICKING OUTSIDE
+    ===================================================== */
+
+    document.addEventListener(
+        "click",
+        (event) => {
+
+            if (!navLinks || !menuToggle) {
+                return;
+            }
+
+            if (
+                !navLinks.classList.contains("open")
+            ) {
+                return;
+            }
+
+            const clickedInsideNavigation =
+                navLinks.contains(event.target);
+
+            const clickedMenuButton =
+                menuToggle.contains(event.target);
+
+            if (
+                !clickedInsideNavigation &&
+                !clickedMenuButton
+            ) {
+                closeNavigation();
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       08. HEADER SCROLL STATE
+    ===================================================== */
+
+    function updateHeader() {
+
+        if (!header) {
+            return;
+        }
+
+        if (window.scrollY > 20) {
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
+        }
     }
-  });
-};
 
-if (sections.length) {
-  const sectionObserver =
-    new IntersectionObserver(
-      (entries) => {
-        const visibleSections =
-          entries
-            .filter(
-              (entry) =>
-                entry.isIntersecting
-            )
-            .sort(
-              (a, b) =>
-                b.intersectionRatio -
-                a.intersectionRatio
+    updateHeader();
+
+    window.addEventListener(
+        "scroll",
+        updateHeader,
+        { passive: true }
+    );
+
+
+    /* =====================================================
+       09. ACTIVE NAVIGATION
+    ===================================================== */
+
+    function updateActiveNavigation() {
+
+        if (!sections.length) {
+            return;
+        }
+
+        const scrollPosition =
+            window.scrollY +
+            window.innerHeight * 0.35;
+
+        let currentSection = "";
+
+        sections.forEach((section) => {
+
+            const sectionTop =
+                section.offsetTop;
+
+            const sectionBottom =
+                sectionTop +
+                section.offsetHeight;
+
+            if (
+                scrollPosition >= sectionTop &&
+                scrollPosition < sectionBottom
+            ) {
+                currentSection =
+                    section.getAttribute("id");
+            }
+
+        });
+
+        navigationItems.forEach((link) => {
+
+            const target =
+                link.getAttribute("href");
+
+            const isActive =
+                target === `#${currentSection}`;
+
+            link.classList.toggle(
+                "active",
+                isActive
             );
 
-        if (visibleSections.length) {
-          setActiveNavigation(
-            visibleSections[0].target.id
-          );
-        }
-      },
-      {
-        rootMargin:
-          "-25% 0px -60% 0px",
-        threshold: [0.05, 0.2, 0.5]
-      }
-    );
-
-  sections.forEach((section) => {
-    sectionObserver.observe(section);
-  });
-}
-
-
-/* =========================================================
-   REVEAL ANIMATIONS
-   ========================================================= */
-
-document.documentElement.classList.add(
-  "js-enabled"
-);
-
-const revealElements = $$(
-  ".reveal, .project-card, .engineering-card"
-);
-
-if (
-  "IntersectionObserver" in window &&
-  revealElements.length
-) {
-  const revealObserver =
-    new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          entry.target.classList.add(
-            "is-visible"
-          );
-
-          observer.unobserve(
-            entry.target
-          );
         });
-      },
-      {
-        threshold: 0.12,
-        rootMargin:
-          "0px 0px -40px 0px"
-      }
+    }
+
+    updateActiveNavigation();
+
+    window.addEventListener(
+        "scroll",
+        updateActiveNavigation,
+        { passive: true }
     );
 
-  revealElements.forEach((element) => {
-    revealObserver.observe(element);
-  });
-} else {
-  revealElements.forEach((element) => {
-    element.classList.add(
-      "is-visible"
+
+    /* =====================================================
+       10. SCROLL REVEAL
+       
+       Adds the data-reveal attribute automatically
+       to major content elements.
+    ===================================================== */
+
+    const revealTargets = document.querySelectorAll(
+        ".section-heading, " +
+        ".about-content, " +
+        ".curiosity-item, " +
+        ".project, " +
+        ".technology-group, " +
+        ".interest, " +
+        ".education-content, " +
+        ".contact-content"
     );
-  });
-}
 
-
-/* =========================================================
-   PROJECT CARD POINTER EFFECT
-   ========================================================= */
-
-const supportsHover =
-  window.matchMedia(
-    "(hover: hover) and (pointer: fine)"
-  ).matches;
-
-if (supportsHover) {
-  $$(".project-card").forEach((card) => {
-    card.addEventListener(
-      "pointermove",
-      (event) => {
-        const rect =
-          card.getBoundingClientRect();
-
-        const x =
-          ((event.clientX - rect.left) /
-            rect.width) *
-          100;
-
-        const y =
-          ((event.clientY - rect.top) /
-            rect.height) *
-          100;
-
-        card.style.setProperty(
-          "--pointer-x",
-          `${x}%`
+    revealTargets.forEach((element) => {
+        element.setAttribute(
+            "data-reveal",
+            ""
         );
-
-        card.style.setProperty(
-          "--pointer-y",
-          `${y}%`
-        );
-      }
-    );
-
-    card.addEventListener(
-      "pointerleave",
-      () => {
-        card.style.removeProperty(
-          "--pointer-x"
-        );
-
-        card.style.removeProperty(
-          "--pointer-y"
-        );
-      }
-    );
-  });
-}
+    });
 
 
-/* =========================================================
-   COPY EMAIL
-   ========================================================= */
+    const revealElements =
+        document.querySelectorAll("[data-reveal]");
 
-const copyEmailButton =
-  $("[data-copy-email]");
+    const prefersReducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
 
-const copyEmail = async () => {
-  if (!copyEmailButton) return;
-
-  try {
-    await navigator.clipboard.writeText(
-      SITE.email
-    );
-
-    const originalText =
-      copyEmailButton.textContent;
-
-    copyEmailButton.textContent =
-      "Copied";
-
-    copyEmailButton.classList.add(
-      "copied"
-    );
-
-    window.setTimeout(() => {
-      copyEmailButton.textContent =
-        originalText;
-
-      copyEmailButton.classList.remove(
-        "copied"
-      );
-    }, 1600);
-  } catch {
-    window.location.href =
-      `mailto:${SITE.email}`;
-  }
-};
-
-copyEmailButton?.addEventListener(
-  "click",
-  copyEmail
-);
-
-
-/* =========================================================
-   EXTERNAL LINKS
-   ========================================================= */
-
-$$('a[href^="http"]').forEach((link) => {
-  link.setAttribute(
-    "target",
-    "_blank"
-  );
-
-  link.setAttribute(
-    "rel",
-    "noopener noreferrer"
-  );
-});
-
-
-/* =========================================================
-   KEYBOARD SHORTCUT
-   Home → scroll to top
-   ========================================================= */
-
-document.addEventListener(
-  "keydown",
-  (event) => {
-    const tag =
-      document.activeElement?.tagName;
-
-    const isTyping =
-      tag === "INPUT" ||
-      tag === "TEXTAREA" ||
-      tag === "SELECT" ||
-      document.activeElement?.isContentEditable;
-
-    if (isTyping) return;
 
     if (
-      event.key === "Home" &&
-      !event.ctrlKey &&
-      !event.metaKey
+        prefersReducedMotion ||
+        !("IntersectionObserver" in window)
     ) {
-      event.preventDefault();
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+        revealElements.forEach((element) => {
+            element.classList.add("revealed");
+        });
+
+    } else {
+
+        const revealObserver =
+            new IntersectionObserver(
+                (entries, observer) => {
+
+                    entries.forEach((entry) => {
+
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+
+                        entry.target.classList.add(
+                            "revealed"
+                        );
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    });
+
+                },
+                {
+                    threshold: 0.12,
+                    rootMargin: "0px 0px -40px 0px"
+                }
+            );
+
+        revealElements.forEach((element) => {
+            revealObserver.observe(element);
+        });
     }
-  }
-);
 
 
-/* =========================================================
-   RESIZE HANDLING
-   ========================================================= */
+    /* =====================================================
+       11. COPY EMAIL
+    ===================================================== */
 
-let resizeTimer;
+    if (copyEmailButton) {
 
-window.addEventListener(
-  "resize",
-  () => {
-    clearTimeout(resizeTimer);
+        const email =
+            copyEmailButton.dataset.email;
 
-    resizeTimer = setTimeout(() => {
-      if (
-        window.innerWidth > 760
-      ) {
-        closeMenu();
-      }
-    }, 120);
-  },
-  { passive: true }
-);
+        const originalText =
+            copyEmailButton.textContent;
+
+        let resetTimer = null;
+
+        async function copyEmail() {
+
+            if (!email) {
+                return;
+            }
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    email
+                );
+
+                copyEmailButton.textContent =
+                    "Copied";
+
+                copyEmailButton.setAttribute(
+                    "aria-label",
+                    "Email copied"
+                );
+
+                clearTimeout(resetTimer);
+
+                resetTimer =
+                    setTimeout(() => {
+
+                        copyEmailButton.textContent =
+                            originalText;
+
+                        copyEmailButton.setAttribute(
+                            "aria-label",
+                            "Copy email address"
+                        );
+
+                    }, 1800);
+
+            } catch (error) {
+
+                /*
+                 * Fallback for browsers where
+                 * Clipboard API is unavailable.
+                 */
+
+                const temporaryInput =
+                    document.createElement("input");
+
+                temporaryInput.value = email;
+
+                temporaryInput.setAttribute(
+                    "readonly",
+                    ""
+                );
+
+                temporaryInput.style.position =
+                    "fixed";
+
+                temporaryInput.style.opacity =
+                    "0";
+
+                document.body.appendChild(
+                    temporaryInput
+                );
+
+                temporaryInput.select();
+
+                try {
+                    document.execCommand("copy");
+
+                    copyEmailButton.textContent =
+                        "Copied";
+
+                    clearTimeout(resetTimer);
+
+                    resetTimer =
+                        setTimeout(() => {
+
+                            copyEmailButton.textContent =
+                                originalText;
+
+                        }, 1800);
+
+                } finally {
+
+                    temporaryInput.remove();
+
+                }
+            }
+        }
+
+        copyEmailButton.addEventListener(
+            "click",
+            copyEmail
+        );
+    }
 
 
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
+    /* =====================================================
+       12. SMOOTH ANCHOR HANDLING
+       
+       Keeps fixed navigation from covering
+       section headings.
+    ===================================================== */
 
-const prefersReducedMotion =
-  window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach((link) => {
 
-if (prefersReducedMotion) {
-  document.documentElement.classList.add(
-    "reduced-motion"
-  );
-}
+            link.addEventListener(
+                "click",
+                (event) => {
+
+                    const targetId =
+                        link.getAttribute("href");
+
+                    if (
+                        !targetId ||
+                        targetId === "#"
+                    ) {
+                        return;
+                    }
+
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
+
+                    if (!target) {
+                        return;
+                    }
+
+                    event.preventDefault();
+
+                    const headerHeight =
+                        header?.offsetHeight || 0;
+
+                    const targetPosition =
+                        target.getBoundingClientRect().top +
+                        window.scrollY -
+                        headerHeight -
+                        20;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior:
+                            prefersReducedMotion
+                                ? "auto"
+                                : "smooth"
+                    });
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       13. KEYBOARD ACCESSIBILITY
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        (event) => {
+
+            /*
+             * Prevent accidental body scrolling when
+             * mobile navigation is open.
+             */
+
+            if (
+                event.key === "Tab" &&
+                navLinks?.classList.contains("open")
+            ) {
+                document.body.classList.add(
+                    "keyboard-navigation"
+                );
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       14. YEAR / CLASS REFRESH
+       
+       Keeps dynamic information correct if the page
+       stays open across midnight or the academic-year
+       boundary.
+    ===================================================== */
+
+    function scheduleDailyRefresh() {
+
+        const now = new Date();
+
+        const tomorrow =
+            new Date(now);
+
+        tomorrow.setHours(
+            24,
+            0,
+            5,
+            0
+        );
+
+        const millisecondsUntilTomorrow =
+            tomorrow.getTime() -
+            now.getTime();
+
+        setTimeout(() => {
+
+            updateCurrentClass();
+            updateCurrentYear();
+
+            scheduleDailyRefresh();
+
+        }, millisecondsUntilTomorrow);
+    }
+
+    scheduleDailyRefresh();
+
+
+    /* =====================================================
+       15. EXTERNAL LINK SAFETY
+       
+       Ensures links opening new tabs have the expected
+       relationship attributes.
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            'a[target="_blank"]'
+        )
+        .forEach((link) => {
+
+            const rel =
+                link.getAttribute("rel") || "";
+
+            const values =
+                new Set(
+                    rel
+                        .split(/\s+/)
+                        .filter(Boolean)
+                );
+
+            values.add("noopener");
+            values.add("noreferrer");
+
+            link.setAttribute(
+                "rel",
+                Array.from(values).join(" ")
+            );
+
+        });
+
+
+    /* =====================================================
+       16. INITIAL STATE
+    ===================================================== */
+
+    updateCurrentClass();
+    updateCurrentYear();
+    updateHeader();
+    updateActiveNavigation();
+
+});
